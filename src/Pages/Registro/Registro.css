@@ -1,0 +1,85 @@
+.register-container {
+    background-color: #f0f4f3;
+    border-radius: 16px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+  
+  }
+  
+  .register-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    margin-bottom: 40px; 
+    width: 300px;
+    height: 140px;
+  }
+  
+  .back-button {
+    color: #868484;
+  }
+  
+  .register-text {
+    color: #397f0e; 
+  }
+
+  .subtitle-text {
+    color: #9e9e9e;
+   
+   }
+  
+  .form-box {
+     padding-top: 30px;
+    margin-top: 8px;
+  }
+  
+  .input-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .input-icon {
+    margin-right: 8px;
+  }
+  
+  /* Cambiar el borde de los campos de entrada a verde */
+  .input-box .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border-color:#9e9e9e;
+  }
+  
+  .input-box .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+  .input-box .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #397f0e 
+  }
+  
+  .input-box .MuiInputBase-input {
+    color: #9e9e9e;
+  }
+  
+  .register-button {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    background-color: #397f0e;
+    color: #fff;
+    border-radius: 8px;
+  }
+  
+
+  .social-button {
+    color: #889388;
+    margin: 0 8px;
+  }
+  .MuiFormLabel-root.Mui-focused {
+    color: rgb(58, 126, 13) ; 
+  }
+
+  .input-box .MuiInputBase-input {
+    color: #000000; 
+  }
+  
+.input-box .MuiFormLabel-root.Mui-focused {
+    color: #397f0e;
+  }
+  
