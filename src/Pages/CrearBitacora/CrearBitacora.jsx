@@ -13,8 +13,9 @@ import SaveIcon from '@mui/icons-material/Save';
 import { LocalizationProvider, DatePicker, TimePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import esLocale from 'date-fns/locale/es';
-import axios from 'axios'; // Importar axios
+import axios from 'axios';
 import './CrearBitacora.css';
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 function CrearBitacora() {
   const [images, setImages] = useState([]);
@@ -70,6 +71,23 @@ function CrearBitacora() {
       const response = await axios.post('https://bachendapi.onrender.com/api/bitacoras/', data);
       console.log('Bitácora guardada:', response.data);
       alert('Bitácora guardada exitosamente');
+      
+      // Limpiar los campos después de guardar
+      setTitle('');
+      setSelectedDate(null);
+      setSelectedTime(null);
+      setLocalizacion({ latitud: '', longitud: '' });
+      setCondicionesClimaticas('');
+      setDescripcionHabitat('');
+      setObservacionesAdicionales('');
+      setEspecie({
+        nombreCientifico: '',
+        nombreComun: '',
+        familia: '',
+        cantidadMuestras: '',
+        estadoPlanta: ''
+      });
+      setImages([]);
     } catch (error) {
       console.error('Error al guardar la bitácora:', error);
       alert('Error al guardar la bitácora');
@@ -77,7 +95,13 @@ function CrearBitacora() {
   };
 
   return (
+
     <Container maxWidth="sm" className="bitacora-container">
+  <Box className="bitacora-header">
+        <IconButton className="back-button">
+          <ArrowBackIosNewIcon />
+        </IconButton>
+      </Box>
       <Typography variant="h4" align="center" className="title-text">
         Crear Bitácora
       </Typography>
