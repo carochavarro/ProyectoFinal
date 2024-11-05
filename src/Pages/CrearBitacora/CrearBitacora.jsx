@@ -12,16 +12,28 @@ import UploadFile from '@mui/icons-material/UploadFile';
 import SaveIcon from '@mui/icons-material/Save';
 import { LocalizationProvider, DatePicker, TimePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import esLocale from 'date-fns/locale/es'; // para usar el calendario en español
+import esLocale from 'date-fns/locale/es';
+import axios from 'axios'; // Importar axios
 import './CrearBitacora.css';
 
 function CrearBitacora() {
   const [images, setImages] = useState([]);
   const [title, setTitle] = useState('');
-  const [selectedDate, setSelectedDate] = useState(null); // estado para la fecha
-  const [selectedTime, setSelectedTime] = useState(null); // estado para la hora
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [localizacion, setLocalizacion] = useState({ latitud: '', longitud: '' });
+  const [condicionesClimaticas, setCondicionesClimaticas] = useState('');
+  const [descripcionHabitat, setDescripcionHabitat] = useState('');
+  const [observacionesAdicionales, setObservacionesAdicionales] = useState('');
+  const [especie, setEspecie] = useState({
+    nombreCientifico: '',
+    nombreComun: '',
+    familia: '',
+    cantidadMuestras: '',
+    estadoPlanta: ''
+  });
 
-  const isMobile = window.innerWidth < 768; // Verifica si es un dispositivo móvil
+  const isMobile = window.innerWidth < 768;
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -33,6 +45,35 @@ function CrearBitacora() {
     const files = Array.from(e.target.files);
     const newImages = files.map((file) => URL.createObjectURL(file));
     setImages((prevImages) => [...prevImages, ...newImages]);
+  };
+
+  const handleSubmit = async () => {
+    const fechaHoraMuestreo = new Date(
+      selectedDate.setHours(selectedTime.getHours(), selectedTime.getMinutes())
+    );
+
+    const data = {
+      titulo: title,
+      fechaHoraMuestreo,
+      localizacion: {
+        latitud: parseFloat(localizacion.latitud),
+        longitud: parseFloat(localizacion.longitud)
+      },
+      condicionesClimaticas,
+      descripcionHabitat,
+      especiesRecolectadas: [especie],
+      observacionesAdicionales,
+      estadoActivo: true
+    };
+
+    try {
+      const response = await axios.post('https://bachendapi.onrender.com/api/bitacoras/', data);
+      console.log('Bitácora guardada:', response.data);
+      alert('Bitácora guardada exitosamente');
+    } catch (error) {
+      console.error('Error al guardar la bitácora:', error);
+      alert('Error al guardar la bitácora');
+    }
   };
 
   return (
@@ -64,7 +105,7 @@ function CrearBitacora() {
           type="file"
           multiple
           onChange={isMobile ? handleCapture : handleImageChange}
-          capture={isMobile ? 'environment' : undefined} // Activa la cámara en móviles
+          capture={isMobile ? 'environment' : undefined}
         />
         <label htmlFor="upload-button" className="upload-label">
           <Box className="upload-box">
@@ -92,31 +133,87 @@ function CrearBitacora() {
           />
         </LocalizationProvider>
 
-        {/* Otros campos de la bitácora */}
-        {['Nombre científico', 'Nombre común', 'Familia/Especie', 'Estado de la planta (viva, seca, etc.)', 'Cantidad de muestras'].map((label, index) => (
-          <TextField
-            key={index}
-            label={label}
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            className="input-box"
-          />
-        ))}
-      </Box>
-
-      <Box className="bitacora-details">
-        <Typography variant="h6" className="details-title">Detalles</Typography>
-        {['Localización geográfica del muestreo (coordenadas GPS)', 'Detalles de las especies recolectadas', 'Condiciones climáticas durante el muestreo', 'Observaciones adicionales', 'Descripción del hábitat (tipo de vegetación, altitud, etc.)'].map((label, index) => (
-          <TextField
-            key={index + 7}
-            label={label}
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            className="input-box"
-          />
-        ))}
+        <TextField
+          label="Latitud"
+          fullWidth
+          margin="normal"
+          value={localizacion.latitud}
+          onChange={(e) => setLocalizacion({ ...localizacion, latitud: e.target.value })}
+          className="input-box"
+        />
+        <TextField
+          label="Longitud"
+          fullWidth
+          margin="normal"
+          value={localizacion.longitud}
+          onChange={(e) => setLocalizacion({ ...localizacion, longitud: e.target.value })}
+          className="input-box"
+        />
+        <TextField
+          label="Condiciones Climáticas"
+          fullWidth
+          margin="normal"
+          value={condicionesClimaticas}
+          onChange={(e) => setCondicionesClimaticas(e.target.value)}
+          className="input-box"
+        />
+        <TextField
+          label="Descripción del Hábitat"
+          fullWidth
+          margin="normal"
+          value={descripcionHabitat}
+          onChange={(e) => setDescripcionHabitat(e.target.value)}
+          className="input-box"
+        />
+        <TextField
+          label="Nombre Científico"
+          fullWidth
+          margin="normal"
+          value={especie.nombreCientifico}
+          onChange={(e) => setEspecie({ ...especie, nombreCientifico: e.target.value })}
+          className="input-box"
+        />
+        <TextField
+          label="Nombre Común"
+          fullWidth
+          margin="normal"
+          value={especie.nombreComun}
+          onChange={(e) => setEspecie({ ...especie, nombreComun: e.target.value })}
+          className="input-box"
+        />
+        <TextField
+          label="Familia"
+          fullWidth
+          margin="normal"
+          value={especie.familia}
+          onChange={(e) => setEspecie({ ...especie, familia: e.target.value })}
+          className="input-box"
+        />
+        <TextField
+          label="Cantidad de Muestras"
+          fullWidth
+          margin="normal"
+          type="number"
+          value={especie.cantidadMuestras}
+          onChange={(e) => setEspecie({ ...especie, cantidadMuestras: e.target.value })}
+          className="input-box"
+        />
+        <TextField
+          label="Estado de la Planta"
+          fullWidth
+          margin="normal"
+          value={especie.estadoPlanta}
+          onChange={(e) => setEspecie({ ...especie, estadoPlanta: e.target.value })}
+          className="input-box"
+        />
+        <TextField
+          label="Observaciones Adicionales"
+          fullWidth
+          margin="normal"
+          value={observacionesAdicionales}
+          onChange={(e) => setObservacionesAdicionales(e.target.value)}
+          className="input-box"
+        />
       </Box>
 
       <Box className="save-button-container">
@@ -124,6 +221,7 @@ function CrearBitacora() {
           variant="contained"
           color="primary"
           startIcon={<SaveIcon />}
+          onClick={handleSubmit}
           className="save-button"
           sx={{
             backgroundColor: '#3a7e0d',
