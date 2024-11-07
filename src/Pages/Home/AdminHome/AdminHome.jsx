@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import FilterBar from '../../../Components/FilterBar/FilterBar';
 import BitacoraCard from '../../../Components/BitacoraCard/BitacoraCard';
+import { Snackbar } from '@mui/material';  // Importamos el componente Snackbar
 import './AdminHome.css';
 
 const AdminHome = ({ userRole }) => {
@@ -10,14 +11,16 @@ const AdminHome = ({ userRole }) => {
     const [sortOrder, setSortOrder] = useState('recientes');
     const [searchText, setSearchText] = useState('');
     const [filters, setFilters] = useState({});
-    const [hasNewBitacoras, setHasNewBitacoras] = useState(false); // Nuevo estado para la notificación
+    const [openSnackbar, setOpenSnackbar] = useState(false); // Estado para manejar la visibilidad del Snackbar
 
+    // Fetch de bitácoras cada 5 segundos
     useEffect(() => {
         fetchBitacoras();
-        const interval = setInterval(fetchBitacoras, 5000); // Cada 5 segundos
+        const interval = setInterval(fetchBitacoras, 5000);
         return () => clearInterval(interval);
     }, []);
 
+    // Actualiza la lista de bitácoras filtradas y ordenadas
     useEffect(() => {
         const sortedAndFiltered = filterAndSortBitacoras(bitacoras, searchText, sortOrder, filters);
         setFilteredBitacoras(sortedAndFiltered);
@@ -27,29 +30,30 @@ const AdminHome = ({ userRole }) => {
         axios.get('https://bachendapi.onrender.com/api/bitacoras')
             .then(response => {
                 const newBitacoras = response.data.filter(bitacora => bitacora.estadoActivo);
+                
+                // Recuperamos el contador de bitácoras desde el localStorage
+                const previousBitacoraCount = parseInt(localStorage.getItem('bitacoraCount')) || 0;
 
-                // Verificar si hay nuevas bitácoras comparando la longitud y el contenido de las listas
-                if (newBitacoras.length > bitacoras.length || !areBitacorasEqual(newBitacoras, bitacoras)) {
-                    setHasNewBitacoras(true); // Activar notificación
+                // Verificamos si ha habido un incremento en la cantidad de bitácoras
+                if (newBitacoras.length > previousBitacoraCount) {
+                    setOpenSnackbar(true); // Mostrar Snackbar de nueva bitácora
                 }
 
-                setBitacoras(newBitacoras); // Actualizar la lista de bitácoras
+                // Actualizamos el número de bitácoras en el localStorage
+                localStorage.setItem('bitacoraCount', newBitacoras.length);
+
+                // Actualizamos las bitácoras en el estado
+                setBitacoras(newBitacoras);
             })
             .catch(error => console.error('Error al obtener las bitácoras:', error));
     };
 
-    // Función para comparar si dos listas de bitácoras son iguales
-    const areBitacorasEqual = (newList, oldList) => {
-        if (newList.length !== oldList.length) return false;
-        return newList.every((newBitacora, index) => newBitacora._id === oldList[index]._id);
+    // Maneja el cierre del Snackbar
+    const handleCloseSnackbar = () => {
+        setOpenSnackbar(false);
     };
 
-    const handleSortChange = (order) => setSortOrder(order);
-
-    const handleSearchChange = (e) => setSearchText(e.target.value);
-
-    const handleFilterChange = (newFilters) => setFilters(newFilters);
-
+    // Filtra y ordena las bitácoras según los criterios dados
     const filterAndSortBitacoras = (bitacorasToFilter, search, order, filters) => {
         const searchLower = search.toLowerCase();
 
@@ -60,7 +64,7 @@ const AdminHome = ({ userRole }) => {
 
             const inDateRange = (!startDate || fecha >= startDate) && (!endDate || fecha <= endDate);
             const matchesTitle = bitacora.titulo.toLowerCase().includes(searchLower);
-            
+
             const matchesHabitat = filters.habitat 
                 ? bitacora.descripcionHabitat.toLowerCase().includes(filters.habitat.toLowerCase())
                 : true;
@@ -70,7 +74,7 @@ const AdminHome = ({ userRole }) => {
                 : true;
                 
             const matchesLocation = filters.location 
-                ? (`${bitacora.localizacion.latitud}`, `${bitacora.localizacion.longitud}`).includes(filters.location)
+                ? (`${bitacora.localizacion.latitud},${bitacora.localizacion.longitud}`).includes(filters.location)
                 : true;
 
             const matchesSpecies = bitacora.especiesRecolectadas.some(especie => 
@@ -102,20 +106,13 @@ const AdminHome = ({ userRole }) => {
         <div className="admin-home-container">
             <div className="filter-bar-container">
                 <FilterBar 
-                    onSortChange={handleSortChange} 
-                    onSearchChange={handleSearchChange} 
-                    onFilterChange={handleFilterChange} 
-                    userRole={userRole} 
+                    onSortChange={setSortOrder} 
+                    onSearchChange={setSearchText} 
+                    onFilterChange={setFilters} 
+                    userRole={localStorage.getItem('role')}
                 />
             </div>
             
-            {/* Notificación de nuevas bitácoras */}
-            {hasNewBitacoras && (
-                <div className="notification-bell" onClick={() => setHasNewBitacoras(false)}>
-                    🔔 Tienes nuevas bitácoras
-                </div>
-            )}
-
             <div className="bitacora-list">
                 {filteredBitacoras.length > 0 ? (
                     filteredBitacoras.map((bitacora) => (
@@ -125,6 +122,14 @@ const AdminHome = ({ userRole }) => {
                     <p>No se encontraron bitácoras activas.</p>
                 )}
             </div>
+
+            {/* Snackbar de notificación de nueva bitácora */}
+            <Snackbar
+                open={openSnackbar}
+                autoHideDuration={1000}
+                message="¡Nueva bitácora agregada!"
+                onClose={handleCloseSnackbar}
+            />
         </div>
     );
 };
