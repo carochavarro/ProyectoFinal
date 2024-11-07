@@ -5,21 +5,11 @@ import Registro from "./Pages/Registro/Registro";
 import CrearBitacora from './Pages/CrearBitacora/CrearBitacora';
 import AdminHome from './Pages/Home/AdminHome/AdminHome';
 import BitacoraDetail from './Components/BitacoraDetail/BitacoraDetail'; // Asegúrate de que este componente exista
+import Panel from './Pages/Panel/Panel';
 
 function App() {
   return (
-    <CrearBitacora/>
-
-
-
-    /*
-    <Router>
-      <Routes>
-        <Route path="/" element={<AdminHome />} /> 
-        <Route path="/bitacora/:id" element={<BitacoraDetail />} />
-      </Routes>
-    </Router>
-    */
+    <Panel/>
   );
 }
 
