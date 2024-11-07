@@ -1,0 +1,127 @@
+/* src/pages/AdminHome/AdminHome.css */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.admin-home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    padding-top: 60px; /* espacio superior para el navbar fijo */
+}
+
+.filter-bar-container {
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    background-color: #EAF2E4; /* color claro de fondo */
+    padding: 8px 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.filter-bar-container > * {
+    flex-grow: 1;
+    margin: 0 8px;
+}
+
+.filter-bar-container select {
+    flex-grow: 0;
+    width: auto;
+    color: #37730D; /* Verde oscuro */
+    border: 1px solid #9ABF80;
+    border-radius: 6px;
+    padding: 4px;
+    background-color: #EAF2E4;
+    cursor: pointer;
+}
+
+.filter-bar-container select:hover {
+    background-color: #9ABF80; /* Hover en select */
+}
+
+.sort-container {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    color: #37730D;
+}
+
+.sort-container span {
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.bitacora-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    max-width: 1200px;
+    margin-top: 80px;
+    padding: 20px; /* Espaciado para mantener separación de los bordes */
+    background-color: transparent; /* Elimina el fondo blanco compartido */
+}
+
+/* Botones e iconos */
+button, .icon-button {
+    background-color: #9ABF80;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, .icon-button:hover {
+    background-color: #51A614;
+}
+
+.search-input {
+    background-color: #EAF2E4;
+    color: #37730D;
+    border: 1px solid #9ABF80;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+/* Hover en iconos y barra de búsqueda */
+.icon-button:hover, .search-input:hover {
+    background-color: #438C0F; /* Hover verde más oscuro */
+}
+
+@media (max-width: 768px) {
+    .bitacora-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filter-bar-container {
+        width: 100%;
+        padding: 10px 15px;
+    }
+}
+
+
+.subtitulo-verde {
+    color: #9ABF80; /* Color verde */
+    font-weight: bold;
+}
