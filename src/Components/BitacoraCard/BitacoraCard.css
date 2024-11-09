@@ -1,0 +1,57 @@
+/* src/components/BitacoraCard/BitacoraCard.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.bitacora-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.85); /* Fondo claro individual para cada tarjeta */
+    border-radius: 12px;
+    padding: 16px;
+    margin: 16px;
+    color: #333; /* Color de texto oscuro para contrastar con el fondo claro */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para darle profundidad a cada tarjeta */
+    width: 280px; /* Tamaño fijo para cada tarjeta */
+    font-family: 'Roboto', sans-serif; /* Fuente atractiva */
+}
+
+.bitacora-content {
+    margin-top: 12px; /* Espacio entre imagen y contenido */
+}
+
+.bitacora-image {
+    margin: 12px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bitacora-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra para resaltar la imagen */
+}
+
+.bitacora-content h3 {
+    margin: 0;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #37730D; /* Verde oscuro para destacar el título */
+}
+
+.bitacora-content p {
+    margin: 6px 0;
+    font-size: 0.9em;
+    color: #333; /* Color oscuro para los textos secundarios */
+}
+
+/* Ajuste para dispositivos móviles */
+@media (max-width: 768px) {
+    .bitacora-card {
+        width: 90%; /* Ajuste de ancho completo en pantallas pequeñas */
+    }
+}
