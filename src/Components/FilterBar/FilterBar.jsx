@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
-import { TextField, Popover, Typography, Box, IconButton, Menu, MenuItem, Select, Button } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import {
+    TextField,
+    Popover,
+    Typography,
+    Box,
+    IconButton,
+    Menu,
+    MenuItem,
+    Select,
+    Button,
+} from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { es } from 'date-fns/locale';
 import { useLocation, useNavigate } from 'react-router-dom';
-
 
 const FilterBar = ({ onSortChange, onSearchChange, userRole, onFilterChange }) => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -19,6 +28,18 @@ const FilterBar = ({ onSortChange, onSearchChange, userRole, onFilterChange }) =
 
     const locationData = useLocation();
     const navigate = useNavigate();
+
+    const [isLoadingRoles, setIsLoadingRoles] = useState(true);
+    const [storedRole, setStoredRole] = useState(localStorage.getItem('role'));
+
+    useEffect(() => {
+        setStoredRole(localStorage.getItem('role'));
+        setIsLoadingRoles(false);
+    }, []);
+
+    const isRoleAllowed = (requiredRole) => {
+        return storedRole === requiredRole || storedRole === 'Administrador';
+    };
 
     const handleFilterClick = (event) => setAnchorEl(event.currentTarget);
     const handleClose = () => setAnchorEl(null);
@@ -62,11 +83,7 @@ const FilterBar = ({ onSortChange, onSearchChange, userRole, onFilterChange }) =
                             padding: '8px',
                         }}
                     >
-                        <img
-                            src="https://cdn.icon-icons.com/icons2/1660/PNG/512/3844475-filter-filters_110342.png"
-                            alt="Filtro"
-                            style={{ width: 24 }}
-                        />
+                        <img src="https://cdn.icon-icons.com/icons2/1660/PNG/512/3844475-filter-filters_110342.png" alt="Filtro" style={{ width: 24 }} />
                     </IconButton>
 
                     <TextField
@@ -141,11 +158,7 @@ const FilterBar = ({ onSortChange, onSearchChange, userRole, onFilterChange }) =
                     }}
                     onClick={() => navigate('/adminhome')}
                 >
-                    <img
-                        src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
-                        alt="Home"
-                        style={{ width: 24 }}
-                    />
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home" style={{ width: 24 }} />
                 </IconButton>
                 <IconButton
                     onClick={handleUserIconClick}
@@ -171,20 +184,19 @@ const FilterBar = ({ onSortChange, onSearchChange, userRole, onFilterChange }) =
                         horizontal: 'left',
                     }}
                 >
-                    {userRole === 'Colaborador' && <MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>}
-                    {userRole === 'Investigador' && (
-                        <>
-                            <MenuItem onClick={handleMenuClose}>Cuenta</MenuItem>
-                            <MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>
-                        </>
-                    )}
-                    {userRole === 'Administrador' && (
-                        <>
-                            <MenuItem onClick={handleMenuClose}>Gestión Usuarios</MenuItem>
-                            <MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>
-                        </>
-                    )}
+                    {userRole === 'Colaborador' && [
+                        <MenuItem key="logout" onClick={handleMenuClose}>Cerrar sesión</MenuItem>
+                    ]}
+                    {userRole === 'Investigador' && [
+                        <MenuItem key="account" onClick={handleMenuClose}>Cuenta</MenuItem>,
+                        <MenuItem key="logout" onClick={handleMenuClose}>Cerrar sesión</MenuItem>
+                    ]}
+                    {userRole === 'Administrador' && [
+                        <MenuItem key="manage-users" onClick={handleMenuClose}>Gestión Usuarios</MenuItem>,
+                        <MenuItem key="logout" onClick={handleMenuClose}>Cerrar sesión</MenuItem>
+                    ]}
                 </Menu>
+
             </div>
 
             <Popover
@@ -247,9 +259,9 @@ const FilterBar = ({ onSortChange, onSearchChange, userRole, onFilterChange }) =
                     </Box>
 
                     <Box sx={{ marginTop: 2 }}>
-                        <Typography variant="body1">Ubicación</Typography>
+                        <Typography variant="body1">Lugar</Typography>
                         <TextField
-                            placeholder="Escribe ubicación"
+                            placeholder="Escribe lugar"
                             size="small"
                             fullWidth
                             margin="normal"
@@ -259,8 +271,12 @@ const FilterBar = ({ onSortChange, onSearchChange, userRole, onFilterChange }) =
                     </Box>
 
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: 2 }}>
-                        <Button onClick={clearFilters} color="secondary">Limpiar filtros</Button>
-                        <Button onClick={applyFilters} color="primary">Aplicar</Button>
+                        <Button onClick={clearFilters} sx={{ color: '#9ABF80' }}>
+                            Limpiar
+                        </Button>
+                        <Button onClick={applyFilters} variant="contained" sx={{ bgcolor: '#3a7e0d', '&:hover': { bgcolor: '#51A614' } }}>
+                            Aplicar
+                        </Button>
                     </Box>
                 </Box>
             </Popover>

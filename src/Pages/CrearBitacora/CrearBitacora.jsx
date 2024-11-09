@@ -188,22 +188,25 @@ function CrearBitacora() {
       </Box>
 
       {/* Otros campos del formulario */}
-      <LocalizationProvider dateAdapter={AdapterDateFns} locale={esLocale}>
-        <Box className="bitacora-fields">
-          <DatePicker
-            label="Fecha del muestreo"
-            value={selectedDate}
-            onChange={(newValue) => setSelectedDate(newValue)}
-            renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
-          />
-          <TimePicker
-            label="Hora del muestreo"
-            value={selectedTime}
-            onChange={(newValue) => setSelectedTime(newValue)}
-            renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
-          />
-        </Box>
-      </LocalizationProvider>
+<LocalizationProvider dateAdapter={AdapterDateFns} locale={esLocale}>
+  <Box className="date-time-container">
+    <DatePicker
+      label="Fecha del muestreo"
+      value={selectedDate}
+      onChange={(newValue) => setSelectedDate(newValue)}
+      renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
+      className="input-box"
+    />
+    <TimePicker
+      label="Hora del muestreo"
+      value={selectedTime}
+      onChange={(newValue) => setSelectedTime(newValue)}
+      renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
+      className="input-box"
+    />
+  </Box>
+</LocalizationProvider>
+
 
       <Box className="bitacora-fields">
         <TextField
@@ -213,6 +216,7 @@ function CrearBitacora() {
           value={localizacion.latitud}
           onChange={(e) => setLocalizacion({ ...localizacion, latitud: e.target.value })}
           margin="normal"
+          className="input-box"
         />
         <TextField
           variant="outlined"
@@ -221,6 +225,7 @@ function CrearBitacora() {
           value={localizacion.longitud}
           onChange={(e) => setLocalizacion({ ...localizacion, longitud: e.target.value })}
           margin="normal"
+          className="input-box"
         />
         <TextField
           variant="outlined"
@@ -229,6 +234,7 @@ function CrearBitacora() {
           value={condicionesClimaticas}
           onChange={(e) => setCondicionesClimaticas(e.target.value)}
           margin="normal"
+          className="input-box"
         />
         <TextField
           variant="outlined"
@@ -239,6 +245,7 @@ function CrearBitacora() {
           value={descripcionHabitat}
           onChange={(e) => setDescripcionHabitat(e.target.value)}
           margin="normal"
+         className="input-box"
         />
         <TextField
           variant="outlined"
@@ -249,6 +256,7 @@ function CrearBitacora() {
           value={observacionesAdicionales}
           onChange={(e) => setObservacionesAdicionales(e.target.value)}
           margin="normal"
+          className="input-box"
         />
         <Box className="especie-fields">
           <Typography variant="h6">Especie Recolectada</Typography>
@@ -259,6 +267,7 @@ function CrearBitacora() {
             value={especie.nombreCientifico}
             onChange={(e) => setEspecie({ ...especie, nombreCientifico: e.target.value })}
             margin="normal"
+            className="input-box"
           />
           <TextField
             variant="outlined"
@@ -267,6 +276,7 @@ function CrearBitacora() {
             value={especie.nombreComun}
             onChange={(e) => setEspecie({ ...especie, nombreComun: e.target.value })}
             margin="normal"
+            className="input-box"
           />
           <TextField
             variant="outlined"
@@ -275,6 +285,7 @@ function CrearBitacora() {
             value={especie.familia}
             onChange={(e) => setEspecie({ ...especie, familia: e.target.value })}
             margin="normal"
+            className="input-box"
           />
           <TextField
             variant="outlined"
@@ -284,6 +295,7 @@ function CrearBitacora() {
             value={especie.cantidadMuestras}
             onChange={(e) => setEspecie({ ...especie, cantidadMuestras: e.target.value })}
             margin="normal"
+            className="input-box"
           />
           <TextField
             variant="outlined"
@@ -292,6 +304,7 @@ function CrearBitacora() {
             value={especie.estadoPlanta}
             onChange={(e) => setEspecie({ ...especie, estadoPlanta: e.target.value })}
             margin="normal"
+            className="input-box"
           />
         </Box>
       </Box>
