@@ -54,8 +54,7 @@ function Registro() {
         message: 'Registro exitoso',
         severity: 'success'
       });
-      // Redirige al usuario al login después del registro exitoso
-      setTimeout(() => navigate('/login'), 2000); // Opcional: espera 2 segundos antes de redirigir
+      setTimeout(() => navigate('/login'), 2000);
     } catch (error) {
       console.error("Error al registrar:", error.response ? error.response.data : error.message);
       setAlert({
@@ -67,7 +66,7 @@ function Registro() {
   };
 
   const handleBack = () => {
-    navigate('/login'); // Navega a la página de login
+    navigate('/login');
   };
 
   const handleClose = (event, reason) => {
@@ -81,6 +80,7 @@ function Registro() {
         <IconButton className="back-button" onClick={handleBack}>
           <ArrowBackIosNewIcon />
         </IconButton>
+        <img src="https://i.ibb.co/86vzgdT/Proyecto-Creador-de-logotipos-2.png" alt="Logo" className="logo" />
       </Box>
       <Typography variant="h4" align="center" className="register-text">
         Registro
@@ -163,7 +163,6 @@ function Registro() {
         </Box>
       </Box>
 
-      {/* Snackbar para mostrar alertas */}
       <Snackbar
         open={alert.open}
         autoHideDuration={6000}

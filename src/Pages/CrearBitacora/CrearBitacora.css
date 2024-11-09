@@ -1,115 +1,121 @@
 .bitacora-container {
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .title-text {
-    color: #397f0e;
-    padding: 20px;
-    margin-top: 50px;
-  }
-  
-  .bitacora-header {
-    text-align: center;
-    margin-bottom: 20px;
-    width: 100%;
-  }
-  
-  .image-upload-container {
-    width: 60%;
-    background-color: #e0f2e9;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .image-gallery {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px 0;
-  }
-  
-  .bitacora-image {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-  
-  .upload-label {
-    display: inline-block;
-    width: 100%;
-    cursor: pointer;
-  }
-  
-  .upload-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #397f0e;
-    color: white;
-    height: 60px;
-    border-radius: 12px;
-    margin-top: 10px;
-  }
-  
-  .upload-icon {
-    font-size: 24px;
-    color: #ffffff;
-  }
-  
-  .upload-text {
-    font-size: 14px;
-    color: #ffffff;
-  }
-  
-  .bitacora-fields,
-  .bitacora-details {
-    width: 100%;
-    margin-top: 20px;
-    gap: 20px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+  border-radius: 10px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Habilitar desplazamiento si es necesario */
+  max-height: 90vh; /* Altura máxima para evitar que se salga de la pantalla */
+}
 
+.title-text {
+  color: #397f0e;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.bitacora-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.image-upload-container {
+  width: 100%;
+  background-color: #e0f2e9;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.bitacora-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.upload-label {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.upload-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #397f0e;
+  color: white;
+  height: 60px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.upload-icon {
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.upload-text {
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.bitacora-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.save-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .title-text {
+      font-size: 1.8rem;
   }
-  
-  .details-title {
-    margin-top: 20px;
-    font-weight: bold;
-    text-align: left;
-  }
-  
-  .save-button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  .bitacora-fields .fecha{
-    display: flex;
-    margin-top: 20px;
-    gap: 10px;
-  }
- 
-  @media (max-width: 600px) {
-    .bitacora-container {
+}
+
+@media (max-width: 480px) {
+  .bitacora-container {
       padding: 10px;
-    }
-  
-    .bitacora-header h5 {
-      font-size: 1.2rem;
-    }
-  
-    .bitacora-image {
+      margin-top: 20px;
+  }
+
+  .title-text {
+      font-size: 1.6rem;
+  }
+
+  .bitacora-image {
       width: 60px;
       height: 60px;
-    }
-  
-    .save-button {
-      width: 120px;
-    }
   }
+
+  .upload-box {
+      height: 50px;
+  }
+} 

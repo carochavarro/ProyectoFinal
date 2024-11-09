@@ -1,0 +1,98 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.panel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    padding-top: 100px; /* Espacio superior para el navbar fijo */
+}
+
+.filter-bar-container {
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    background-color: #9ABF80;
+    padding: 8px 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.table-container {
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    margin-top: 100px; /* Ajusta el espacio para que la tabla se separe del FilterBar */
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco ligeramente más opaco */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container th, .table-container td {
+    padding: 10px;
+    text-align: center; /* Centra el contenido de cada celda */
+    vertical-align: middle; /* Centra verticalmente */
+}
+
+.table-container th {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+.table-container tr:nth-child(even) {
+    background-color: rgba(230, 230, 230, 0.5); /* Color de fondo alternativo para filas */
+}
+
+/* Botones de Icono */
+.icon-button {
+    padding: 5px; /* Ajuste de espacio alrededor del icono */
+}
+
+.icon-button:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Efecto hover suave */
+}
+
+.search-input {
+    background-color: #EAF2E4;
+    color: #37730D;
+    border: 1px solid #9ABF80;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+/* Hover en iconos y barra de búsqueda */
+.icon-button:hover, .search-input:hover {
+    background-color: #438C0F; /* Hover verde más oscuro */
+}
+
+@media (max-width: 768px) {
+    .filter-bar-container {
+        width: 100%;
+        padding: 10px 15px;
+    }
+}
+
+.subtitulo-verde {
+    color: #9ABF80; /* Color verde */
+    font-weight: bold;
+}

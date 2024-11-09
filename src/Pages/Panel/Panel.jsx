@@ -8,12 +8,13 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Button,
+  IconButton,
   Select,
-  MenuItem,
-  Box
+  MenuItem
 } from '@mui/material';
+import { PersonOff, Person } from '@mui/icons-material'; // Íconos de deshabilitar y habilitar
 import FilterBarUsuario from '../../Components/FilterBarUsuario/FilterBarUsuario';
+import './Panel.css';
 
 const Panel = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -93,10 +94,12 @@ const Panel = () => {
   );
 
   return (
-    <Box sx={{ width: '100%', padding: 2 }}>
-      <FilterBarUsuario onSearchChange={handleSearchChange} onCreateUser={handleCreateUser} />
+    <div className="panel-container">
+      <div className="filter-bar-container">
+        <FilterBarUsuario onSearchChange={handleSearchChange} onCreateUser={handleCreateUser} />
+      </div>
 
-      <TableContainer component={Paper} sx={{ width: '100%', marginTop: 2 }}>
+      <TableContainer component={Paper} className="table-container">
         <Table>
           <TableHead>
             <TableRow>
@@ -104,7 +107,8 @@ const Panel = () => {
               <TableCell>Email</TableCell>
               <TableCell>Estado</TableCell>
               <TableCell>Rol</TableCell>
-              <TableCell>Acciones</TableCell>
+              <TableCell>Cambiar Estado</TableCell>
+              <TableCell>Cambiar Rol</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -115,13 +119,18 @@ const Panel = () => {
                 <TableCell>{usuario.estado ? 'Activo' : 'Deshabilitado'}</TableCell>
                 <TableCell>{usuario.rol}</TableCell>
                 <TableCell>
-                  <Button
-                    variant="contained"
-                    color={usuario.estado ? 'secondary' : 'primary'}
+                  <IconButton
                     onClick={() => actualizarEstado(usuario._id, !usuario.estado)}
+                    className="icon-button"
+                    style={{
+                      color: usuario.estado ? '#FF0000' : '#51A614', // Rojo para deshabilitar, verde para habilitar
+                      fontSize: '1.5rem' // Aumenta el tamaño del ícono
+                    }}
                   >
-                    {usuario.estado ? 'Deshabilitar' : 'Activar'}
-                  </Button>
+                    {usuario.estado ? <PersonOff /> : <Person />}
+                  </IconButton>
+                </TableCell>
+                <TableCell>
                   <Select
                     value={usuario.rol}
                     onChange={(e) => actualizarRol(usuario._id, e.target.value)}
@@ -137,7 +146,7 @@ const Panel = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </Box>
+    </div>
   );
 };
 

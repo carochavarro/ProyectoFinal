@@ -50,7 +50,7 @@ const FilterBar = ({ onSortChange, onSearchChange, userRole, onFilterChange }) =
     const isDetailView = locationData.pathname.includes('/bitacora/');
 
     return (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: 8, borderRadius: 8, backgroundColor: '#EAF2E4' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: 8, borderRadius: 8, backgroundColor: '#9ABF80' }}>
             {!isDetailView && (
                 <>
                     <IconButton
@@ -157,7 +157,7 @@ const FilterBar = ({ onSortChange, onSearchChange, userRole, onFilterChange }) =
                     }}
                 >
                     <img
-                        src="https://w7.pngwing.com/pngs/722/101/png-transparent-computer-icons-user-profile-circle-abstract-miscellaneous-rim-account-thumbnail.png"
+                        src="https://img.icons8.com/?size=64&id=rrtYnzKMTlUr&format=png"
                         alt="Perfil"
                         style={{ width: 24 }}
                     />

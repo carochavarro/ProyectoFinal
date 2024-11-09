@@ -11,7 +11,7 @@ const FilterBarUsuario = ({ onSearchChange, onCreateUser }) => {
   const handleMenuClose = () => setMenuAnchorEl(null);
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, padding: 2, backgroundColor: '#EAF2E4' }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, padding: 2, backgroundColor: '#9ABF80' }}>
       {/* Campo de Búsqueda con icono de lupa */}
       <TextField
         variant="outlined"
@@ -26,7 +26,7 @@ const FilterBarUsuario = ({ onSearchChange, onCreateUser }) => {
         }}
         sx={{
           flexGrow: 1,
-          bgcolor: '#FFFFFF',
+          bgcolor: '#EAF2E4',
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
               borderColor: 'transparent',
@@ -39,7 +39,7 @@ const FilterBarUsuario = ({ onSearchChange, onCreateUser }) => {
       />
 
       {/* Botón Crear Usuario */}
-      <Button variant="contained" color="primary" onClick={onCreateUser}>
+      <Button variant="contained" color="primary" sx={{bgcolor: '#3a7e0d'}} onClick={onCreateUser}>
         Crear Usuario
       </Button>
 
@@ -61,7 +61,7 @@ const FilterBarUsuario = ({ onSearchChange, onCreateUser }) => {
         onClick={handleUserIconClick}
       >
         <img
-          src="https://w7.pngwing.com/pngs/722/101/png-transparent-computer-icons-user-profile-circle-abstract-miscellaneous-rim-account-thumbnail.png" // URL del icono de usuario
+          src="https://img.icons8.com/?size=64&id=rrtYnzKMTlUr&format=png" // URL del icono de usuario
           alt="Perfil"
           style={{ width: 24 }}
         />
