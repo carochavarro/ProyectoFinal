@@ -2,8 +2,6 @@
     background-color: #f0f4f3;
     border-radius: 16px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 24px;
-  
   }
   
   .register-header {
@@ -11,16 +9,17 @@
     display: flex;
     align-items: center;
     justify-content: flex-start; 
-    margin-bottom: 40px; 
-    width: 300px;
-    height: 140px;
-  }
+    margin-bottom: 30px; 
+    height: 120px;
+    }
   
   .back-button {
     color: #868484;
-  }
+   }
   
   .register-text {
+    margin-top: 10px;
+    padding: -70px;
     color: #397f0e; 
   }
 
@@ -66,7 +65,6 @@
     border-radius: 8px;
   }
   
-
   .social-button {
     color: #889388;
     margin: 0 8px;
