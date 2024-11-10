@@ -1,78 +1,116 @@
-// src/pages/Cuentas/Cuentas.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import FilterBar from '../../Components/FilterBar/FilterBar';
-import { Card, CardContent, Typography, CircularProgress, Box } from '@mui/material';
+import BitacoraCard from '../../Components/BitacoraCard/BitacoraCard';
+import { IconButton } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import './Cuentas.css';
 
 const Cuentas = () => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+    const [bitacoras, setBitacoras] = useState([]);
+    const [filteredBitacoras, setFilteredBitacoras] = useState([]);
+    const [sortOrder, setSortOrder] = useState('recientes');
+    const [searchText, setSearchText] = useState('');
+    const [filters, setFilters] = useState({});
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    const userId = localStorage.getItem("userId");
+    useEffect(() => {
+        fetchBitacoras();
+    }, []);
 
-    if (userId) {
-      axios.get(`https://bachendapi.onrender.com/api/usuarios/${userId}`)
-        .then(response => {
-          setUser(response.data);
-        })
-        .catch(error => {
-          console.error("Error al obtener la información del usuario:", error);
-          setError("No se pudo cargar la información del usuario. Por favor, intenta de nuevo más tarde.");
-        })
-        .finally(() => {
-          setLoading(false);
+    useEffect(() => {
+        const sortedAndFiltered = filterAndSortBitacoras(bitacoras, searchText, sortOrder, filters);
+        setFilteredBitacoras(sortedAndFiltered);
+    }, [sortOrder, bitacoras, searchText, filters]);
+
+    const fetchBitacoras = () => {
+        axios.get('https://bachendapi.onrender.com/api/bitacoras')
+            .then(response => {
+                const activeBitacoras = response.data.filter(bitacora => bitacora.estadoActivo);
+                setBitacoras(activeBitacoras);
+            })
+            .catch(error => console.error('Error al obtener las bitácoras:', error));
+    };
+
+    const filterAndSortBitacoras = (bitacorasToFilter, search, order, filters) => {
+        const searchLower = search.toLowerCase();
+        let filteredBitacoras = bitacorasToFilter.filter(bitacora => {
+            const fecha = new Date(bitacora.fechaHoraMuestreo);
+            const startDate = filters.startDate ? new Date(filters.startDate) : null;
+            const endDate = filters.endDate ? new Date(filters.endDate) : null;
+            const inDateRange = (!startDate || fecha >= startDate) && (!endDate || fecha <= endDate);
+            const matchesTitle = bitacora.titulo.toLowerCase().includes(searchLower);
+            const matchesHabitat = bitacora.descripcionHabitat.toLowerCase().includes(searchLower);
+            const matchesClimate = bitacora.condicionesClimaticas.toLowerCase().includes(searchLower);
+            const matchesLocation = (`${bitacora.localizacion.latitud},${bitacora.localizacion.longitud}`).includes(searchLower);
+            const matchesSpecies = bitacora.especiesRecolectadas.some(especie => 
+                especie.nombreComun.toLowerCase().includes(searchLower) || 
+                especie.nombreCientifico.toLowerCase().includes(searchLower)
+            );
+            return inDateRange && (searchLower === '' || matchesTitle || matchesHabitat || matchesClimate || matchesLocation || matchesSpecies);
         });
-    } else {
-      setError("No se ha encontrado la información del usuario.");
-      setLoading(false);
-    }
-  }, []);
 
-  if (loading) return <CircularProgress />;
-  if (error) return <p>{error}</p>;
+        switch (order) {
+            case 'recientes':
+                filteredBitacoras.sort((a, b) => new Date(b.fechaHoraMuestreo) - new Date(a.fechaHoraMuestreo));
+                break;
+            case 'antiguas':
+                filteredBitacoras.sort((a, b) => new Date(a.fechaHoraMuestreo) - new Date(b.fechaHoraMuestreo));
+                break;
+            case 'lugar':
+                filteredBitacoras.sort((a, b) => a.localizacion.latitud - b.localizacion.latitud);
+                break;
+            default:
+                break;
+        }
 
-  return (
-    <div className="cuentas-container">
-      {/* Agregar FilterBar */}
-      <FilterBar
-        onSortChange={() => {}} // Función vacía para ordenar, puedes personalizar según lo necesario
-        onSearchChange={() => {}} // Función vacía para búsqueda, también personalizable
-        onFilterChange={() => {}} // Función vacía para filtros
-        userRole={user?.rol || 'Colaborador'} // Pasa el rol del usuario si está disponible
-      />
+        return filteredBitacoras;
+    };
 
-      <div className="cuentas-content">
-        {user && (
-          <Card className="user-card">
-            <CardContent>
-              <Typography variant="h5" component="div" className="user-name">
-                {user.nombreCompleto}
-              </Typography>
-              <Typography variant="body1" className="user-email">
-                {user.email}
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                Rol: {user.rol}
-              </Typography>
-            </CardContent>
-          </Card>
-        )}
+    const handleEdit = (id) => {
+        navigate(`/editar-bitacora/${id}`);
+    };
 
-        {/* Espacio para las bitácoras creadas por el usuario, en desarrollo */}
-        <Box className="future-logs">
-          <Typography variant="h6" color="textSecondary">
-            Bitácoras creadas por el usuario:
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            (Esta sección está en desarrollo)
-          </Typography>
-        </Box>
-      </div>
-    </div>
-  );
+    return (
+        <div className="cuentas-container">
+            <div className="filter-bar-container">
+                <FilterBar 
+                    onSortChange={setSortOrder} 
+                    onSearchChange={(e) => setSearchText(e.target.value)} 
+                    onFilterChange={setFilters} 
+                />
+            </div>
+
+            <div className="user-name-banner">
+                <h2>Nombre del usuario: Juan Camilo</h2>
+            </div>
+
+            <div className="bitacora-list">
+                {filteredBitacoras.length > 0 ? (
+                    filteredBitacoras.map((bitacora) => (
+                        <div key={bitacora._id} className="bitacora-card-container">
+                            <BitacoraCard 
+                                bitacora={bitacora}
+                                showEditDeleteOptions={true}
+                            />
+                            <div className="edit-delete-icons">
+                                <IconButton color="success" aria-label="Editar bitácora" onClick={() => handleEdit(bitacora._id)}>
+                                    <EditIcon />
+                                </IconButton>
+                                <IconButton color="error" aria-label="Eliminar bitácora">
+                                    <DeleteIcon />
+                                </IconButton>
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <p>No se encontraron bitácoras activas.</p>
+                )}
+            </div>
+        </div>
+    );
 };
 
 export default Cuentas;

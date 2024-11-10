@@ -1,62 +1,68 @@
-/* src/pages/Cuentas/Cuentas.css */
-
 .cuentas-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-image: url('https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    min-height: 100vh;
-    padding-top: 60px; /* Espacio para el navbar fijo */
-  }
-  
-  .cuentas-content {
-    width: 90%;
-    max-width: 600px;
-    margin-top: 100px; /* Ajuste para que quede bien debajo del FilterBar */
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  }
-  
-  .user-card {
-    margin-bottom: 20px;
-    background-color: #EAF2E4;
-    border-radius: 8px;
-  }
-  
-  .user-name {
-    font-weight: bold;
-    color: #37730D;
-  }
-  
-  .user-email {
-    margin-top: 8px;
-    color: #37730D;
-  }
-  
-  .future-logs {
-    margin-top: 20px;
-    text-align: center;
-    color: #555;
-  }
-  
-  /* Responsividad para dispositivos móviles */
-  @media (max-width: 768px) {
-    .cuentas-content {
-      width: 95%;
-      padding: 15px;
-    }
-  
-    .user-card {
-      padding: 10px;
-    }
-  
-    .future-logs {
-      font-size: 0.9rem;
-    }
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  min-height: 100vh;
+  padding-top: 60px;
+}
+
+.filter-bar-container {
+  width: calc(100% - 40px);
+  max-width: 1200px;
+  background-color: #9ABF80;
+  padding: 8px 15px;
+  border-radius: 10px;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.user-name-banner {
+  width: calc(100% - 40px);
+  max-width: 1200px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 80px;
+}
+
+.bitacora-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.bitacora-card-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.edit-delete-icons {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px;
+}
+
+.edit-delete-icons .MuiIconButton-root {
+  transition: transform 0.2s ease-in-out;
+}
+
+.edit-delete-icons .MuiIconButton-root:hover {
+  transform: scale(1.1);
+}

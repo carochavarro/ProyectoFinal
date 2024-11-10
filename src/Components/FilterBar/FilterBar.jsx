@@ -16,7 +16,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { es } from 'date-fns/locale';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const FilterBar = ({ onSortChange, onSearchChange, userRole, onFilterChange }) => {
+const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [menuAnchorEl, setMenuAnchorEl] = useState(null);
     const [sortOrder, setSortOrder] = useState('recientes');
@@ -28,18 +28,6 @@ const FilterBar = ({ onSortChange, onSearchChange, userRole, onFilterChange }) =
 
     const locationData = useLocation();
     const navigate = useNavigate();
-
-    const [isLoadingRoles, setIsLoadingRoles] = useState(true);
-    const [storedRole, setStoredRole] = useState(localStorage.getItem('role'));
-
-    useEffect(() => {
-        setStoredRole(localStorage.getItem('role'));
-        setIsLoadingRoles(false);
-    }, []);
-
-    const isRoleAllowed = (requiredRole) => {
-        return storedRole === requiredRole || storedRole === 'Administrador';
-    };
 
     const handleFilterClick = (event) => setAnchorEl(event.currentTarget);
     const handleClose = () => setAnchorEl(null);
@@ -184,17 +172,9 @@ const FilterBar = ({ onSortChange, onSearchChange, userRole, onFilterChange }) =
                         horizontal: 'left',
                     }}
                 >
-                    {userRole === 'Colaborador' && [
-                        <MenuItem key="logout" onClick={handleMenuClose}>Cerrar sesión</MenuItem>
-                    ]}
-                    {userRole === 'Investigador' && [
-                        <MenuItem key="account" onClick={handleMenuClose}>Cuenta</MenuItem>,
-                        <MenuItem key="logout" onClick={handleMenuClose}>Cerrar sesión</MenuItem>
-                    ]}
-                    {userRole === 'Administrador' && [
-                        <MenuItem key="manage-users" onClick={handleMenuClose}>Gestión Usuarios</MenuItem>,
-                        <MenuItem key="logout" onClick={handleMenuClose}>Cerrar sesión</MenuItem>
-                    ]}
+                    <MenuItem onClick={handleMenuClose}>Gestión Usuarios</MenuItem>
+                    <MenuItem onClick={handleMenuClose}>Cuenta</MenuItem>
+                    <MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>
                 </Menu>
 
             </div>
