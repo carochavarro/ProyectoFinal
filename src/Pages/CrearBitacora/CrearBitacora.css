@@ -23,9 +23,9 @@ body {
 
 .title-text {
   color: #397f0e;
-  margin-bottom: 20px;
   font-size: 2rem;
   text-align: center;
+  padding: 15px;
 }
 
 .bitacora-header {
@@ -37,7 +37,7 @@ body {
 }
 
 .image-upload-container {
-  width: 100%;
+  width: 80%;
   background-color: #e0f2e9;
   border-radius: 12px;
   padding: 20px;
@@ -128,3 +128,18 @@ body {
       height: 50px;
   }
 }
+.input-box .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color:  #d9d9d9; 
+}
+
+.input-box .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+.input-box .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: rgb(58, 126, 13) ; 
+}
+/* Cambiar el color cuando el input esté enfocado */
+.MuiInputLabel-root.Mui-focused {
+  color: #2e5d0a; /* Otro tono de verde */
+}
+
+
+

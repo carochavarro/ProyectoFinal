@@ -148,6 +148,7 @@ function CrearBitacora() {
       </Typography>
       <Box className="bitacora-header">
         <TextField
+        color="action"
           variant="outlined"
           label="Título de la bitácora"
           fullWidth
@@ -182,7 +183,7 @@ function CrearBitacora() {
       </Box>
 
       <LocalizationProvider dateAdapter={AdapterDateFns} locale={esLocale}>
-        <Box className="date-time-container">
+        <Box className="date-time-container" >
           <DatePicker
             label="Fecha del muestreo"
             value={selectedDate}
@@ -200,19 +201,19 @@ function CrearBitacora() {
         </Box>
       </LocalizationProvider>
 
-      <Box className="bitacora-fields">
-        <TextField variant="outlined" label="Latitud" fullWidth value={localizacion.latitud} onChange={(e) => setLocalizacion({ ...localizacion, latitud: e.target.value })} margin="normal" className="input-box" />
-        <TextField variant="outlined" label="Longitud" fullWidth value={localizacion.longitud} onChange={(e) => setLocalizacion({ ...localizacion, longitud: e.target.value })} margin="normal" className="input-box" />
-        <TextField variant="outlined" label="Condiciones Climáticas" fullWidth value={condicionesClimaticas} onChange={(e) => setCondicionesClimaticas(e.target.value)} margin="normal" className="input-box" />
-        <TextField variant="outlined" label="Descripción del Hábitat" fullWidth multiline rows={4} value={descripcionHabitat} onChange={(e) => setDescripcionHabitat(e.target.value)} margin="normal" className="input-box" />
-        <TextField variant="outlined" label="Observaciones Adicionales" fullWidth multiline rows={4} value={observacionesAdicionales} onChange={(e) => setObservacionesAdicionales(e.target.value)} margin="normal" className="input-box" />
+      <Box className="bitacora-fields" >
+        <TextField color="action" variant="outlined" label="Latitud" fullWidth value={localizacion.latitud} onChange={(e) => setLocalizacion({ ...localizacion, latitud: e.target.value })} margin="normal" className="input-box" />
+        <TextField color="action" variant="outlined" label="Longitud" fullWidth value={localizacion.longitud} onChange={(e) => setLocalizacion({ ...localizacion, longitud: e.target.value })} margin="normal" className="input-box" />
+        <TextField color="action" variant="outlined" label="Condiciones Climáticas" fullWidth value={condicionesClimaticas} onChange={(e) => setCondicionesClimaticas(e.target.value)} margin="normal" className="input-box" />
+        <TextField color="action" variant="outlined" label="Descripción del Hábitat" fullWidth multiline rows={4} value={descripcionHabitat} onChange={(e) => setDescripcionHabitat(e.target.value)} margin="normal" className="input-box" />
+        <TextField color="action" variant="outlined" label="Observaciones Adicionales" fullWidth multiline rows={4} value={observacionesAdicionales} onChange={(e) => setObservacionesAdicionales(e.target.value)} margin="normal" className="input-box" />
         <Box className="especie-fields">
-          <Typography variant="h6">Especie Recolectada</Typography>
-          <TextField variant="outlined" label="Nombre Científico" fullWidth value={especie.nombreCientifico} onChange={(e) => setEspecie({ ...especie, nombreCientifico: e.target.value })} margin="normal" className="input-box" />
-          <TextField variant="outlined" label="Nombre Común" fullWidth value={especie.nombreComun} onChange={(e) => setEspecie({ ...especie, nombreComun: e.target.value })} margin="normal" className="input-box" />
-          <TextField variant="outlined" label="Familia" fullWidth value={especie.familia} onChange={(e) => setEspecie({ ...especie, familia: e.target.value })} margin="normal" className="input-box" />
-          <TextField variant="outlined" label="Cantidad de Muestras" fullWidth type="number" value={especie.cantidadMuestras} onChange={(e) => setEspecie({ ...especie, cantidadMuestras: e.target.value })} margin="normal" className="input-box" />
-          <TextField variant="outlined" label="Estado de la Planta" fullWidth value={especie.estadoPlanta} onChange={(e) => setEspecie({ ...especie, estadoPlanta: e.target.value })} margin="normal" className="input-box" />
+          <Typography variant="h6" color='#397f0e'>Especie Recolectada</Typography>
+          <TextField color="action" variant="outlined" label="Nombre Científico" fullWidth value={especie.nombreCientifico} onChange={(e) => setEspecie({ ...especie, nombreCientifico: e.target.value })} margin="normal" className="input-box" />
+          <TextField color="action" variant="outlined" label="Nombre Común" fullWidth value={especie.nombreComun} onChange={(e) => setEspecie({ ...especie, nombreComun: e.target.value })} margin="normal" className="input-box" />
+          <TextField color="action" variant="outlined" label="Familia" fullWidth value={especie.familia} onChange={(e) => setEspecie({ ...especie, familia: e.target.value })} margin="normal" className="input-box" />
+          <TextField color="action" variant="outlined" label="Cantidad de Muestras" fullWidth type="number" value={especie.cantidadMuestras} onChange={(e) => setEspecie({ ...especie, cantidadMuestras: e.target.value })} margin="normal" className="input-box" />
+          <TextField color="action" variant="outlined" label="Estado de la Planta" fullWidth value={especie.estadoPlanta} onChange={(e) => setEspecie({ ...especie, estadoPlanta: e.target.value })} margin="normal" className="input-box" />
         </Box>
       </Box>
 

@@ -1,5 +1,5 @@
 .login-container {
-    background-color: #f0f4f3;
+    background-color: white;
     border-radius: 16px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     padding: 24px;
@@ -10,7 +10,7 @@
     position: relative;
     border-radius: 16px;
     overflow: hidden;
-    width: 300px;
+    width: 350px;
     height: 130px;
     background-size: cover;
     margin-bottom: 32px;
@@ -114,4 +114,9 @@
   .input-box .MuiInputBase-input {
     color: #000000; /* Cambia el texto a negro */
   } 
+  .signup-link {
+    color: #3a7e0d; /* Color verde para el texto */
+    text-decoration: underline;
+    text-decoration-color: #3a7e0d; /* Cambiar el color del subrayado a verde inicialmente */
+  }
   
