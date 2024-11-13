@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
     TextField,
     Popover,
@@ -137,6 +137,19 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
             )}
 
             <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginLeft: 'auto' }}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => navigate('/crear-bitacora')}
+                    sx={{
+                        bgcolor: '#3a7e0d',
+                        '&:hover': { bgcolor: '#51A614' },
+                        borderRadius: 1,
+                        padding: '8px 16px',
+                    }}
+                >
+                    Crear Bitácora
+                </Button>
                 <IconButton
                     sx={{
                         bgcolor: '#3a7e0d',
@@ -144,7 +157,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
                         borderRadius: 1,
                         padding: '8px',
                     }}
-                    onClick={() => navigate('/adminhome')}
+                    onClick={() => navigate('/home')}
                 >
                     <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home" style={{ width: 24 }} />
                 </IconButton>
@@ -172,11 +185,10 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
                         horizontal: 'left',
                     }}
                 >
-                    <MenuItem onClick={handleMenuClose}>Gestión Usuarios</MenuItem>
-                    <MenuItem onClick={handleMenuClose}>Cuenta</MenuItem>
-                    <MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>
+                    <MenuItem onClick={() => { navigate('/panel'); handleMenuClose(); }}>Gestión Usuarios</MenuItem>
+                    <MenuItem onClick={() => { navigate('/cuentas'); handleMenuClose(); }}>Cuenta</MenuItem>
+                    <MenuItem onClick={() => { navigate('/login'); handleMenuClose(); }}>Cerrar sesión</MenuItem>
                 </Menu>
-
             </div>
 
             <Popover

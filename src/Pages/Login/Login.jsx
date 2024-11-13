@@ -45,12 +45,11 @@ function Login() {
       const response = await axios.post('https://bachendapi.onrender.com/api/usuarios/login', formData);
       console.log("Login exitoso:", response.data);
 
-      // Obtener el rol y el token de la respuesta
-      const { token, rol } = response.data;  // Cambiado de response.data.user a response.data directamente
+      // Obtener el token de la respuesta
+      const { token } = response.data;
 
-      // Almacenar el token y el rol en el localStorage
+      // Almacenar el token en el localStorage
       localStorage.setItem('token', token);
-      localStorage.setItem('role', rol);  // Almacenar el rol
 
       setAlert({
         open: true,
@@ -58,14 +57,9 @@ function Login() {
         severity: 'success'
       });
 
-      // Redirigir dependiendo del rol
-      if (rol === 'Administrador') {
-        navigate('/home');  // Redirigir a la página de administrador
-      } else if (rol === 'Investigador') {
-        navigate('/home');  // Redirigir a la página de investigador
-      } else {
-        navigate('/home');  // Redirigir a la página de inicio para colaboradores
-      }
+      // Redirigir directamente a AdminHome
+      navigate('/home');  // Redirigir a la página de AdminHome
+
     } catch (error) {
       console.error("Error al iniciar sesión:", error.response ? error.response.data : error.message);
       setAlert({

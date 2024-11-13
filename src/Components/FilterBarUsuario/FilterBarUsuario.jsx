@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import { TextField, IconButton, Button, Menu, MenuItem, Box } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SearchIcon from '@mui/icons-material/Search'; // Icono de búsqueda
+import { useNavigate } from 'react-router-dom';
+import SearchIcon from '@mui/icons-material/Search';
 
-const FilterBarUsuario = ({ onSearchChange, onCreateUser }) => {
+const FilterBarUsuario = ({ onSearchChange }) => {
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
+  const navigate = useNavigate();
 
   const handleUserIconClick = (event) => setMenuAnchorEl(event.currentTarget);
   const handleMenuClose = () => setMenuAnchorEl(null);
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, padding: 2, backgroundColor: '#9ABF80' }}>
-      {/* Campo de Búsqueda con icono de lupa */}
       <TextField
         variant="outlined"
         placeholder="Buscar usuario"
@@ -38,44 +37,45 @@ const FilterBarUsuario = ({ onSearchChange, onCreateUser }) => {
         }}
       />
 
-      {/* Botón Crear Usuario */}
-      <Button variant="contained" color="primary" sx={{bgcolor: '#3a7e0d'}} onClick={onCreateUser}>
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ bgcolor: '#3a7e0d' }}
+        onClick={() => navigate('/crear-usuario')}
+      >
         Crear Usuario
       </Button>
 
-      {/* Icono de Casa */}
       <IconButton
         sx={{ bgcolor: '#3a7e0d', '&:hover': { bgcolor: '#51A614' }, borderRadius: 1 }}
-        onClick={() => window.location.href = '/adminhome'}
+        onClick={() => navigate('/home')}
       >
         <img
-          src="https://cdn-icons-png.flaticon.com/512/25/25694.png" // URL del icono de casa
+          src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
           alt="Home"
           style={{ width: 24 }}
         />
       </IconButton>
 
-      {/* Icono de Usuario con Menú */}
       <IconButton
         sx={{ bgcolor: '#3a7e0d', '&:hover': { bgcolor: '#51A614' }, borderRadius: 1 }}
         onClick={handleUserIconClick}
       >
         <img
-          src="https://img.icons8.com/?size=64&id=rrtYnzKMTlUr&format=png" // URL del icono de usuario
+          src="https://img.icons8.com/?size=64&id=rrtYnzKMTlUr&format=png"
           alt="Perfil"
           style={{ width: 24 }}
         />
       </IconButton>
-      
-      {/* Menú desplegable del icono de usuario */}
+
       <Menu
         anchorEl={menuAnchorEl}
         open={Boolean(menuAnchorEl)}
         onClose={handleMenuClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
       >
-        <MenuItem onClick={handleMenuClose}>Gestión Usuarios</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>
+        <MenuItem onClick={() => { navigate('/panel'); handleMenuClose(); }}>Gestión Usuarios</MenuItem>
+        <MenuItem onClick={() => { navigate('/login'); handleMenuClose(); }}>Cerrar sesión</MenuItem>
       </Menu>
     </Box>
   );

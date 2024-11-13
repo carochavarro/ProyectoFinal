@@ -1,0 +1,53 @@
+/* src/pages/CrearUsuario/CrearUsuario.css */
+
+body, html {
+    height: 100%;
+    background-image: url('https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+  }
+  
+  .crear-usuario-container {
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.9); /* Opacidad en blanco para mostrar el fondo */
+    border-radius: 16px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+  }
+  
+  .crear-usuario-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .back-button {
+    color: white;
+    align-self: flex-start;
+  }
+  
+  .crear-usuario-text {
+    color: #397f0e;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .input-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .input-icon {
+    margin-right: 8px;
+  }
+  
+  .crear-usuario-button {
+    margin-top: 24px;
+    background-color: #397f0e;
+    color: #fff;
+    border-radius: 8px;
+  }
+  
