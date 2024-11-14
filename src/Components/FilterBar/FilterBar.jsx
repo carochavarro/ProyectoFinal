@@ -12,8 +12,8 @@ import {
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { es } from 'date-fns/locale';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
@@ -203,7 +203,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
             >
                 <Box sx={{ padding: 2, maxWidth: 300 }}>
                     <Typography variant="h6">Filtros</Typography>
-                    <LocalizationProvider dateAdapter={AdapterDateFns} locale={es}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs} locale={LocalizationProvider}>
                         <Box sx={{ marginTop: 2 }}>
                             <Typography variant="body1">Fecha de inicio</Typography>
                             <DatePicker

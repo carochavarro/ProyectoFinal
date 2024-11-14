@@ -12,8 +12,8 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import UploadFile from '@mui/icons-material/UploadFile';
 import SaveIcon from '@mui/icons-material/Save';
 import { LocalizationProvider, DatePicker, TimePicker } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import esLocale from 'date-fns/locale/es';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 import axios from 'axios';
 import './CrearBitacora.css';
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -182,7 +182,7 @@ function CrearBitacora() {
         </label>
       </Box>
 
-      <LocalizationProvider dateAdapter={AdapterDateFns} locale={esLocale}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} locale={LocalizationProvider}>
         <Box className="date-time-container" >
           <DatePicker
             label="Fecha del muestreo"
