@@ -2,19 +2,16 @@
     background-color: white;
     border-radius: 16px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 24px;
-    margin-top: 40px;
-  }
+   }
   
   .login-header {
     position: relative;
     border-radius: 16px;
     overflow: hidden;
-    width: 350px;
-    height: 130px;
+    width: 300px;
     background-size: cover;
     margin-bottom: 32px;
-  }
+    }
   
   .back-button {
     position: absolute;
@@ -93,6 +90,7 @@
   .signup-box {
     text-align: center;
     margin-top: 16px;
+    padding: 10px;
   }
   
   .signup-link {
@@ -119,4 +117,18 @@
     text-decoration: underline;
     text-decoration-color: #3a7e0d; /* Cambiar el color del subrayado a verde inicialmente */
   }
-  
+  .logo {
+    display: block;
+    margin: 0 auto; 
+  }
+
+  .login-container {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 20px auto; /* Asegura un margen superior e inferior */
+    padding: 16px;
+    max-width: 100%; /* Asegura que el contenedor no sea más ancho que la pantalla */
+  }
+    
+ 

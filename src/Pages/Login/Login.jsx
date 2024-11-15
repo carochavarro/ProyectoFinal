@@ -81,8 +81,9 @@ function Login() {
   };
 
   return (
-    <Container maxWidth="xs" className="login-container">
+    <Container maxWidth="xs" className="login-container" >
       <Box className="login-header"></Box>
+      <img src="https://i.ibb.co/86vzgdT/Proyecto-Creador-de-logotipos-2.png" alt="Logo" className="logo" />
       <Typography variant="h4" align="center" className="welcome-text">
         NEOGARDEN
       </Typography>

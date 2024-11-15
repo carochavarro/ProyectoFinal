@@ -103,9 +103,9 @@ const AdminHome = ({ userRole }) => {
     };
 
     return (
-        <div className="admin-home-container">
-            <div className="filter-bar-container">
-                <FilterBar 
+        <div className="admin-home-container" >
+            <div className="filter-bar-container"  >
+                <FilterBar  
                     onSortChange={setSortOrder} 
                     onSearchChange={setSearchText} 
                     onFilterChange={setFilters} 
