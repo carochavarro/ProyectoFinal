@@ -1,3 +1,7 @@
+.container{
+  height: 100vh;
+}
+
 /* Fondo de pantalla con imagen de plantas */
 body {
   background-image: url('https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');

@@ -137,6 +137,7 @@ function CrearBitacora() {
   };
 
   return (
+    <div className="container">
     <Container maxWidth="sm" className="bitacora-container">
       <Box className="bitacora-header">
         <IconButton className="back-button">
@@ -245,6 +246,7 @@ function CrearBitacora() {
         </Box>
       )}
     </Container>
+    </div>
   );
 }
 
