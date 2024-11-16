@@ -12,30 +12,23 @@
     background-repeat: no-repeat;
     background-position: center;
     min-height: 100vh;
-    padding-top: 100px; /* Espacio superior para el navbar fijo */
+    padding-top: 50px; /* Espacio superior para el navbar fijo */
 }
 
 .filter-bar-container {
-    width: calc(100% - 40px);
-    max-width: 1200px;
-    background-color: #9ABF80;
+    width: 75%;
+    background-color:#397f0e;
     padding: 8px 15px;
     border-radius: 10px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    position:  center sticky;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
 }
 
 .table-container {
     width: calc(100% - 40px);
     max-width: 1200px;
-    margin-top: 100px; /* Ajusta el espacio para que la tabla se separe del FilterBar */
+    margin-top: 30%; /* Ajusta el espacio para que la tabla se separe del FilterBar */
     background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco ligeramente más opaco */
     padding: 15px;
     border-radius: 10px;
@@ -72,18 +65,24 @@
 }
 
 .search-input {
-    background-color: #EAF2E4;
-    color: #2b1aab;
-    border: 1px solid #9ABF80;
+    background-color: white;
+      border: 1px solid #9ABF80;
     padding: 8px;
     border-radius: 8px;
 }
 
-/* Hover en iconos y barra de búsqueda */
-.icon-button:hover, .search-input:hover {
-    background-color: #438C0F; /* Hover verde más oscuro */
-}
-
+.MuiFormLabel-root.Mui-focused {
+    color: rgb(58, 126, 13); 
+  }
+  
+  .input-box .MuiInputBase-input {
+    color: #000000; 
+  }
+  
+  .input-box .MuiFormLabel-root.Mui-focused {
+    color: #397f0e;
+  }
+  
 @media (max-width: 768px) {
     .filter-bar-container {
         width: 100%;
@@ -91,7 +90,3 @@
     }
 }
 
-.subtitulo-verde {
-    color: #9ABF80; /* Color verde */
-    font-weight: bold;
-}

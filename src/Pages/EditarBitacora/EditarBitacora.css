@@ -1,8 +1,8 @@
 .container{
+  background-color: white;
   height: 100vh;
 }
 
-/* Fondo de pantalla con imagen de plantas */
 body {
   background-image: url('https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
   background-size: cover;
@@ -143,4 +143,17 @@ body {
   .upload-box {
       height: 50px;
   }
+}
+
+.input-box .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color:  #d9d9d9; 
+}
+
+.input-box .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+.input-box .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: rgb(58, 126, 13) ; 
+}
+/* Cambiar el color cuando el input esté enfocado */
+.MuiInputLabel-root.Mui-focused {
+  color: #2e5d0a; /* Otro tono de verde */
 }

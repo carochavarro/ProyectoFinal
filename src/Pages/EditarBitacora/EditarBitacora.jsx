@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Box,
@@ -7,18 +7,24 @@ import {
   Button,
   IconButton,
   CircularProgress,
-} from '@mui/material';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import SaveIcon from '@mui/icons-material/Save';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { LocalizationProvider, DatePicker, TimePicker } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+} from "@mui/material";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import SaveIcon from "@mui/icons-material/Save";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-import axios from 'axios';
-import './EditarBitacora.css';
-import { useParams, useNavigate } from 'react-router-dom';
-import { uploadImages } from '../../FireBase/Service';
-import dayjs from 'dayjs';
+import {
+  LocalizationProvider,
+  DatePicker,
+  TimePicker,
+} from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
+import axios from "axios";
+import "./EditarBitacora.css";
+import { useParams, useNavigate } from "react-router-dom";
+import { uploadImages } from "../../FireBase/Service";
+import dayjs from "dayjs";
 
 function EditarBitacora() {
   const { id } = useParams();
@@ -44,8 +50,10 @@ function EditarBitacora() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Error al cargar los datos:', error);
-        setError('No se pudo cargar la bitácora. Inténtalo de nuevo más tarde.');
+        console.error("Error al cargar los datos:", error);
+        setError(
+          "No se pudo cargar la bitácora. Inténtalo de nuevo más tarde."
+        );
         setLoading(false);
       });
   }, [id]);
@@ -82,11 +90,14 @@ function EditarBitacora() {
         imageUrls,
       };
 
-      await axios.put(`https://bachendapi.onrender.com/api/bitacoras/${id}`, updatedBitacora);
-      alert('Bitácora actualizada exitosamente');
+      await axios.put(
+        `https://bachendapi.onrender.com/api/bitacoras/${id}`,
+        updatedBitacora
+      );
+      alert("Bitácora actualizada exitosamente");
       navigate(-1);
     } catch (error) {
-      console.error('Error al actualizar la bitácora:', error);
+      console.error("Error al actualizar la bitácora:", error);
     } finally {
       setLoading(false);
     }
@@ -96,187 +107,275 @@ function EditarBitacora() {
   if (error) return <Typography color="error">{error}</Typography>;
 
   return (
-    <div className='container'>
-    <Container maxWidth="sm" className="bitacora-container">
-      <Box className="bitacora-header">
-        <IconButton onClick={() => navigate(-1)} className="back-button">
-          <ArrowBackIosNewIcon />
-        </IconButton>
-        <Typography variant="h4" className="title-text">Editar Bitácora</Typography>
-      </Box>
-
-      <TextField
-        variant="outlined"
-        label="Título de la bitácora"
-        fullWidth
-        value={bitacora?.titulo || ''}
-        onChange={(e) => setBitacora({ ...bitacora, titulo: e.target.value })}
-        margin="normal"
-      />
-
-      <Box className="image-upload-container">
-        <Box className="image-gallery">
-          {images.map((image, index) => (
-            <div key={index} className="image-wrapper">
-              <img src={image} alt={`Imagen ${index + 1}`} className="bitacora-image" />
-              <IconButton onClick={() => handleDeleteImage(index)} color="secondary">
-                Eliminar
-              </IconButton>
-            </div>
-          ))}
+    <div className="container">
+      <Container maxWidth="sm" className="bitacora-container">
+        <Box className="bitacora-header">
+          <IconButton onClick={() => navigate(-1)} className="back-button">
+            <ArrowBackIosNewIcon />
+          </IconButton>
+          <Typography variant="h4" className="title-text">
+            Editar Bitácora
+          </Typography>
         </Box>
-        <input
-          accept="image/*"
-          style={{ display: 'none' }}
-          id="upload-button"
-          type="file"
-          multiple
-          onChange={handleImageChange}
+
+        <TextField
+          className="input-box"
+          variant="outlined"
+          label="Título de la bitácora"
+          fullWidth
+          value={bitacora?.titulo || ""}
+          onChange={(e) => setBitacora({ ...bitacora, titulo: e.target.value })}
+          margin="normal"
         />
-        <label htmlFor="upload-button" className="upload-label">
-          <Box className="upload-box">
-            <IconButton color="primary" component="span">
-              <PhotoCamera className="upload-icon" />
-            </IconButton>
-            <Typography variant="body2" className="upload-text">Agregar imagen</Typography>
+
+        <Box className="image-upload-container">
+          <Box className="image-gallery">
+            {images.map((image, index) => (
+              <div key={index} className="image-wrapper">
+                <img
+                  src={image}
+                  alt={`Imagen ${index + 1}`}
+                  className="bitacora-image"
+                />
+                <IconButton
+                  onClick={() => handleDeleteImage(index)}
+                  color="error" // Esto aplica el color rojo al ícono
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </div>
+            ))}
           </Box>
-        </label>
-      </Box>
-
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Box className="date-time-container" margin="normal">
-          <DatePicker
-            label="Fecha del muestreo"
-            value={bitacora?.fechaHoraMuestreo || null}
-            onChange={(newDate) => setBitacora({ ...bitacora, fechaHoraMuestreo: newDate })}
-            slotProps={{ textField: { fullWidth: true } }}
+          <input
+            accept="image/*"
+            style={{ display: "none" }}
+            id="upload-button"
+            type="file"
+            multiple
+            onChange={handleImageChange}
           />
-          <TimePicker
-            label="Hora del muestreo"
-            value={bitacora?.horaMuestreo || null}
-            onChange={(newTime) => setBitacora({ ...bitacora, horaMuestreo: newTime })}
-            slotProps={{ textField: { fullWidth: true } }}
+          <label htmlFor="upload-button" className="upload-label">
+            <Box className="upload-box">
+              <IconButton color="primary" component="span">
+                <PhotoCamera className="upload-icon" />
+              </IconButton>
+              <Typography variant="body2" className="upload-text">
+                Agregar imagen
+              </Typography>
+            </Box>
+          </label>
+        </Box>
+
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <Box className="date-time-container" margin="normal">
+            <DatePicker
+              className="input-box"
+              label="Fecha del muestreo"
+              value={bitacora?.fechaHoraMuestreo || null}
+              onChange={(newDate) =>
+                setBitacora({ ...bitacora, fechaHoraMuestreo: newDate })
+              }
+              slotProps={{ textField: { fullWidth: true } }}
+            />
+            <TimePicker
+              className="input-box"
+              label="Hora del muestreo"
+              value={bitacora?.horaMuestreo || null}
+              onChange={(newTime) =>
+                setBitacora({ ...bitacora, horaMuestreo: newTime })
+              }
+              slotProps={{ textField: { fullWidth: true } }}
+            />
+          </Box>
+        </LocalizationProvider>
+
+        <Box className="bitacora-fields" margin="normal">
+          <TextField
+            className="input-box"
+            variant="outlined"
+            label="Latitud"
+            fullWidth
+            value={bitacora?.localizacion?.latitud || ""}
+            onChange={(e) =>
+              setBitacora({
+                ...bitacora,
+                localizacion: {
+                  ...bitacora.localizacion,
+                  latitud: e.target.value,
+                },
+              })
+            }
+          />
+          <TextField
+            className="input-box"
+            variant="outlined"
+            label="Longitud"
+            fullWidth
+            value={bitacora?.localizacion?.longitud || ""}
+            onChange={(e) =>
+              setBitacora({
+                ...bitacora,
+                localizacion: {
+                  ...bitacora.localizacion,
+                  longitud: e.target.value,
+                },
+              })
+            }
+          />
+          <TextField
+            className="input-box"
+            variant="outlined"
+            label="Condiciones Climáticas"
+            fullWidth
+            value={bitacora?.condicionesClimaticas || ""}
+            onChange={(e) =>
+              setBitacora({
+                ...bitacora,
+                condicionesClimaticas: e.target.value,
+              })
+            }
+          />
+          <TextField
+            className="input-box"
+            variant="outlined"
+            label="Descripción del Hábitat"
+            fullWidth
+            multiline
+            rows={4}
+            value={bitacora?.descripcionHabitat || ""}
+            onChange={(e) =>
+              setBitacora({ ...bitacora, descripcionHabitat: e.target.value })
+            }
+          />
+          <TextField
+            className="input-box"
+            variant="outlined"
+            label="Observaciones Adicionales"
+            fullWidth
+            multiline
+            rows={4}
+            value={bitacora?.observacionesAdicionales || ""}
+            onChange={(e) =>
+              setBitacora({
+                ...bitacora,
+                observacionesAdicionales: e.target.value,
+              })
+            }
+          />
+
+          <Typography variant="h6">Especie Recolectada</Typography>
+          <TextField
+            className="input-box"
+            variant="outlined"
+            label="Nombre Científico"
+            fullWidth
+            value={bitacora?.especiesRecolectadas?.[0]?.nombreCientifico || ""}
+            onChange={(e) =>
+              setBitacora({
+                ...bitacora,
+                especiesRecolectadas: [
+                  {
+                    ...bitacora.especiesRecolectadas[0],
+                    nombreCientifico: e.target.value,
+                  },
+                ],
+              })
+            }
+          />
+          <TextField
+            className="input-box"
+            variant="outlined"
+            label="Nombre Común"
+            fullWidth
+            value={bitacora?.especiesRecolectadas?.[0]?.nombreComun || ""}
+            onChange={(e) =>
+              setBitacora({
+                ...bitacora,
+                especiesRecolectadas: [
+                  {
+                    ...bitacora.especiesRecolectadas[0],
+                    nombreComun: e.target.value,
+                  },
+                ],
+              })
+            }
+          />
+          <TextField
+            className="input-box"
+            variant="outlined"
+            label="Familia"
+            fullWidth
+            value={bitacora?.especiesRecolectadas?.[0]?.familia || ""}
+            onChange={(e) =>
+              setBitacora({
+                ...bitacora,
+                especiesRecolectadas: [
+                  {
+                    ...bitacora.especiesRecolectadas[0],
+                    familia: e.target.value,
+                  },
+                ],
+              })
+            }
+          />
+          <TextField
+            className="input-box"
+            variant="outlined"
+            label="Cantidad de Muestras"
+            fullWidth
+            type="number"
+            value={bitacora?.especiesRecolectadas?.[0]?.cantidadMuestras || ""}
+            onChange={(e) =>
+              setBitacora({
+                ...bitacora,
+                especiesRecolectadas: [
+                  {
+                    ...bitacora.especiesRecolectadas[0],
+                    cantidadMuestras: e.target.value,
+                  },
+                ],
+              })
+            }
+          />
+          <TextField
+            className="input-box"
+            variant="outlined"
+            label="Estado de la Planta"
+            fullWidth
+            value={bitacora?.especiesRecolectadas?.[0]?.estadoPlanta || ""}
+            onChange={(e) =>
+              setBitacora({
+                ...bitacora,
+                especiesRecolectadas: [
+                  {
+                    ...bitacora.especiesRecolectadas[0],
+                    estadoPlanta: e.target.value,
+                  },
+                ],
+              })
+            }
           />
         </Box>
-      </LocalizationProvider>
 
-      <Box className="bitacora-fields" margin="normal">
-        <TextField
-          variant="outlined"
-          label="Latitud"
-          fullWidth
-          value={bitacora?.localizacion?.latitud || ''}
-          onChange={(e) => setBitacora({ ...bitacora, localizacion: { ...bitacora.localizacion, latitud: e.target.value } })}
-        />
-        <TextField
-          variant="outlined"
-          label="Longitud"
-          fullWidth
-          value={bitacora?.localizacion?.longitud || ''}
-          onChange={(e) => setBitacora({ ...bitacora, localizacion: { ...bitacora.localizacion, longitud: e.target.value } })}
-        />
-        <TextField
-          variant="outlined"
-          label="Condiciones Climáticas"
-          fullWidth
-          value={bitacora?.condicionesClimaticas || ''}
-          onChange={(e) => setBitacora({ ...bitacora, condicionesClimaticas: e.target.value })}
-        />
-        <TextField
-          variant="outlined"
-          label="Descripción del Hábitat"
-          fullWidth
-          multiline
-          rows={4}
-          value={bitacora?.descripcionHabitat || ''}
-          onChange={(e) => setBitacora({ ...bitacora, descripcionHabitat: e.target.value })}
-        />
-        <TextField
-          variant="outlined"
-          label="Observaciones Adicionales"
-          fullWidth
-          multiline
-          rows={4}
-          value={bitacora?.observacionesAdicionales || ''}
-          onChange={(e) => setBitacora({ ...bitacora, observacionesAdicionales: e.target.value })}
-        />
-
-        <Typography variant="h6">Especie Recolectada</Typography>
-        <TextField
-          variant="outlined"
-          label="Nombre Científico"
-          fullWidth
-          value={bitacora?.especiesRecolectadas?.[0]?.nombreCientifico || ''}
-          onChange={(e) =>
-            setBitacora({
-              ...bitacora,
-              especiesRecolectadas: [{ ...bitacora.especiesRecolectadas[0], nombreCientifico: e.target.value }],
-            })
-          }
-        />
-        <TextField
-          variant="outlined"
-          label="Nombre Común"
-          fullWidth
-          value={bitacora?.especiesRecolectadas?.[0]?.nombreComun || ''}
-          onChange={(e) =>
-            setBitacora({
-              ...bitacora,
-              especiesRecolectadas: [{ ...bitacora.especiesRecolectadas[0], nombreComun: e.target.value }],
-            })
-          }
-        />
-        <TextField
-          variant="outlined"
-          label="Familia"
-          fullWidth
-          value={bitacora?.especiesRecolectadas?.[0]?.familia || ''}
-          onChange={(e) =>
-            setBitacora({
-              ...bitacora,
-              especiesRecolectadas: [{ ...bitacora.especiesRecolectadas[0], familia: e.target.value }],
-            })
-          }
-        />
-        <TextField
-          variant="outlined"
-          label="Cantidad de Muestras"
-          fullWidth
-          type="number"
-          value={bitacora?.especiesRecolectadas?.[0]?.cantidadMuestras || ''}
-          onChange={(e) =>
-            setBitacora({
-              ...bitacora,
-              especiesRecolectadas: [{ ...bitacora.especiesRecolectadas[0], cantidadMuestras: e.target.value }],
-            })
-          }
-        />
-        <TextField
-          variant="outlined"
-          label="Estado de la Planta"
-          fullWidth
-          value={bitacora?.especiesRecolectadas?.[0]?.estadoPlanta || ''}
-          onChange={(e) =>
-            setBitacora({
-              ...bitacora,
-              especiesRecolectadas: [{ ...bitacora.especiesRecolectadas[0], estadoPlanta: e.target.value }],
-            })
-          }
-        />
-      </Box>
-
-      <Box className="save-button-container">
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<SaveIcon />}
-          onClick={handleSave}
-          className="save-button"
-        >
-          Guardar Cambios
-        </Button>
-      </Box>
-    </Container>
+        <Box className="save-button-container">
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<SaveIcon />}
+            onClick={handleSave}
+            className="save-button"
+            sx={{
+              backgroundColor: '#3a7e0d',
+              color: '#fff',
+              '&:hover': {
+                backgroundColor: '#2e5d0a',
+              },
+            }}
+          >
+            Guardar Cambios
+          </Button>
+        </Box>
+      </Container>
     </div>
   );
 }

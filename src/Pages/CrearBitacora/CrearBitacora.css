@@ -1,11 +1,30 @@
-.container{
-  height: 100vh;
+body {
+  background-image: url('https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100vh; /* Asegura que el cuerpo ocupe la altura completa */
+  overflow-y: auto; /* Permite desplazamiento si es necesario */
 }
 
 
-/* Estilos generales para html y body */
-
-
+.bitacora-container {
+  background-color: white;
+  padding: 10px; /* Reduce el padding si es necesario */
+  border-radius: 10px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 0%;
+  width: 90vw;
+  min-height: 100vh; /* Asegura que el contenedor ocupe al menos toda la altura de la ventana */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Permite que el contenido se desplace si es necesario */
+}
 
 
 .title-text {
@@ -89,27 +108,32 @@
   margin-top: 20px;
 }
 
-/* Estilos responsivos para dispositivos móviles */
+/* Ajustes para responsividad */
 @media (max-width: 768px) {
-  .bitacora-container {
-    padding: 10px;
-  }
-
   .title-text {
-    font-size: 1.5rem;
+      font-size: 1.8rem;
   }
 }
 
 @media (max-width: 480px) {
   .bitacora-container {
-    padding: 8px;
+      padding: 10px;
+      margin-top: 20px;
   }
 
   .title-text {
-    font-size: 1.4rem;
+      font-size: 1.6rem;
+  }
+
+  .bitacora-image {
+      width: 60px;
+      height: 60px;
+  }
+
+  .upload-box {
+      height: 50px;
   }
 }
-
 .input-box .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
   border-color:  #d9d9d9; 
 }

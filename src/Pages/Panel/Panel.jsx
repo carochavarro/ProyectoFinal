@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import {
   Table,
   TableBody,
@@ -10,29 +10,32 @@ import {
   Paper,
   IconButton,
   Select,
-  MenuItem
-} from '@mui/material';
-import { PersonOff, Person } from '@mui/icons-material'; // Íconos de deshabilitar y habilitar
-import FilterBarUsuario from '../../Components/FilterBarUsuario/FilterBarUsuario';
-import './Panel.css';
+  MenuItem,
+} from "@mui/material";
+import { PersonOff, Person } from "@mui/icons-material"; // Íconos de deshabilitar y habilitar
+import FilterBarUsuario from "../../Components/FilterBarUsuario/FilterBarUsuario";
+import "./Panel.css";
 
 const Panel = () => {
   const [usuarios, setUsuarios] = useState([]);
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     const fetchUsuarios = async () => {
       try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get('https://bachendapi.onrender.com/api/usuarios', {
-          headers: {
-            'Authorization': `Bearer ${token}`
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          "https://bachendapi.onrender.com/api/usuarios",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
-        });
+        );
         setUsuarios(response.data);
       } catch (error) {
-        console.error('Error al obtener los usuarios:', error);
-        alert('Hubo un error al cargar los usuarios');
+        console.error("Error al obtener los usuarios:", error);
+        alert("Hubo un error al cargar los usuarios");
       }
     };
 
@@ -41,43 +44,43 @@ const Panel = () => {
 
   const actualizarEstado = async (id, nuevoEstado) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       await axios.put(
         `https://bachendapi.onrender.com/api/usuarios/${id}/estado`,
         { estado: nuevoEstado },
         {
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
       );
-      alert('Estado actualizado correctamente');
+      alert("Estado actualizado correctamente");
       window.location.reload();
     } catch (error) {
-      console.error('Error al actualizar el estado:', error);
-      alert('Hubo un error al actualizar el estado');
+      console.error("Error al actualizar el estado:", error);
+      alert("Hubo un error al actualizar el estado");
     }
   };
 
   const actualizarRol = async (id, nuevoRol) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       await axios.put(
         `https://bachendapi.onrender.com/api/usuarios/${id}/rol`,
         { rol: nuevoRol },
         {
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
       );
-      alert('Rol actualizado correctamente');
+      alert("Rol actualizado correctamente");
       window.location.reload();
     } catch (error) {
-      console.error('Error al actualizar el rol:', error);
-      alert('Hubo un error al actualizar el rol');
+      console.error("Error al actualizar el rol:", error);
+      alert("Hubo un error al actualizar el rol");
     }
   };
 
@@ -89,16 +92,18 @@ const Panel = () => {
     alert("Funcionalidad para crear usuario aún no implementada.");
   };
 
-  const filteredUsuarios = usuarios.filter(usuario =>
+  const filteredUsuarios = usuarios.filter((usuario) =>
     usuario.nombreCompleto.toLowerCase().includes(searchText)
   );
 
   return (
     <div className="panel-container">
-      <div className="filter-bar-container">
-        <FilterBarUsuario onSearchChange={handleSearchChange} onCreateUser={handleCreateUser} />
+      <div className="filter-bar-container ">
+        <FilterBarUsuario
+          onSearchChange={handleSearchChange}
+          onCreateUser={handleCreateUser}
+        />
       </div>
-
       <TableContainer component={Paper} className="table-container">
         <Table>
           <TableHead>
@@ -112,25 +117,29 @@ const Panel = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredUsuarios.map(usuario => (
+            {filteredUsuarios.map((usuario) => (
               <TableRow key={usuario._id}>
                 <TableCell>{usuario.nombreCompleto}</TableCell>
                 <TableCell>{usuario.email}</TableCell>
-                <TableCell>{usuario.estado ? 'Activo' : 'Deshabilitado'}</TableCell>
+                <TableCell>
+                  {usuario.estado ? "Activo" : "Deshabilitado"}
+                </TableCell>
                 <TableCell>{usuario.rol}</TableCell>
                 <TableCell>
                   <IconButton
-                    onClick={() => actualizarEstado(usuario._id, !usuario.estado)}
+                    onClick={() =>
+                      actualizarEstado(usuario._id, !usuario.estado)
+                    }
                     className="icon-button"
                     style={{
-                      color: usuario.estado ? '#FF0000' : '#51A614', // Rojo para deshabilitar, verde para habilitar
-                      fontSize: '1.5rem' // Aumenta el tamaño del ícono
+                      color: usuario.estado ? "#FF0000" : "#51A614", // Rojo para deshabilitar, verde para habilitar
+                      fontSize: "1.5rem", // Aumenta el tamaño del ícono
                     }}
                   >
                     {usuario.estado ? <PersonOff /> : <Person />}
                   </IconButton>
                 </TableCell>
-                <TableCell>
+                <TableCell className="input-box">
                   <Select
                     value={usuario.rol}
                     onChange={(e) => actualizarRol(usuario._id, e.target.value)}

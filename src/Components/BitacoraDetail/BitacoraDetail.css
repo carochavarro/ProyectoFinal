@@ -1,38 +1,28 @@
-/* src/pages/BitacoraDetail/BitacoraDetail.css */
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
+.container{
+    background-color: white;
+    width: 500px;
+    border-radius: 10px;
+    align-items: center;
+    min-height: 100%; /* Asegura que el contenedor ocupe al menos toda la altura de la ventana */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);  
+ }
 
 .bitacora-detail-container {
-    height:100vh ;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    min-height: 100vh;
-    color: #EAF2E4;
-    padding-top: 60px; /* espacio para el navbar */
-    padding-bottom: 40px; /* espacio inferior */
 }
 
-.detail-content {
-    background-color: rgba(255, 255, 255, 0.85); /* Fondo blanco similar al de AdminHome */
+ .detail-content {
     padding: 20px;
     border-radius: 10px;
-    max-width: 600px;
-    width: 90%;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    margin-top: 20px;
-    text-align: center;
+    box-shadow: 0px 4px 10px rgba(120, 120, 120, 0.2);
+    margin-top: 10px;
+    text-align: left;
 }
 
 .subtitulo-verde {
-    color: #9ABF80; /* Color verde */
+    color: #397f0e; /* Color verde */
     font-weight: bold;
 }
 
@@ -46,16 +36,12 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.detail-text {
-    color: #EAF2E4;
-    font-size: 1rem;
-    margin: 10px 0;
-    line-height: 1.5;
-}
-
-.detail-subtitle {
+.detail-title {
+    font-size: 2rem;
     font-weight: bold;
-    color: #9ABF80;
+    color: #397f0e;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -80,26 +66,4 @@
     .detail-text {
         font-size: 0.8rem;
     }
-}
-
-
-/* src/pages/BitacoraDetail/BitacoraDetail.css */
-
-.detail-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #9ABF80; /* Verde */
-    margin-bottom: 20px;
-}
-
-.detail-text {
-    color: #333; /* Color oscuro para texto */
-    font-size: 1rem;
-    margin: 10px 0;
-    line-height: 1.5;
-}
-
-.subtitulo-verde {
-    color: #9ABF80; /* Verde */
-    font-weight: bold;
 }

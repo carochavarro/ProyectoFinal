@@ -13,7 +13,7 @@ import UploadFile from '@mui/icons-material/UploadFile';
 import SaveIcon from '@mui/icons-material/Save';
 import { LocalizationProvider, DatePicker, TimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './CrearBitacora.css';
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -135,12 +135,16 @@ function CrearBitacora() {
       setIsLoading(false);
     }
   };
+  const navigate = useNavigate(); // Hook de navegación
+  const handleBack = () => {
+    navigate('/home');
+  };
 
   return (
     <div className="container">
     <Container maxWidth="sm" className="bitacora-container">
       <Box className="bitacora-header">
-        <IconButton className="back-button">
+        <IconButton className="back-button" onClick={handleBack}>
           <ArrowBackIosNewIcon />
         </IconButton>
       </Box>

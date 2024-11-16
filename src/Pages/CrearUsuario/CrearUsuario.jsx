@@ -7,11 +7,13 @@ import {
   Button,
   Snackbar,
   MenuItem,
+  IconButton,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import './CrearUsuario.css'
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"; // Asegúrate de importar el ícono
+import "./CrearUsuario.css";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -19,16 +21,16 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function CrearUsuario() {
   const [formData, setFormData] = useState({
-    nombreCompleto: '',
-    email: '',
-    contraseña: '',
-    rol: 'Colaborador', // Valor inicial para el rol
+    nombreCompleto: "",
+    email: "",
+    contraseña: "",
+    rol: "Colaborador", // Valor inicial para el rol
   });
 
   const [alert, setAlert] = useState({
     open: false,
-    message: '',
-    severity: 'success'
+    message: "",
+    severity: "success",
   });
 
   const navigate = useNavigate();
@@ -41,40 +43,62 @@ function CrearUsuario() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://bachendapi.onrender.com/api/usuarios', formData);
+      const response = await axios.post(
+        "https://bachendapi.onrender.com/api/usuarios",
+        formData
+      );
       console.log("Usuario creado exitosamente:", response.data);
       setAlert({
         open: true,
-        message: 'Usuario creado exitosamente',
-        severity: 'success'
+        message: "Usuario creado exitosamente",
+        severity: "success",
       });
-      setTimeout(() => navigate('/panel'), 2000);
+      setTimeout(() => navigate("/panel"), 2000);
     } catch (error) {
-      console.error("Error al crear usuario:", error.response ? error.response.data : error.message);
+      console.error(
+        "Error al crear usuario:",
+        error.response ? error.response.data : error.message
+      );
       setAlert({
         open: true,
-        message: error.response?.data?.message || 'Error al crear el usuario',
-        severity: 'error'
+        message: error.response?.data?.message || "Error al crear el usuario",
+        severity: "error",
       });
     }
   };
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') return;
+    if (reason === "clickaway") return;
     setAlert({ ...alert, open: false });
+  };
+
+  const handleBack = () => {
+    navigate(-1); // Navega a la página anterior en la historia del navegador
   };
 
   return (
     <Container maxWidth="xs" className="crear-usuario-container">
-      <Typography variant="h4" align="center" sx={{ mt: 4, mb: 2, color: '#397f0e' }}>
+      <IconButton className="back-button" onClick={handleBack}>
+        <ArrowBackIosNewIcon />
+      </IconButton>
+      <Typography
+        variant="h4"
+        align="center"
+        sx={{ mt: 4, mb: 2, color: "#397f0e" }}
+      >
         Crear Usuario
       </Typography>
-      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
+      <Box
+        className="input-box"
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{ mt: 2 }}
+      >
+      <div className="campos">
         <TextField
           fullWidth
           variant="outlined"
           label="Nombre completo"
-          placeholder="Nombre completo"
           name="nombreCompleto"
           value={formData.nombreCompleto}
           onChange={handleChange}
@@ -84,7 +108,6 @@ function CrearUsuario() {
           fullWidth
           variant="outlined"
           label="Email"
-          placeholder="user@mail.com"
           type="email"
           name="email"
           value={formData.email}
@@ -95,7 +118,6 @@ function CrearUsuario() {
           fullWidth
           variant="outlined"
           label="Contraseña"
-          placeholder="contraseña"
           type="password"
           name="contraseña"
           value={formData.contraseña}
@@ -116,23 +138,34 @@ function CrearUsuario() {
           <MenuItem value="Administrador">Administrador</MenuItem>
           <MenuItem value="Investigador">Investigador</MenuItem>
         </TextField>
+        
         <Button
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ mt: 2, backgroundColor: '#3a7e0d', color: '#fff', '&:hover': { backgroundColor: '#2e5d0a' } }}
+          sx={{
+            mt: 2,
+            backgroundColor: "#397f0e",
+            color: "#fff",
+            "&:hover": { backgroundColor: "#397f0e" },
+          }}
         >
           Crear Usuario
         </Button>
+        </div>
       </Box>
 
       <Snackbar
         open={alert.open}
         autoHideDuration={6000}
         onClose={handleClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
-        <Alert onClose={handleClose} severity={alert.severity} sx={{ width: '100%' }}>
+        <Alert
+          onClose={handleClose}
+          severity={alert.severity}
+          sx={{ width: "100%" }}
+        >
           {alert.message}
         </Alert>
       </Snackbar>

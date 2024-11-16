@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { TextField, IconButton, Button, Menu, MenuItem, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
+import HomeIcon from "@mui/icons-material/Home";
+import PersonIcon from "@mui/icons-material/Person";
 
 const FilterBarUsuario = ({ onSearchChange }) => {
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
@@ -11,9 +13,10 @@ const FilterBarUsuario = ({ onSearchChange }) => {
   const handleMenuClose = () => setMenuAnchorEl(null);
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, padding: 2, backgroundColor: '#9ABF80' }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2,  backgroundColor: '#397f0e' }}>
       <TextField
-        variant="outlined"
+      className="input-box"
+             variant="outlined"
         placeholder="Buscar usuario"
         onChange={(e) => onSearchChange(e.target.value)}
         InputProps={{
@@ -25,14 +28,12 @@ const FilterBarUsuario = ({ onSearchChange }) => {
         }}
         sx={{
           flexGrow: 1,
-          bgcolor: '#EAF2E4',
+          bgcolor: 'white',
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
               borderColor: 'transparent',
             },
-            '&:hover fieldset': {
-              borderColor: '#3a7e0d',
-            },
+            
           },
         }}
       />
@@ -47,26 +48,29 @@ const FilterBarUsuario = ({ onSearchChange }) => {
       </Button>
 
       <IconButton
-        sx={{ bgcolor: '#3a7e0d', '&:hover': { bgcolor: '#51A614' }, borderRadius: 1 }}
-        onClick={() => navigate('/home')}
-      >
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
-          alt="Home"
-          style={{ width: 24 }}
-        />
-      </IconButton>
+      
+          sx={{
+            bgcolor: "#49a011",
+            "&:hover": { bgcolor: "#49a011" },
+            borderRadius: 1,
+            padding: "8px",
+          }}
+          onClick={() => navigate("/home")}
+        >
+          <HomeIcon sx={{ color: "white", fontSize: 24 }} />
+        </IconButton>
 
-      <IconButton
-        sx={{ bgcolor: '#3a7e0d', '&:hover': { bgcolor: '#51A614' }, borderRadius: 1 }}
-        onClick={handleUserIconClick}
-      >
-        <img
-          src="https://img.icons8.com/?size=64&id=rrtYnzKMTlUr&format=png"
-          alt="Perfil"
-          style={{ width: 24 }}
-        />
-      </IconButton>
+        <IconButton
+      onClick={handleUserIconClick}
+      sx={{
+        bgcolor: "#49a011",
+        "&:hover": { bgcolor: "#49a011" },
+        borderRadius: 1,
+        padding: "8px",
+      }}
+    >
+      <PersonIcon sx={{ color: "white", fontSize: 24 }} />
+    </IconButton>
 
       <Menu
         anchorEl={menuAnchorEl}

@@ -7,7 +7,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.85); /* Fondo claro individual para cada tarjeta */
+    background-color: white; /* Fondo claro individual para cada tarjeta */
     border-radius: 12px;
     padding: 16px;
     margin: 16px;

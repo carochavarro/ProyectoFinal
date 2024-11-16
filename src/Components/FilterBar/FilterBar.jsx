@@ -16,6 +16,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 // import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useLocation, useNavigate } from "react-router-dom";
 import "./FilterBar.css";
+import HomeIcon from "@mui/icons-material/Home";
+import PersonIcon from "@mui/icons-material/Person";
 
 const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -73,7 +75,6 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
         gap: 8,
         padding: 8,
         borderRadius: 8,
-   
       }}
     >
       {!isDetailView && (
@@ -90,7 +91,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
             <img
               src="https://cdn.icon-icons.com/icons2/1660/PNG/512/3844475-filter-filters_110342.png"
               alt="Filtro"
-              style={{ width: 24 }}
+              style={{ width: 25, filter: "invert(1)" }}
             />
           </IconButton>
 
@@ -193,28 +194,22 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
           }}
           onClick={() => navigate("/home")}
         >
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
-            alt="Home"
-            style={{ width: 24 }}
-          />
+          <HomeIcon sx={{ color: "white", fontSize: 24 }} />
         </IconButton>
 
         <IconButton
-          onClick={handleUserIconClick}
-          sx={{
-            bgcolor: "#49a011",
-            "&:hover": { bgcolor: "#49a011" },
-            borderRadius: 1,
-            padding: "8px",
-          }}
-        >
-          <img
-            src="https://img.icons8.com/?size=64&id=rrtYnzKMTlUr&format=png"
-            alt="Perfil"
-            style={{ width: 24 }}
-          />
-        </IconButton>
+      onClick={handleUserIconClick}
+      sx={{
+        bgcolor: "#49a011",
+        "&:hover": { bgcolor: "#49a011" },
+        borderRadius: 1,
+        padding: "8px",
+      }}
+    >
+      <PersonIcon sx={{ color: "white", fontSize: 24 }} />
+    </IconButton>
+
+
         <Menu
           anchorEl={menuAnchorEl}
           open={menuOpen}
