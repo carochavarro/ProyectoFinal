@@ -23,6 +23,7 @@ const BitacoraCard = ({ bitacora }) => {
         <p><span className="subtitulo-verde">Ubicación:</span> Lat {bitacora.localizacion.latitud}, Lng {bitacora.localizacion.longitud}</p>
         <p><span className="subtitulo-verde">Clima:</span> {bitacora.condicionesClimaticas}</p>
         <p><span className="subtitulo-verde">Hábitat:</span> {bitacora.descripcionHabitat}</p>
+        <p><span className="subtitulo-verde">Autor:</span> {bitacora.Autor}</p>
       </div>
     </div>
   );
