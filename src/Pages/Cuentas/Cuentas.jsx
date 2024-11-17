@@ -14,7 +14,19 @@ const Cuentas = () => {
     const [sortOrder, setSortOrder] = useState('recientes');
     const [searchText, setSearchText] = useState('');
     const [filters, setFilters] = useState({});
+    const [usuario, setUsuario] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const Usuario = localStorage.getItem('usuario');
+
+        if (Usuario) {
+            setUsuario(Usuario); // Establece el nombre del usuario desde localStorage
+        } else {
+            alert('No has iniciado sesión. Por favor, inicia sesión.');
+            navigate('/'); // Redirige a la página de login
+        }
+    }, [navigate]);
 
     useEffect(() => {
         fetchBitacoras();
@@ -28,7 +40,7 @@ const Cuentas = () => {
     const fetchBitacoras = () => {
         axios.get('https://bachendapi.onrender.com/api/bitacoras')
             .then(response => {
-                const activeBitacoras = response.data.filter(bitacora => bitacora.estadoActivo);
+                const activeBitacoras = response.data.filter(bitacora => bitacora.estadoActivo && bitacora.Autor === usuario);
                 setBitacoras(activeBitacoras);
             })
             .catch(error => console.error('Error al obtener las bitácoras:', error));
@@ -36,6 +48,7 @@ const Cuentas = () => {
 
     const filterAndSortBitacoras = (bitacorasToFilter, search, order, filters) => {
         const searchLower = search.toLowerCase();
+        const usuario = localStorage.getItem('usuario');
         let filteredBitacoras = bitacorasToFilter.filter(bitacora => {
             const fecha = new Date(bitacora.fechaHoraMuestreo);
             const startDate = filters.startDate ? new Date(filters.startDate) : null;
@@ -45,8 +58,8 @@ const Cuentas = () => {
             const matchesHabitat = bitacora.descripcionHabitat.toLowerCase().includes(searchLower);
             const matchesClimate = bitacora.condicionesClimaticas.toLowerCase().includes(searchLower);
             const matchesLocation = (`${bitacora.localizacion.latitud},${bitacora.localizacion.longitud}`).includes(searchLower);
-            const matchesSpecies = bitacora.especiesRecolectadas.some(especie => 
-                especie.nombreComun.toLowerCase().includes(searchLower) || 
+            const matchesSpecies = bitacora.especiesRecolectadas.some(especie =>
+                especie.nombreComun.toLowerCase().includes(searchLower) ||
                 especie.nombreCientifico.toLowerCase().includes(searchLower)
             );
             return inDateRange && (searchLower === '' || matchesTitle || matchesHabitat || matchesClimate || matchesLocation || matchesSpecies);
@@ -76,22 +89,22 @@ const Cuentas = () => {
     return (
         <div className="cuentas-container">
             <div className="filter-bar-container">
-                <FilterBar 
-                    onSortChange={setSortOrder} 
-                    onSearchChange={(e) => setSearchText(e.target.value)} 
-                    onFilterChange={setFilters} 
+                <FilterBar
+                    onSortChange={setSortOrder}
+                    onSearchChange={(e) => setSearchText(e.target.value)}
+                    onFilterChange={setFilters}
                 />
             </div>
 
             <div className="user-name-banner">
-                <h2>Nombre del usuario: Juan Camilo</h2>
+                <h2>Nombre del usuario: {usuario}</h2>
             </div>
 
             <div className="bitacora-list">
                 {filteredBitacoras.length > 0 ? (
                     filteredBitacoras.map((bitacora) => (
                         <div key={bitacora._id} className="bitacora-card-container">
-                            <BitacoraCard 
+                            <BitacoraCard
                                 bitacora={bitacora}
                                 showEditDeleteOptions={true}
                             />
@@ -106,7 +119,7 @@ const Cuentas = () => {
                         </div>
                     ))
                 ) : (
-                    <p>No se encontraron bitácoras activas.</p>
+                    <p>No Cuenta con bitacoras.</p>
                 )}
             </div>
         </div>

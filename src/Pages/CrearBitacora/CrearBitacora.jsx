@@ -19,8 +19,12 @@ import './CrearBitacora.css';
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { uploadImages } from "../../FireBase/Service";
 
+
 function CrearBitacora() {
+
+  const navigate = useNavigate();
   const [images, setImages] = useState([]);
+  const [autor, setAutor] = useState('');
   const [imageFiles, setImageFiles] = useState([]);
   const [title, setTitle] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
@@ -39,7 +43,20 @@ function CrearBitacora() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+
+
   const isMobile = window.innerWidth < 768;
+
+  useEffect(() => {
+    const usuario = localStorage.getItem('usuario');
+    if (!usuario) {
+      alert('No has iniciado sesión. Por favor, inicia sesión.');
+      navigate('/'); // Redirige a la página de login
+    } else {
+      setAutor(usuario);
+      console.log(usuario); // Establece el autor como el usuario del localStorage
+    }
+  }, [navigate]);
 
   useEffect(() => {
     return () => {
@@ -79,13 +96,14 @@ function CrearBitacora() {
 
     try {
       const fechaHoraMuestreo = new Date(
-        selectedDate.getFullYear(),
-        selectedDate.getMonth(),
-        selectedDate.getDate(),
-        selectedTime.getHours(),
-        selectedTime.getMinutes(),
-        selectedTime.getSeconds()
+        selectedDate.toDate().getFullYear(),
+        selectedDate.toDate().getMonth(),
+        selectedDate.toDate().getDate(),
+        selectedTime.toDate().getHours(),
+        selectedTime.toDate().getMinutes(),
+        selectedTime.toDate().getSeconds()
       );
+
 
       let imageUrls = [];
       if (imageFiles.length > 0) {
@@ -104,7 +122,8 @@ function CrearBitacora() {
         especiesRecolectadas: [especie],
         observacionesAdicionales,
         estadoActivo: true,
-        imageUrls
+        imageUrls,
+        Autor: autor
       };
 
       const response = await axios.post('https://bachendapi.onrender.com/api/bitacoras/', data);
@@ -135,121 +154,121 @@ function CrearBitacora() {
       setIsLoading(false);
     }
   };
-  const navigate = useNavigate(); // Hook de navegación
+  // Hook de navegación
   const handleBack = () => {
     navigate('/home');
   };
 
   return (
     <div className="container">
-    <Container maxWidth="sm" className="bitacora-container">
-      <Box className="bitacora-header">
-        <IconButton className="back-button" onClick={handleBack}>
-          <ArrowBackIosNewIcon />
-        </IconButton>
-      </Box>
-      <Typography variant="h4" align="center" className="title-text">
-        Crear Bitácora
-      </Typography>
-      <Box className="bitacora-header">
-        <TextField
-        color="action"
-          variant="outlined"
-          label="Título de la bitácora"
-          fullWidth
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="input-box"
-        />
-      </Box>
-
-      <Box className="image-upload-container">
-        <Box className="image-gallery">
-          {images.map((image, index) => (
-            <img key={index} src={image} alt={`Imagen ${index + 1}`} className="bitacora-image" />
-          ))}
+      <Container maxWidth="sm" className="bitacora-container">
+        <Box className="bitacora-header">
+          <IconButton className="back-button" onClick={handleBack}>
+            <ArrowBackIosNewIcon />
+          </IconButton>
         </Box>
-        <input
-          accept="image/*"
-          style={{ display: 'none' }}
-          id="upload-button"
-          type="file"
-          multiple
-          onChange={handleImageChange}
-        />
-        <label htmlFor="upload-button" className="upload-label">
-          <Box className="upload-box">
-            <IconButton color="primary" component="span">
-              {isMobile ? <PhotoCamera className="upload-icon" /> : <UploadFile className="upload-icon" />}
-            </IconButton>
-            <Typography variant="body2" className="upload-text">Agregar imagen</Typography>
+        <Typography variant="h4" align="center" className="title-text">
+          Crear Bitácora
+        </Typography>
+        <Box className="bitacora-header">
+          <TextField
+            color="action"
+            variant="outlined"
+            label="Título de la bitácora"
+            fullWidth
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="input-box"
+          />
+        </Box>
+
+        <Box className="image-upload-container">
+          <Box className="image-gallery">
+            {images.map((image, index) => (
+              <img key={index} src={image} alt={`Imagen ${index + 1}`} className="bitacora-image" />
+            ))}
           </Box>
-        </label>
-      </Box>
-
-      <LocalizationProvider dateAdapter={AdapterDayjs} locale={LocalizationProvider}>
-        <Box className="date-time-container" >
-          <DatePicker
-            label="Fecha del muestreo"
-            value={selectedDate}
-            onChange={(newValue) => setSelectedDate(newValue)}
-            renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
-            className="input-box"
+          <input
+            accept="image/*"
+            style={{ display: 'none' }}
+            id="upload-button"
+            type="file"
+            multiple
+            onChange={handleImageChange}
           />
-          <TimePicker
-            label="Hora del muestreo"
-            value={selectedTime}
-            onChange={(newValue) => setSelectedTime(newValue)}
-            renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
-            className="input-box"
-          />
+          <label htmlFor="upload-button" className="upload-label">
+            <Box className="upload-box">
+              <IconButton color="primary" component="span">
+                {isMobile ? <PhotoCamera className="upload-icon" /> : <UploadFile className="upload-icon" />}
+              </IconButton>
+              <Typography variant="body2" className="upload-text">Agregar imagen</Typography>
+            </Box>
+          </label>
         </Box>
-      </LocalizationProvider>
 
-      <Box className="bitacora-fields" >
-        <TextField color="action" variant="outlined" label="Latitud" fullWidth value={localizacion.latitud} onChange={(e) => setLocalizacion({ ...localizacion, latitud: e.target.value })} margin="normal" className="input-box" />
-        <TextField color="action" variant="outlined" label="Longitud" fullWidth value={localizacion.longitud} onChange={(e) => setLocalizacion({ ...localizacion, longitud: e.target.value })} margin="normal" className="input-box" />
-        <TextField color="action" variant="outlined" label="Condiciones Climáticas" fullWidth value={condicionesClimaticas} onChange={(e) => setCondicionesClimaticas(e.target.value)} margin="normal" className="input-box" />
-        <TextField color="action" variant="outlined" label="Descripción del Hábitat" fullWidth multiline rows={4} value={descripcionHabitat} onChange={(e) => setDescripcionHabitat(e.target.value)} margin="normal" className="input-box" />
-        <TextField color="action" variant="outlined" label="Observaciones Adicionales" fullWidth multiline rows={4} value={observacionesAdicionales} onChange={(e) => setObservacionesAdicionales(e.target.value)} margin="normal" className="input-box" />
-        <Box className="especie-fields">
-          <Typography variant="h6" color='#397f0e'>Especie Recolectada</Typography>
-          <TextField color="action" variant="outlined" label="Nombre Científico" fullWidth value={especie.nombreCientifico} onChange={(e) => setEspecie({ ...especie, nombreCientifico: e.target.value })} margin="normal" className="input-box" />
-          <TextField color="action" variant="outlined" label="Nombre Común" fullWidth value={especie.nombreComun} onChange={(e) => setEspecie({ ...especie, nombreComun: e.target.value })} margin="normal" className="input-box" />
-          <TextField color="action" variant="outlined" label="Familia" fullWidth value={especie.familia} onChange={(e) => setEspecie({ ...especie, familia: e.target.value })} margin="normal" className="input-box" />
-          <TextField color="action" variant="outlined" label="Cantidad de Muestras" fullWidth type="number" value={especie.cantidadMuestras} onChange={(e) => setEspecie({ ...especie, cantidadMuestras: e.target.value })} margin="normal" className="input-box" />
-          <TextField color="action" variant="outlined" label="Estado de la Planta" fullWidth value={especie.estadoPlanta} onChange={(e) => setEspecie({ ...especie, estadoPlanta: e.target.value })} margin="normal" className="input-box" />
+        <LocalizationProvider dateAdapter={AdapterDayjs} locale={LocalizationProvider}>
+          <Box className="date-time-container" >
+            <DatePicker
+              label="Fecha del muestreo"
+              value={selectedDate}
+              onChange={(newValue) => setSelectedDate(newValue)}
+              renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
+              className="input-box"
+            />
+            <TimePicker
+              label="Hora del muestreo"
+              value={selectedTime}
+              onChange={(newValue) => setSelectedTime(newValue)}
+              renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
+              className="input-box"
+            />
+          </Box>
+        </LocalizationProvider>
+
+        <Box className="bitacora-fields" >
+          <TextField color="action" variant="outlined" label="Latitud" fullWidth value={localizacion.latitud} onChange={(e) => setLocalizacion({ ...localizacion, latitud: e.target.value })} margin="normal" className="input-box" />
+          <TextField color="action" variant="outlined" label="Longitud" fullWidth value={localizacion.longitud} onChange={(e) => setLocalizacion({ ...localizacion, longitud: e.target.value })} margin="normal" className="input-box" />
+          <TextField color="action" variant="outlined" label="Condiciones Climáticas" fullWidth value={condicionesClimaticas} onChange={(e) => setCondicionesClimaticas(e.target.value)} margin="normal" className="input-box" />
+          <TextField color="action" variant="outlined" label="Descripción del Hábitat" fullWidth multiline rows={4} value={descripcionHabitat} onChange={(e) => setDescripcionHabitat(e.target.value)} margin="normal" className="input-box" />
+          <TextField color="action" variant="outlined" label="Observaciones Adicionales" fullWidth multiline rows={4} value={observacionesAdicionales} onChange={(e) => setObservacionesAdicionales(e.target.value)} margin="normal" className="input-box" />
+          <Box className="especie-fields">
+            <Typography variant="h6" color='#397f0e'>Especie Recolectada</Typography>
+            <TextField color="action" variant="outlined" label="Nombre Científico" fullWidth value={especie.nombreCientifico} onChange={(e) => setEspecie({ ...especie, nombreCientifico: e.target.value })} margin="normal" className="input-box" />
+            <TextField color="action" variant="outlined" label="Nombre Común" fullWidth value={especie.nombreComun} onChange={(e) => setEspecie({ ...especie, nombreComun: e.target.value })} margin="normal" className="input-box" />
+            <TextField color="action" variant="outlined" label="Familia" fullWidth value={especie.familia} onChange={(e) => setEspecie({ ...especie, familia: e.target.value })} margin="normal" className="input-box" />
+            <TextField color="action" variant="outlined" label="Cantidad de Muestras" fullWidth type="number" value={especie.cantidadMuestras} onChange={(e) => setEspecie({ ...especie, cantidadMuestras: e.target.value })} margin="normal" className="input-box" />
+            <TextField color="action" variant="outlined" label="Estado de la Planta" fullWidth value={especie.estadoPlanta} onChange={(e) => setEspecie({ ...especie, estadoPlanta: e.target.value })} margin="normal" className="input-box" />
+          </Box>
         </Box>
-      </Box>
 
-      <Box className="save-button-container">
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={isLoading ? <CircularProgress size={20} /> : <SaveIcon />}
-          onClick={handleSubmit}
-          className="save-button"
-          sx={{
-            backgroundColor: '#3a7e0d',
-            color: '#fff',
-            '&:hover': {
-              backgroundColor: '#2e5d0a',
-            },
-          }}
-          disabled={isLoading}
-        >
-          {isLoading ? 'Guardando...' : 'Guardar'}
-        </Button>
-      </Box>
-
-      {error && (
-        <Box mt={2}>
-          <Typography color="error" align="center">
-            {error}
-          </Typography>
+        <Box className="save-button-container">
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={isLoading ? <CircularProgress size={20} /> : <SaveIcon />}
+            onClick={handleSubmit}
+            className="save-button"
+            sx={{
+              backgroundColor: '#3a7e0d',
+              color: '#fff',
+              '&:hover': {
+                backgroundColor: '#2e5d0a',
+              },
+            }}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Guardando...' : 'Guardar'}
+          </Button>
         </Box>
-      )}
-    </Container>
+
+        {error && (
+          <Box mt={2}>
+            <Typography color="error" align="center">
+              {error}
+            </Typography>
+          </Box>
+        )}
+      </Container>
     </div>
   );
 }

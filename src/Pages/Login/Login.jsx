@@ -46,10 +46,11 @@ function Login() {
       console.log("Login exitoso:", response.data);
 
       // Obtener el token de la respuesta
-      const { token } = response.data;
+      const { token, Nombre } = response.data;
 
       // Almacenar el token en el localStorage
       localStorage.setItem('token', token);
+      localStorage.setItem('usuario', Nombre); 
 
       setAlert({
         open: true,
