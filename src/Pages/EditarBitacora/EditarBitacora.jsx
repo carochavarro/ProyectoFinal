@@ -107,19 +107,19 @@ function EditarBitacora() {
   if (error) return <Typography color="error">{error}</Typography>;
 
   return (
-    <div className="container">
-      <Container maxWidth="sm" className="bitacora-container">
-        <Box className="bitacora-header">
-          <IconButton onClick={() => navigate(-1)} className="back-button">
+    <div className="container-edit">
+      <Container maxWidth="sm" className="bitacora-container-edit">
+        <Box className="bitacora-header-edit">
+          <IconButton onClick={() => navigate(-1)} className="back-button-edit">
             <ArrowBackIosNewIcon />
           </IconButton>
-          <Typography variant="h4" className="title-text">
+          <Typography variant="h4" className="title-text-edit">
             Editar Bitácora
           </Typography>
         </Box>
 
         <TextField
-          className="input-box"
+          className="input-box-edit"
           variant="outlined"
           label="Título de la bitácora"
           fullWidth
@@ -128,14 +128,14 @@ function EditarBitacora() {
           margin="normal"
         />
 
-        <Box className="image-upload-container">
-          <Box className="image-gallery">
+        <Box className="image-upload-container-edit">
+          <Box className="image-gallery-edit">
             {images.map((image, index) => (
-              <div key={index} className="image-wrapper">
+              <div key={index} className="image-wrapper-edit">
                 <img
                   src={image}
                   alt={`Imagen ${index + 1}`}
-                  className="bitacora-image"
+                  className="bitacora-image-edit"
                 />
                 <IconButton
                   onClick={() => handleDeleteImage(index)}
@@ -154,12 +154,12 @@ function EditarBitacora() {
             multiple
             onChange={handleImageChange}
           />
-          <label htmlFor="upload-button" className="upload-label">
-            <Box className="upload-box">
+          <label htmlFor="upload-button" className="upload-label-edit">
+            <Box className="upload-box-edit">
               <IconButton color="primary" component="span">
-                <PhotoCamera className="upload-icon" />
+                <PhotoCamera className="upload-icon-edit" />
               </IconButton>
-              <Typography variant="body2" className="upload-text">
+              <Typography variant="body2" className="upload-text-edit">
                 Agregar imagen
               </Typography>
             </Box>
@@ -167,9 +167,9 @@ function EditarBitacora() {
         </Box>
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Box className="date-time-container" margin="normal">
+          <Box className="date-time-container-edit" margin="normal">
             <DatePicker
-              className="input-box"
+              className="input-box-edit"
               label="Fecha del muestreo"
               value={bitacora?.fechaHoraMuestreo || null}
               onChange={(newDate) =>
@@ -178,7 +178,7 @@ function EditarBitacora() {
               slotProps={{ textField: { fullWidth: true } }}
             />
             <TimePicker
-              className="input-box"
+              className="input-box-edit"
               label="Hora del muestreo"
               value={bitacora?.horaMuestreo || null}
               onChange={(newTime) =>
@@ -189,9 +189,9 @@ function EditarBitacora() {
           </Box>
         </LocalizationProvider>
 
-        <Box className="bitacora-fields" margin="normal">
+        <Box className="bitacora-fields-edit" margin="normal">
           <TextField
-            className="input-box"
+            className="input-box-edit"
             variant="outlined"
             label="Latitud"
             fullWidth
@@ -207,7 +207,7 @@ function EditarBitacora() {
             }
           />
           <TextField
-            className="input-box"
+            className="input-box-edit"
             variant="outlined"
             label="Longitud"
             fullWidth
@@ -223,7 +223,7 @@ function EditarBitacora() {
             }
           />
           <TextField
-            className="input-box"
+            className="input-box-edit"
             variant="outlined"
             label="Condiciones Climáticas"
             fullWidth
@@ -236,7 +236,7 @@ function EditarBitacora() {
             }
           />
           <TextField
-            className="input-box"
+            className="input-box-edit"
             variant="outlined"
             label="Descripción del Hábitat"
             fullWidth
@@ -248,7 +248,7 @@ function EditarBitacora() {
             }
           />
           <TextField
-            className="input-box"
+            className="input-box-edit"
             variant="outlined"
             label="Observaciones Adicionales"
             fullWidth
@@ -265,7 +265,7 @@ function EditarBitacora() {
 
           <Typography variant="h6">Especie Recolectada</Typography>
           <TextField
-            className="input-box"
+            className="input-box-edit"
             variant="outlined"
             label="Nombre Científico"
             fullWidth
@@ -283,7 +283,7 @@ function EditarBitacora() {
             }
           />
           <TextField
-            className="input-box"
+            className="input-box-edit"
             variant="outlined"
             label="Nombre Común"
             fullWidth
@@ -301,7 +301,7 @@ function EditarBitacora() {
             }
           />
           <TextField
-            className="input-box"
+            className="input-box-edit"
             variant="outlined"
             label="Familia"
             fullWidth
@@ -319,7 +319,7 @@ function EditarBitacora() {
             }
           />
           <TextField
-            className="input-box"
+            className="input-box-edit"
             variant="outlined"
             label="Cantidad de Muestras"
             fullWidth
@@ -338,7 +338,7 @@ function EditarBitacora() {
             }
           />
           <TextField
-            className="input-box"
+            className="input-box-edit"
             variant="outlined"
             label="Estado de la Planta"
             fullWidth
@@ -357,13 +357,13 @@ function EditarBitacora() {
           />
         </Box>
 
-        <Box className="save-button-container">
+        <Box className="save-button-container-edit">
           <Button
             variant="contained"
             color="primary"
             startIcon={<SaveIcon />}
             onClick={handleSave}
-            className="save-button"
+            className="save-button-edit"
             sx={{
               backgroundColor: '#3a7e0d',
               color: '#fff',

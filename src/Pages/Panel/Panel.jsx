@@ -94,11 +94,18 @@ const Panel = () => {
 
   return (
     <div className="panel-container">
-      <div className="filter-bar-container">
-        <FilterBarUsuario onSearchChange={handleSearchChange} />
+      <div className="filter-bar-container-panel">
+        <FilterBarUsuario
+          onSearchChange={handleSearchChange}
+          onCreateUser={handleCreateUser}
+        />
       </div>
-      <TableContainer component={Paper} className="table-container">
-        <Table>
+      <TableContainer
+        component={Paper}
+        className="table-container"
+        style={{ overflowX: "auto" }} // Asegura que el contenido sea desplazable horizontalmente
+      >
+        <Table stickyHeader aria-label="sticky table"> {/* Añadido stickyHeader para mejorar UX en móviles */}
           <TableHead>
             <TableRow>
               <TableCell>Nombre Completo</TableCell>
@@ -112,13 +119,19 @@ const Panel = () => {
           <TableBody>
             {filteredUsuarios.map((usuario) => (
               <TableRow key={usuario._id}>
-                <TableCell>{usuario.nombreCompleto}</TableCell>
-                <TableCell>{usuario.email}</TableCell>
-                <TableCell>
+                <TableCell style={{ whiteSpace: "nowrap" }}>
+                  {usuario.nombreCompleto}
+                </TableCell>
+                <TableCell style={{ whiteSpace: "nowrap" }}>
+                  {usuario.email}
+                </TableCell>
+                <TableCell style={{ whiteSpace: "nowrap" }}>
                   {usuario.estado ? "Activo" : "Deshabilitado"}
                 </TableCell>
-                <TableCell>{usuario.rol}</TableCell>
-                <TableCell>
+                <TableCell style={{ whiteSpace: "nowrap" }}>
+                  {usuario.rol}
+                </TableCell>
+                <TableCell style={{ whiteSpace: "nowrap" }}>
                   <IconButton
                     onClick={() =>
                       actualizarEstado(usuario._id, !usuario.estado)
@@ -126,16 +139,17 @@ const Panel = () => {
                     className="icon-button"
                     style={{
                       color: usuario.estado ? "#FF0000" : "#51A614",
+                      fontSize: "1.5rem",
                     }}
                   >
                     {usuario.estado ? <PersonOff /> : <Person />}
                   </IconButton>
                 </TableCell>
-                <TableCell>
+                <TableCell style={{ whiteSpace: "nowrap" }}>
                   <Select
                     value={usuario.rol}
                     onChange={(e) => actualizarRol(usuario._id, e.target.value)}
-                    className="select-box"
+                    sx={{ marginLeft: 1, minWidth: 120 }} // Añade minWidth para asegurar que sea manejable
                   >
                     <MenuItem value="Colaborador">Colaborador</MenuItem>
                     <MenuItem value="Administrador">Administrador</MenuItem>

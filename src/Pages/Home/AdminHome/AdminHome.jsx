@@ -90,19 +90,17 @@ const AdminHome = ({ userRole }) => {
     };
 
     return (
-        
-        <div className="admin-home-container">
-            <div className="filter-bar-container">
-                <FilterBar
-                    onSortChange={setSortOrder}
-                    onSearchChange={(e) => setSearchText(e.target.value)} // Actualiza el texto de búsqueda correctamente
-                    onFilterChange={setFilters}
+        <div className="admin-home-container" >
+            <div className="filter-bar-container-home"  >
+                <FilterBar  className="filtro"
+                    onSortChange={setSortOrder} 
+                    onSearchChange={setSearchText} 
+                    onFilterChange={setFilters} 
                     userRole={localStorage.getItem('role')}
                 />
             </div>
             
-
-            <div className="bitacora-list">
+            <div className="bitacora-list-home">
                 {filteredBitacoras.length > 0 ? (
                     filteredBitacoras.map((bitacora) => (
                         <BitacoraCard key={bitacora._id} bitacora={bitacora} />

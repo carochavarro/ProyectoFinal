@@ -1,31 +1,6 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 
-body, html {
-  height: 100%;
-}
 
-.container {
-  background-color: white;
-  height: 100vh;
-}
-
-.admin-home-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-image: url("https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  min-height: 100vh;
-  padding-top: 80px; /* Espacio superior para el navbar fijo */
-}
-
-.filter-bar-container {
+.filter-bar-container-home {
   width: calc(100% - 40px);
   max-width: 1200px;
   padding: 8px 15px;
@@ -39,82 +14,39 @@ body, html {
   transform: translateX(-50%);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
   z-index: 1000;
-  background-color: #37730d; /* Verde para la barra de filtros */
-}
+  position: absolute;
+ }
 
-.filter-bar-container > * {
+.filter-bar-container-home > * {
   flex-grow: 1;
   margin: 0 8px;
+  background-color: #397f0e;
 }
 
-.filter-bar-container select {
-  flex-grow: 0;
-  width: auto;
-  color: #ffffff;
-  border: 1px solid #9abf80;
-  border-radius: 6px;
-  padding: 4px;
-  background-color: #9abf80;
-  cursor: pointer;
-}
-
-.filter-bar-container select:hover {
-  background-color: #51a614; /* Hover en select */
-}
-
-.bitacora-list {
+.bitacora-list-home {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
-  width: 100%;
-  max-width: 1200px;
-  margin-top: 100px; /* Ajusta el espacio debajo de la barra de filtros */
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
-  border-radius: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Permite desplazamiento vertical solo en la lista */
-  max-height: 80vh; /* Define una altura máxima para la lista de bitácoras */
-}
-
-.bitacora-list .bitacora-card {
-  flex: 1 1 calc(33.333% - 16px); /* Tres columnas en escritorio */
-  max-width: calc(33.333% - 16px);
-}
-
-.bitacora-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
+  gap: 6px;
+  height: 100vh;
+  margin-top: 15%;
+  max-width:80%;
   border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
+  justify-content:center;
+  margin-left: 10%;
+ }
 
-/* Responsiveness */
-@media (max-width: 1024px) {
-  .bitacora-list .bitacora-card {
-    flex: 1 1 calc(50% - 16px); /* Dos columnas en tablets */
-    max-width: calc(50% - 16px);
-  }
+ @media (max-width: 768px) {
+  .filter-bar-container-home {
+      flex-direction: column;
+      align-items: center;
+      max-width: 100%;
+      background-color:rgb(220, 220, 220);
+        }
 }
 
 @media (max-width: 768px) {
-  .filter-bar-container {
-    width: 100%;
-    padding: 10px 15px;
-  }
-
-  .bitacora-list {
-    flex-direction: column; /* Una columna en móviles */
-    max-height: none; /* Permite que la lista ocupe toda la altura */
-  }
-
-  .bitacora-list .bitacora-card {
-    flex: 1 1 100%; /* Una columna */
-    max-width: 100%;
-  }
+  .bitacora-list-home{
+    margin-left: 10%;
+     margin-top: 135%;
+        }
 }

@@ -1,94 +1,32 @@
-/* Estilos generales de .filter-bar */
-.filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  padding: 8px;
-  border-radius: 8px;
-  background-color: #49a011;
+
+.sort-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* Estilo para los botones con iconos */
-.filter-bar .icon-button {
-  background-color: #49a011;
-  border-radius: 4px;
-  padding: 8px;
-  cursor: pointer;
-}
-
-.filter-bar .icon-button:hover {
-  background-color: #3a7e0d;
-}
-
-/* Campo de texto */
-.filter-bar .text-field {
-  flex-grow: 1;
-  background-color: white;
-  border-radius: 8px;
-  padding: 4px 8px;
-}
-
-/* Selectores desplegables */
-.filter-bar .select {
-  min-width: 120px;
-  background-color: white;
-  border-radius: 8px;
-}
-
-/* Contenedor para botones de acción */
-.filter-bar .action-buttons {
-  display: flex;
-  gap: 8px;
-}
-
-.filter-bar .action-buttons button {
-  padding: 8px 16px;
-  border-radius: 8px;
-  background-color: #49a011;
-  color: white;
-  border: none; /* Asegura que no haya bordes visibles */
-  cursor: pointer;
-}
-
-.filter-bar .action-buttons button:hover {
-  background-color: #3a7e0d;
-}
-
-/* Responsividad para tablets (máximo 1024px) */
-@media (max-width: 1024px) {
-  .filter-bar {
-    flex-direction: column; /* Cambia a una disposición en columna */
-    align-items: stretch; /* Asegura que los elementos ocupen todo el ancho */
-    gap: 12px; /* Espaciado entre elementos */
+.input-box .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border-color: #9e9e9e;
   }
-
-  .filter-bar .text-field,
-  .filter-bar .select,
-  .filter-bar .action-buttons button {
-    width: 100%; /* Elementos ocupan todo el ancho en pantallas pequeñas */
+  
+  .input-box .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+  .input-box .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #397f0e;
   }
-
-  .filter-bar .action-buttons {
-    flex-direction: column; /* Botones de acción apilados verticalmente */
-    gap: 8px; /* Espaciado vertical entre botones */
+  
+  .input-box .MuiInputBase-input {
+    color: #000000;
   }
-}
-
-/* Responsividad para móviles (máximo 768px) */
-@media (max-width: 768px) {
-  .filter-bar {
-    gap: 16px; /* Aumenta el espacio entre los elementos para mayor legibilidad */
+ 
+  @media (max-width: 768px) {
+    .filtro {
+      flex-direction: column; /* Coloca los elementos en una sola columna */
+      align-items: stretch; /* Asegura que los elementos se alineen al ancho del contenedor */
+    }
+  
+    .filter-bar-container-home {
+      flex-direction: column; /* Coloca los elementos en una sola columna */
+      gap: 12px;
+      padding: 12px; /* Mayor espacio para respiración */
+    }
   }
-
-  .filter-bar .text-field {
-    flex-grow: 1;
-    width: 100%; /* Campo de texto ocupa todo el ancho */
-  }
-
-  .filter-bar .action-buttons {
-    flex-direction: column; /* Botones de acción apilados en móviles */
-    justify-content: center; /* Centra los botones */
-    gap: 12px; /* Espaciado mayor entre los botones */
-  }
-}

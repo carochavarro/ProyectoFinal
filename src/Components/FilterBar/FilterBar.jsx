@@ -68,7 +68,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
   const isDetailView = locationData.pathname.includes("/bitacora/");
 
   return (
-    <div
+    <div className="filtro"
       style={{
         display: "flex",
         alignItems: "center",

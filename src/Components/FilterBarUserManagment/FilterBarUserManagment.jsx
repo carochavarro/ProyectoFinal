@@ -33,7 +33,7 @@ const FilterBarUserManagment = ({ onFilter, onSortChange }) => {
     const id = open ? 'simple-popover' : undefined;
 
     return (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: 8, borderRadius: 8, backgroundColor: '#EAF2E4' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: 8, borderRadius: 8, backgroundColor: 'red' }}>
             {/* Campo de Búsqueda con estilo */}
             <TextField
                 variant="outlined"

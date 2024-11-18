@@ -38,10 +38,7 @@ const BitacoraDetail = () => {
   if (!bitacora) return <p>No se encontró la bitácora.</p>;
 
   return (
-    <div className="container">
-      <IconButton className="back-button" onClick={() => navigate(-1)}>
-        <ArrowBackIosNewIcon />
-      </IconButton>
+    <div className="container-details">
       <div className="bitacora-detail-container">
         <FilterBar />
         <div className="detail-content">
