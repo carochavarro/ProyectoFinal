@@ -114,7 +114,7 @@ const AdminHome = ({ userRole }) => {
 
             <Snackbar
                 open={openSnackbar}
-                autoHideDuration={1000}
+                autoHideDuration={5000}
                 message="¡Nueva bitácora agregada!"
                 onClose={handleCloseSnackbar}
             />

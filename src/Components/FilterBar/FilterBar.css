@@ -1,3 +1,4 @@
+/* Estilos generales de .filter-bar */
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -8,6 +9,7 @@
   background-color: #49a011;
 }
 
+/* Estilo para los botones con iconos */
 .filter-bar .icon-button {
   background-color: #49a011;
   border-radius: 4px;
@@ -19,6 +21,7 @@
   background-color: #3a7e0d;
 }
 
+/* Campo de texto */
 .filter-bar .text-field {
   flex-grow: 1;
   background-color: white;
@@ -26,12 +29,14 @@
   padding: 4px 8px;
 }
 
+/* Selectores desplegables */
 .filter-bar .select {
   min-width: 120px;
   background-color: white;
   border-radius: 8px;
 }
 
+/* Contenedor para botones de acción */
 .filter-bar .action-buttons {
   display: flex;
   gap: 8px;
@@ -42,42 +47,48 @@
   border-radius: 8px;
   background-color: #49a011;
   color: white;
+  border: none; /* Asegura que no haya bordes visibles */
+  cursor: pointer;
 }
 
 .filter-bar .action-buttons button:hover {
   background-color: #3a7e0d;
 }
 
-/* Responsiveness */
+/* Responsividad para tablets (máximo 1024px) */
 @media (max-width: 1024px) {
   .filter-bar {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: column; /* Cambia a una disposición en columna */
+    align-items: stretch; /* Asegura que los elementos ocupen todo el ancho */
+    gap: 12px; /* Espaciado entre elementos */
   }
 
   .filter-bar .text-field,
   .filter-bar .select,
   .filter-bar .action-buttons button {
-    width: 100%;
+    width: 100%; /* Elementos ocupan todo el ancho en pantallas pequeñas */
   }
 
   .filter-bar .action-buttons {
-    flex-direction: column;
-    gap: 8px;
+    flex-direction: column; /* Botones de acción apilados verticalmente */
+    gap: 8px; /* Espaciado vertical entre botones */
   }
 }
 
+/* Responsividad para móviles (máximo 768px) */
 @media (max-width: 768px) {
   .filter-bar {
-    gap: 12px;
+    gap: 16px; /* Aumenta el espacio entre los elementos para mayor legibilidad */
   }
 
   .filter-bar .text-field {
     flex-grow: 1;
-    width: 100%;
+    width: 100%; /* Campo de texto ocupa todo el ancho */
   }
 
   .filter-bar .action-buttons {
-    justify-content: center;
+    flex-direction: column; /* Botones de acción apilados en móviles */
+    justify-content: center; /* Centra los botones */
+    gap: 12px; /* Espaciado mayor entre los botones */
   }
 }
