@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Asegúrate de importar useNavigate
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { CircularProgress, IconButton } from "@mui/material"; // Asegúrate de importar IconButton
+import { CircularProgress, IconButton } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import FilterBar from "../../Components/FilterBar/FilterBar";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import "./BitacoraDetail.css";
 
 const BitacoraDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate(); // Usa useNavigate para manejar la navegación
+  const navigate = useNavigate();
   const [bitacora, setBitacora] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -38,6 +39,9 @@ const BitacoraDetail = () => {
 
   return (
     <div className="container">
+      <IconButton className="back-button" onClick={() => navigate(-1)}>
+        <ArrowBackIosNewIcon />
+      </IconButton>
       <div className="bitacora-detail-container">
         <FilterBar />
         <div className="detail-content">
@@ -95,11 +99,15 @@ const BitacoraDetail = () => {
                   {especie.familia}
                 </p>
                 <p className="detail-text">
-                  <span className="subtitulo-verde">Cantidad de muestras:</span>{" "}
+                  <span className="subtitulo-verde">
+                    Cantidad de muestras:
+                  </span>{" "}
                   {especie.cantidadMuestras}
                 </p>
                 <p className="detail-text">
-                  <span className="subtitulo-verde">Estado de la planta:</span>{" "}
+                  <span className="subtitulo-verde">
+                    Estado de la planta:
+                  </span>{" "}
                   {especie.estadoPlanta}
                 </p>
               </div>

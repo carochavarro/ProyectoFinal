@@ -2,9 +2,9 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-}
-
-.panel-container {
+  }
+  
+  .panel-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,81 +12,83 @@
     background-repeat: no-repeat;
     background-position: center;
     min-height: 100vh;
-    padding-top: 50px; /* Espacio superior para el navbar fijo */
-}
-
-.filter-bar-container {
-    width: 75%;
-    background-color:#397f0e;
-    padding: 8px 15px;
-    border-radius: 10px;
-    display: flex;
-    position:  center sticky;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-.table-container {
-    width: calc(100% - 40px);
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .filter-bar-container {
+    width: 90%;
     max-width: 1200px;
-    margin-top: 30%; /* Ajusta el espacio para que la tabla se separe del FilterBar */
-    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco ligeramente más opaco */
-    padding: 15px;
+    margin-bottom: 20px; /* Espacio entre el FilterBar y la tabla */
+    display: flex;
+    justify-content: center; /* Centra el FilterBar */
+    align-items: center;
+  }
+  
+  .table-container {
+    width: 90%;
+    max-width: 1200px;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.table-container table {
+    overflow-x: auto; /* Permite desplazamiento horizontal para tablas grandes */
+    margin-top: 200px;
+  }
+  
+  .table-container table {
     width: 100%;
     border-collapse: collapse;
-}
-
-.table-container th, .table-container td {
-    padding: 10px;
-    text-align: center; /* Centra el contenido de cada celda */
-    vertical-align: middle; /* Centra verticalmente */
-}
-
-.table-container th {
-    font-weight: bold;
-    background-color: #f0f0f0;
-}
-
-.table-container tr:nth-child(even) {
-    background-color: rgba(230, 230, 230, 0.5); /* Color de fondo alternativo para filas */
-}
-
-/* Botones de Icono */
-.icon-button {
-    padding: 5px; /* Ajuste de espacio alrededor del icono */
-}
-
-.icon-button:hover {
-    background-color: rgba(0, 0, 0, 0.1); /* Efecto hover suave */
-}
-
-.search-input {
-    background-color: white;
-      border: 1px solid #9ABF80;
+  }
+  
+  .table-container th,
+  .table-container td {
     padding: 8px;
-    border-radius: 8px;
-}
-
-.MuiFormLabel-root.Mui-focused {
-    color: rgb(58, 126, 13); 
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.9rem;
   }
   
-  .input-box .MuiInputBase-input {
-    color: #000000; 
+  .table-container th {
+    font-weight: bold;
+    background-color: #49a011;
+    color: white;
+    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
   
-  .input-box .MuiFormLabel-root.Mui-focused {
-    color: #397f0e;
+  .table-container tr:nth-child(even) {
+    background-color: rgba(230, 230, 230, 0.5);
   }
   
-@media (max-width: 768px) {
+  /* Ajustes para pantallas más pequeñas */
+  @media (max-width: 768px) {
     .filter-bar-container {
-        width: 100%;
-        padding: 10px 15px;
+      flex-direction: column;
+      gap: 10px;
     }
-}
-
+  
+    .table-container th,
+    .table-container td {
+      font-size: 0.8rem; /* Reduce el tamaño del texto */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .filter-bar-container {
+      padding: 10px;
+    }
+  
+    .table-container th,
+    .table-container td {
+      font-size: 0.75rem;
+    }
+  
+    .icon-button {
+      padding: 5px;
+    }
+  }
+  

@@ -2,37 +2,35 @@
   background-color: white;
   border-radius: 16px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  padding: 16px;
+  max-width: 450px; /* Ancho mayor para escritorio */
+  width: 90%; /* Ajuste para dispositivos pequeños */
 }
 
-.login-header {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  width: 350px;
-  background-size: cover;
-  margin-bottom: 32px;
-}
-
-.back-button {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  color: #fff;
-  font-weight: bold;
+.logo {
+  display: block;
+  margin: 0 auto;
+  width: 120px; /* Tamaño ajustado para pantallas grandes */
 }
 
 .welcome-text {
   font-weight: bold;
-  color: rgb(58, 126, 13); /* Verde */
+  color: rgb(58, 126, 13);
+  text-align: center;
+  margin-bottom: 8px;
+  font-size: 2rem; /* Ajuste mayor para pantallas grandes */
 }
 
 .subtitle-text {
   color: #9e9e9e;
   margin-bottom: 24px;
+  text-align: center;
+  font-size: 1.2rem; /* Más grande en escritorio */
 }
 
 .form-box {
-  margin-top: 8px;
+  margin-top: 16px;
 }
 
 .input-box {
@@ -41,93 +39,90 @@
   margin-bottom: 16px;
 }
 
-
-.input-box .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-  border-color: #d9d9d9;
-}
-
-.input-box .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
-.input-box .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: rgb(58, 126, 13);
-}
-
-.MuiFormLabel-root.Mui-focused {
-  color: rgb(58, 126, 13);
+.input-icon {
+  margin-right: 8px;
 }
 
 .options-box {
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: center;
   margin-bottom: 16px;
 }
 
-.options-box .forgot-password {
+.forgot-password {
   font-weight: bold;
   color: rgb(58, 126, 13);
-  text-decoration: none;
-}
-
-.options-box .forgot-password:hover,
-.options-box .forgot-password:focus,
-.options-box .forgot-password:active {
-  color: rgb(40, 85, 10);
-  text-decoration: underline;
 }
 
 .login-button {
   margin-top: 24px;
-  margin-bottom: 16px;
-  background-color: rgb(58, 126, 13); /* Verde */
-  color: #fff;
+  background-color: rgb(58, 126, 13);
+  color: white;
+  width: 100%;
 }
 
 .signup-box {
   text-align: center;
   margin-top: 16px;
-  padding: 10px;
 }
 
 .signup-link {
-  color: rgb(58, 126, 13); /* Verde */
-  font-weight: bold;
+  color: rgb(58, 126, 13);
 }
 
-/* Cambiar el color de los enlaces al hacer clic */
-.signup-link:active,
-.signup-link:focus,
-.signup-link:hover {
-  color: rgb(40, 85, 10); /* Verde oscuro al hacer clic */
+/* Responsividad */
+@media (min-width: 1024px) {
+  .login-container {
+    max-width: 600px; /* Más grande en escritorio */
+    padding: 32px; /* Aumenta el padding */
+  }
+
+  .logo {
+    width: 150px; /* Logo más grande */
+  }
+
+  .welcome-text {
+    font-size: 2.5rem; /* Texto más grande */
+  }
+
+  .subtitle-text {
+    font-size: 1.5rem; /* Subtítulo más grande */
+  }
 }
 
-.signup-box {
-  color: rgb(135, 136, 135);
+@media (max-width: 768px) {
+  .logo {
+    width: 100px;
+  }
+
+  .welcome-text {
+    font-size: 1.5rem;
+  }
+
+  .subtitle-text {
+    font-size: 1rem;
+  }
+
+  .login-container {
+    max-width: 90%; /* Ajuste automático */
+  }
 }
 
-.input-box .MuiInputBase-input {
-  color: #000000; /* Cambia el texto a negro */
-}
-.signup-link {
-  color: #3a7e0d; /* Color verde para el texto */
-  text-decoration: underline;
-  text-decoration-color: #3a7e0d; /* Cambiar el color del subrayado a verde inicialmente */
-}
-.logo {
-  display: block;
-  margin: 0 auto;
-}
+@media (max-width: 480px) {
+  .logo {
+    width: 80px;
+  }
 
-.login-container {
-  background-color: white;
-  border-radius: 16px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  margin: 20px auto; /* Asegura un margen superior e inferior */
-  padding: 16px;
-  max-width: 100%; /* Asegura que el contenedor no sea más ancho que la pantalla */
-}
+  .welcome-text {
+    font-size: 1.2rem;
+  }
 
+  .subtitle-text {
+    font-size: 0.9rem;
+  }
 
-
-.input-box .MuiOutlinedInput-root {
-  flex-grow: 1; /* Permite que el input ocupe el espacio restante */
+  .login-container {
+    padding: 12px;
+  }
 }

@@ -13,10 +13,10 @@ const FilterBarUsuario = ({ onSearchChange }) => {
   const handleMenuClose = () => setMenuAnchorEl(null);
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2,  backgroundColor: '#397f0e' }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, backgroundColor: '#397f0e', padding: '8px' }}>
       <TextField
-      className="input-box"
-             variant="outlined"
+        className="input-box-crear-usuario"
+        variant="outlined"
         placeholder="Buscar usuario"
         onChange={(e) => onSearchChange(e.target.value)}
         InputProps={{
@@ -33,7 +33,6 @@ const FilterBarUsuario = ({ onSearchChange }) => {
             '& fieldset': {
               borderColor: 'transparent',
             },
-            
           },
         }}
       />
@@ -48,29 +47,28 @@ const FilterBarUsuario = ({ onSearchChange }) => {
       </Button>
 
       <IconButton
-      
-          sx={{
-            bgcolor: "#49a011",
-            "&:hover": { bgcolor: "#49a011" },
-            borderRadius: 1,
-            padding: "8px",
-          }}
-          onClick={() => navigate("/home")}
-        >
-          <HomeIcon sx={{ color: "white", fontSize: 24 }} />
-        </IconButton>
+        sx={{
+          bgcolor: "#49a011",
+          "&:hover": { bgcolor: "#49a011" },
+          borderRadius: 1,
+          padding: "8px",
+        }}
+        onClick={() => navigate("/home")}
+      >
+        <HomeIcon sx={{ color: "white", fontSize: 24 }} />
+      </IconButton>
 
-        <IconButton
-      onClick={handleUserIconClick}
-      sx={{
-        bgcolor: "#49a011",
-        "&:hover": { bgcolor: "#49a011" },
-        borderRadius: 1,
-        padding: "8px",
-      }}
-    >
-      <PersonIcon sx={{ color: "white", fontSize: 24 }} />
-    </IconButton>
+      <IconButton
+        onClick={handleUserIconClick}
+        sx={{
+          bgcolor: "#49a011",
+          "&:hover": { bgcolor: "#49a011" },
+          borderRadius: 1,
+          padding: "8px",
+        }}
+      >
+        <PersonIcon sx={{ color: "white", fontSize: 24 }} />
+      </IconButton>
 
       <Menu
         anchorEl={menuAnchorEl}

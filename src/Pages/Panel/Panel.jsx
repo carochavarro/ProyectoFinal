@@ -88,21 +88,14 @@ const Panel = () => {
     setSearchText(searchValue.toLowerCase());
   };
 
-  const handleCreateUser = () => {
-    alert("Funcionalidad para crear usuario aún no implementada.");
-  };
-
   const filteredUsuarios = usuarios.filter((usuario) =>
     usuario.nombreCompleto.toLowerCase().includes(searchText)
   );
 
   return (
     <div className="panel-container">
-      <div className="filter-bar-container ">
-        <FilterBarUsuario
-          onSearchChange={handleSearchChange}
-          onCreateUser={handleCreateUser}
-        />
+      <div className="filter-bar-container">
+        <FilterBarUsuario onSearchChange={handleSearchChange} />
       </div>
       <TableContainer component={Paper} className="table-container">
         <Table>
@@ -132,18 +125,17 @@ const Panel = () => {
                     }
                     className="icon-button"
                     style={{
-                      color: usuario.estado ? "#FF0000" : "#51A614", // Rojo para deshabilitar, verde para habilitar
-                      fontSize: "1.5rem", // Aumenta el tamaño del ícono
+                      color: usuario.estado ? "#FF0000" : "#51A614",
                     }}
                   >
                     {usuario.estado ? <PersonOff /> : <Person />}
                   </IconButton>
                 </TableCell>
-                <TableCell className="input-box">
+                <TableCell>
                   <Select
                     value={usuario.rol}
                     onChange={(e) => actualizarRol(usuario._id, e.target.value)}
-                    sx={{ marginLeft: 1 }}
+                    className="select-box"
                   >
                     <MenuItem value="Colaborador">Colaborador</MenuItem>
                     <MenuItem value="Administrador">Administrador</MenuItem>

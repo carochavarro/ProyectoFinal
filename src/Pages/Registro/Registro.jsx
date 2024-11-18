@@ -15,8 +15,8 @@ import LockIcon from "@mui/icons-material/Lock";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Registro.css";
 
 // Componente de alerta personalizado
@@ -26,15 +26,15 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function Registro() {
   const [formData, setFormData] = useState({
-    nombreCompleto: '',
-    email: '',
-    contraseña: ''
+    nombreCompleto: "",
+    email: "",
+    contraseña: "",
   });
 
   const [alert, setAlert] = useState({
     open: false,
-    message: '',
-    severity: 'success'
+    message: "",
+    severity: "success",
   });
 
   const navigate = useNavigate();
@@ -47,30 +47,37 @@ function Registro() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://bachendapi.onrender.com/api/usuarios/register', formData);
+      const response = await axios.post(
+        "https://bachendapi.onrender.com/api/usuarios/register",
+        formData
+      );
       console.log("Registro exitoso:", response.data);
       setAlert({
         open: true,
-        message: 'Registro exitoso',
-        severity: 'success'
+        message: "Registro exitoso",
+        severity: "success",
       });
-      setTimeout(() => navigate('/login'), 2000);
+      setTimeout(() => navigate("/login"), 2000);
     } catch (error) {
-      console.error("Error al registrar:", error.response ? error.response.data : error.message);
+      console.error(
+        "Error al registrar:",
+        error.response ? error.response.data : error.message
+      );
       setAlert({
         open: true,
-        message: error.response?.data?.message || 'Error al registrar el usuario',
-        severity: 'error'
+        message:
+          error.response?.data?.message || "Error al registrar el usuario",
+        severity: "error",
       });
     }
   };
 
   const handleBack = () => {
-    navigate('/login');
+    navigate("/login");
   };
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') return;
+    if (reason === "clickaway") return;
     setAlert({ ...alert, open: false });
   };
 
@@ -80,7 +87,11 @@ function Registro() {
         <IconButton className="back-button" onClick={handleBack}>
           <ArrowBackIosNewIcon />
         </IconButton>
-        <img src="https://i.ibb.co/86vzgdT/Proyecto-Creador-de-logotipos-2.png" alt="Logo" className="logo" />
+        <img
+          src="https://i.ibb.co/86vzgdT/Proyecto-Creador-de-logotipos-2.png"
+          alt="Logo"
+          className="logo"
+        />
       </Box>
       <Typography variant="h4" align="center" className="register-text">
         Registro
@@ -88,7 +99,12 @@ function Registro() {
       <Typography variant="body2" align="center" className="subtitle-text">
         Crea tu nueva cuenta
       </Typography>
-      <Box component="form" noValidate className="form-box" onSubmit={handleSubmit}>
+      <Box
+        component="form"
+        noValidate
+        className="form-box"
+        onSubmit={handleSubmit}
+      >
         <Box className="input-box">
           <PersonIcon color="action" className="input-icon" />
           <TextField
@@ -167,9 +183,13 @@ function Registro() {
         open={alert.open}
         autoHideDuration={6000}
         onClose={handleClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
-        <Alert onClose={handleClose} severity={alert.severity} sx={{ width: '100%' }}>
+        <Alert
+          onClose={handleClose}
+          severity={alert.severity}
+          sx={{ width: "100%" }}
+        >
           {alert.message}
         </Alert>
       </Snackbar>

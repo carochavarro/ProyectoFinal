@@ -11,7 +11,7 @@ import {
 import MuiAlert from '@mui/material/Alert';
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate para la navegación
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import axios from 'axios';
 
@@ -32,7 +32,7 @@ function Login() {
     severity: 'success'
   });
 
-  const navigate = useNavigate(); // Inicializa useNavigate
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,12 +45,9 @@ function Login() {
       const response = await axios.post('https://bachendapi.onrender.com/api/usuarios/login', formData);
       console.log("Login exitoso:", response.data);
 
-      // Obtener el token de la respuesta
       const { token, Nombre } = response.data;
-
-      // Almacenar el token en el localStorage
       localStorage.setItem('token', token);
-      localStorage.setItem('usuario', Nombre); 
+      localStorage.setItem('usuario', Nombre);
 
       setAlert({
         open: true,
@@ -58,8 +55,7 @@ function Login() {
         severity: 'success'
       });
 
-      // Redirigir directamente a AdminHome
-      navigate('/home');  // Redirigir a la página de AdminHome
+      navigate('/home');
 
     } catch (error) {
       console.error("Error al iniciar sesión:", error.response ? error.response.data : error.message);
@@ -76,13 +72,12 @@ function Login() {
     setAlert({ ...alert, open: false });
   };
 
-  // Función para manejar la navegación al registro
   const goToRegister = () => {
-    navigate('/registro'); // Navega a la página de registro
+    navigate('/registro');
   };
 
   return (
-    <Container maxWidth="xs" className="login-container" >
+    <Container maxWidth="xs" className="login-container">
       <Box className="login-header"></Box>
       <img src="https://i.ibb.co/86vzgdT/Proyecto-Creador-de-logotipos-2.png" alt="Logo" className="logo" />
       <Typography variant="h4" align="center" className="welcome-text">
@@ -149,7 +144,6 @@ function Login() {
         </Box>
       </Box>
 
-      {/* Snackbar para mostrar alertas */}
       <Snackbar
         open={alert.open}
         autoHideDuration={6000}

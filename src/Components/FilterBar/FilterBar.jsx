@@ -13,7 +13,6 @@ import {
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useLocation, useNavigate } from "react-router-dom";
 import "./FilterBar.css";
 import HomeIcon from "@mui/icons-material/Home";
@@ -59,6 +58,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
       climate: "",
       location: "",
     });
+    handleClose(); // Cierra el desplegable de filtros.
   };
 
   const open = Boolean(anchorEl);
@@ -97,7 +97,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
 
           <TextField
             variant="outlined"
-            placeholder="Buscar bitácoras"
+            placeholder="Buscar bitácoras por título o autor"
             onChange={onSearchChange}
             InputProps={{
               startAdornment: (
@@ -198,17 +198,16 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
         </IconButton>
 
         <IconButton
-      onClick={handleUserIconClick}
-      sx={{
-        bgcolor: "#49a011",
-        "&:hover": { bgcolor: "#49a011" },
-        borderRadius: 1,
-        padding: "8px",
-      }}
-    >
-      <PersonIcon sx={{ color: "white", fontSize: 24 }} />
-    </IconButton>
-
+          onClick={handleUserIconClick}
+          sx={{
+            bgcolor: "#49a011",
+            "&:hover": { bgcolor: "#49a011" },
+            borderRadius: 1,
+            padding: "8px",
+          }}
+        >
+          <PersonIcon sx={{ color: "white", fontSize: 24 }} />
+        </IconButton>
 
         <Menu
           anchorEl={menuAnchorEl}
@@ -260,42 +259,24 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
           <Typography variant="h6" color="#3a7e0d">
             Filtros
           </Typography>
-          <LocalizationProvider
-            dateAdapter={AdapterDayjs}
-            locale={LocalizationProvider}
-          >
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Box sx={{ marginTop: 2 }}>
               <DatePicker
-                className="input-box"
                 label="Fecha inicio"
                 value={startDate}
                 onChange={(newValue) => setStartDate(newValue)}
-                inputFormat="dd/MM/yyyy"
                 renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    size="small"
-                    fullWidth
-                    margin="normal"
-                  />
+                  <TextField {...params} size="small" fullWidth margin="normal" />
                 )}
               />
             </Box>
             <Box sx={{ marginTop: 2 }}>
               <DatePicker
-                className="input-box"
                 label="Fecha fin"
                 value={endDate}
                 onChange={(newValue) => setEndDate(newValue)}
-                inputFormat="dd/MM/yyyy"
                 renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    className="custom-text-field"
-                    size="small"
-                    fullWidth
-                    margin="normal"
-                  />
+                  <TextField {...params} size="small" fullWidth margin="normal" />
                 )}
               />
             </Box>
@@ -303,7 +284,6 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
 
           <Box sx={{ marginTop: 2 }}>
             <TextField
-              className="input-box"
               placeholder="Escribe hábitat"
               size="small"
               fullWidth
@@ -315,7 +295,6 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
 
           <Box sx={{ marginTop: 2 }}>
             <TextField
-              className="input-box"
               placeholder="Escribe clima"
               size="small"
               fullWidth
@@ -327,7 +306,6 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
 
           <Box sx={{ marginTop: 2 }}>
             <TextField
-              className="input-box"
               placeholder="Escribe lugar"
               size="small"
               fullWidth
@@ -345,7 +323,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
             }}
           >
             <Button
-              onClick={applyFilters}
+              onClick={clearFilters}
               variant="contained"
               sx={{ bgcolor: "gray", "&:hover": { bgcolor: "#d9d9d9" } }}
             >

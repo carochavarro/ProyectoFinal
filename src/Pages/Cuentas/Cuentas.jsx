@@ -10,62 +10,66 @@ import './Cuentas.css';
 
 const Cuentas = () => {
     const [bitacoras, setBitacoras] = useState([]);
-    const [filteredBitacoras, setFilteredBitacoras] = useState([]);
-    const [sortOrder, setSortOrder] = useState('recientes');
     const [searchText, setSearchText] = useState('');
+    const [sortOrder, setSortOrder] = useState('recientes');
     const [filters, setFilters] = useState({});
     const [usuario, setUsuario] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
-        const Usuario = localStorage.getItem('usuario');
-
-        if (Usuario) {
-            setUsuario(Usuario); // Establece el nombre del usuario desde localStorage
+        const storedUsuario = localStorage.getItem('usuario');
+        if (storedUsuario) {
+            setUsuario(storedUsuario);
         } else {
             alert('No has iniciado sesión. Por favor, inicia sesión.');
-            navigate('/'); // Redirige a la página de login
+            navigate('/');
         }
     }, [navigate]);
 
     useEffect(() => {
-        fetchBitacoras();
-    }, []);
+        if (usuario) {
+            fetchBitacoras();
+        }
+    }, [usuario]);
 
-    useEffect(() => {
-        const sortedAndFiltered = filterAndSortBitacoras(bitacoras, searchText, sortOrder, filters);
-        setFilteredBitacoras(sortedAndFiltered);
-    }, [sortOrder, bitacoras, searchText, filters]);
-
-    const fetchBitacoras = () => {
-        axios.get('https://bachendapi.onrender.com/api/bitacoras')
-            .then(response => {
-                const activeBitacoras = response.data.filter(bitacora => bitacora.estadoActivo && bitacora.Autor === usuario);
-                setBitacoras(activeBitacoras);
-            })
-            .catch(error => console.error('Error al obtener las bitácoras:', error));
+    const fetchBitacoras = async () => {
+        try {
+            const response = await axios.get('https://bachendapi.onrender.com/api/bitacoras');
+            const activeBitacoras = response.data.filter(
+                (bitacora) => bitacora.estadoActivo && bitacora.Autor === usuario
+            );
+            setBitacoras(activeBitacoras);
+        } catch (error) {
+            console.error('Error al obtener las bitácoras:', error);
+        }
     };
 
-    const filterAndSortBitacoras = (bitacorasToFilter, search, order, filters) => {
-        const searchLower = search.toLowerCase();
-        const usuario = localStorage.getItem('usuario');
-        let filteredBitacoras = bitacorasToFilter.filter(bitacora => {
+    const handleDelete = async (id) => {
+        try {
+            await axios.put(`https://bachendapi.onrender.com/api/bitacoras/${id}`, { estadoActivo: false });
+            setBitacoras((prevBitacoras) => prevBitacoras.filter((bitacora) => bitacora._id !== id));
+            alert('Bitácora eliminada correctamente');
+        } catch (error) {
+            console.error('Error al eliminar la bitácora:', error);
+        }
+    };
+
+    const filterAndSortBitacoras = () => {
+        const searchLower = searchText.toLowerCase();
+        let filteredBitacoras = bitacoras.filter((bitacora) => {
+            const tituloLower = bitacora.titulo.toLowerCase();
+            const autorLower = bitacora.Autor.toLowerCase();
+            const matchesTitleOrAuthor = tituloLower.includes(searchLower) || autorLower.includes(searchLower);
+
             const fecha = new Date(bitacora.fechaHoraMuestreo);
             const startDate = filters.startDate ? new Date(filters.startDate) : null;
             const endDate = filters.endDate ? new Date(filters.endDate) : null;
             const inDateRange = (!startDate || fecha >= startDate) && (!endDate || fecha <= endDate);
-            const matchesTitle = bitacora.titulo.toLowerCase().includes(searchLower);
-            const matchesHabitat = bitacora.descripcionHabitat.toLowerCase().includes(searchLower);
-            const matchesClimate = bitacora.condicionesClimaticas.toLowerCase().includes(searchLower);
-            const matchesLocation = (`${bitacora.localizacion.latitud},${bitacora.localizacion.longitud}`).includes(searchLower);
-            const matchesSpecies = bitacora.especiesRecolectadas.some(especie =>
-                especie.nombreComun.toLowerCase().includes(searchLower) ||
-                especie.nombreCientifico.toLowerCase().includes(searchLower)
-            );
-            return inDateRange && (searchLower === '' || matchesTitle || matchesHabitat || matchesClimate || matchesLocation || matchesSpecies);
+
+            return inDateRange && matchesTitleOrAuthor;
         });
 
-        switch (order) {
+        switch (sortOrder) {
             case 'recientes':
                 filteredBitacoras.sort((a, b) => new Date(b.fechaHoraMuestreo) - new Date(a.fechaHoraMuestreo));
                 break;
@@ -82,10 +86,6 @@ const Cuentas = () => {
         return filteredBitacoras;
     };
 
-    const handleEdit = (id) => {
-        navigate(`/editar-bitacora/${id}`);
-    };
-
     return (
         <div className="cuentas-container">
             <div className="filter-bar-container">
@@ -96,23 +96,33 @@ const Cuentas = () => {
                 />
             </div>
 
+            {/* Nombre del usuario siempre visible */}
             <div className="user-name-banner">
                 <h2>Nombre del usuario: {usuario}</h2>
             </div>
 
+            {/* Lista de bitácoras */}
             <div className="bitacora-list">
-                {filteredBitacoras.length > 0 ? (
-                    filteredBitacoras.map((bitacora) => (
+                {filterAndSortBitacoras().length > 0 ? (
+                    filterAndSortBitacoras().map((bitacora) => (
                         <div key={bitacora._id} className="bitacora-card-container">
                             <BitacoraCard
                                 bitacora={bitacora}
                                 showEditDeleteOptions={true}
                             />
                             <div className="edit-delete-icons">
-                                <IconButton color="success" aria-label="Editar bitácora" onClick={() => handleEdit(bitacora._id)}>
+                                <IconButton
+                                    color="success"
+                                    aria-label="Editar bitácora"
+                                    onClick={() => navigate(`/editar-bitacora/${bitacora._id}`)}
+                                >
                                     <EditIcon />
                                 </IconButton>
-                                <IconButton color="error" aria-label="Eliminar bitácora">
+                                <IconButton
+                                    color="error"
+                                    aria-label="Eliminar bitácora"
+                                    onClick={() => handleDelete(bitacora._id)}
+                                >
                                     <DeleteIcon />
                                 </IconButton>
                             </div>

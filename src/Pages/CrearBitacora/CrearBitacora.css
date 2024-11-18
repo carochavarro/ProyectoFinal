@@ -6,30 +6,27 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  height: 100vh; /* Asegura que el cuerpo ocupe la altura completa */
-  overflow-y: auto; /* Permite desplazamiento si es necesario */
+  height: 100vh;
+  overflow-y: auto;
 }
-
 
 .bitacora-container {
   background-color: white;
-  padding: 10px; /* Reduce el padding si es necesario */
-  border-radius: 10px;
-  margin: 10px auto;
+  padding: 20px;
+  border-radius: 16px;
+  margin: 20px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 0%;
-  width: 90vw;
-  min-height: 100vh; /* Asegura que el contenedor ocupe al menos toda la altura de la ventana */
+  max-width: 800px; /* Tamaño máximo para escritorio */
+  width: 90%; /* Ancho relativo para adaptarse en pantallas más pequeñas */
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Permite que el contenido se desplace si es necesario */
+  overflow-y: auto;
 }
-
 
 .title-text {
   color: #397f0e;
-  font-size: 2rem;
+  font-size: 2.2rem;
   text-align: center;
   padding: 15px;
 }
@@ -43,7 +40,7 @@ body {
 }
 
 .image-upload-container {
-  width: 80%;
+  width: 100%;
   background-color: #e0f2e9;
   border-radius: 12px;
   padding: 20px;
@@ -60,10 +57,11 @@ body {
 }
 
 .bitacora-image {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
   border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .upload-label {
@@ -108,44 +106,73 @@ body {
   margin-top: 20px;
 }
 
-/* Ajustes para responsividad */
-@media (max-width: 768px) {
-  .title-text {
-      font-size: 1.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .bitacora-container {
-      padding: 10px;
-      margin-top: 20px;
-  }
-
-  .title-text {
-      font-size: 1.6rem;
-  }
-
-  .bitacora-image {
-      width: 60px;
-      height: 60px;
-  }
-
-  .upload-box {
-      height: 50px;
-  }
-}
 .input-box .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-  border-color:  #d9d9d9; 
+  border-color: #d9d9d9;
 }
 
 .input-box .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
 .input-box .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: rgb(58, 126, 13) ; 
+  border-color: rgb(58, 126, 13);
 }
-/* Cambiar el color cuando el input esté enfocado */
+
 .MuiInputLabel-root.Mui-focused {
-  color: #2e5d0a; /* Otro tono de verde */
+  color: #2e5d0a;
 }
 
+/* Ajustes Responsivos */
+@media (max-width: 1024px) {
+  .title-text {
+    font-size: 2rem;
+  }
 
+  .bitacora-container {
+    max-width: 700px;
+  }
 
+  .bitacora-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .upload-box {
+    height: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title-text {
+    font-size: 1.8rem;
+  }
+
+  .bitacora-container {
+    width: 95%;
+  }
+
+  .bitacora-image {
+    width: 70px;
+    height: 70px;
+  }
+
+  .upload-box {
+    height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title-text {
+    font-size: 1.6rem;
+  }
+
+  .bitacora-container {
+    padding: 15px;
+  }
+
+  .bitacora-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .upload-box {
+    height: 40px;
+  }
+}

@@ -1,4 +1,3 @@
-
 * {
   padding: 0;
   margin: 0;
@@ -22,11 +21,11 @@ body, html {
   border-radius: 16px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 500px; /* Aumenta el ancho máximo a 500px */
+  max-width: 500px; /* Mantén este ancho para escritorio */
+  padding: 16px; /* Añade un padding interno */
 }
 
 .register-header {
-  width: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,7 +33,7 @@ body, html {
 }
 
 .back-button {
-  color:white;
+  color: white;
   align-self: flex-start;
 }
 
@@ -107,4 +106,24 @@ body, html {
 
 .input-box .MuiFormLabel-root.Mui-focused {
   color: #397f0e;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .register-container {
+    max-width: 90%; /* Haz que ocupe casi todo el ancho en tablets y celulares */
+    padding: 12px;
+  }
+
+  .logo {
+    width: 100px; /* Reduce el tamaño del logo */
+  }
+
+  .register-button {
+    font-size: 14px; /* Ajusta el tamaño del texto del botón */
+  }
+
+  .social-button {
+    margin: 0 4px; /* Reduce el espacio entre los íconos */
+  }
 }
