@@ -17,3 +17,16 @@
   .input-box .MuiInputBase-input {
     color: #000000;
   }
+ 
+  @media (max-width: 768px) {
+    .filtro {
+      flex-direction: column; /* Coloca los elementos en una sola columna */
+      align-items: stretch; /* Asegura que los elementos se alineen al ancho del contenedor */
+    }
+  
+    .filter-bar-container-home {
+      flex-direction: column; /* Coloca los elementos en una sola columna */
+      gap: 12px;
+      padding: 12px; /* Mayor espacio para respiración */
+    }
+  }

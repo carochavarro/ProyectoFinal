@@ -2,21 +2,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url('https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
-  background-size: cover;
+   background-size: cover;
   background-attachment: fixed;
   background-position: center;
-  min-height: 100vh;
-  padding-top: 60px;
-  max-width: 1000px;
+  margin-top: 50%;
 
 }
 
 .filter-bar-container {
   width: calc(100% - 40px);
   max-width: 1000px;
-  background-color: #9ABF80;
-  padding: 8px 15px;
+  background-color: #3a7e0d;
+  padding: 1px 10px;
   border-radius: 10px;
   position: fixed;
   top: 20px;
@@ -33,17 +30,18 @@
   padding: 10px 20px;
   border-radius: 8px;
   text-align: center;
-  margin-top: 18%;
+  margin-top: 7%;
 }
 
 .bitacora-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around; /* Ajuste para espaciar de manera uniforme */
-  max-width: 1200px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
-  gap: 30px; /* Agrega un espacio uniforme entre tarjetas */
+  gap: 20px; /* Agrega un espacio uniforme entre tarjetas */
+  width: 1000px;
+  margin-top: 10px;
 }
 
 .bitacora-card-container {
@@ -57,6 +55,9 @@
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .bitacora-card {

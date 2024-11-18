@@ -1,3 +1,4 @@
+
 body, html {
     height: 100%;
     background-image: url('https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
@@ -12,13 +13,13 @@ body, html {
     border-radius: 15px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     padding: 20px;
-   
+ 
+    
   }
   
   .crear-usuario-header {
     display: flex;
     align-items: center;
-    
   }
   
   .back-button {
@@ -32,7 +33,7 @@ body, html {
     margin-top: 10px;
   }
   
-  .input-box {
+  .input-boxCrearUsuario {
     display: flex;
     flex-direction: column; /* Esto asegura que los inputs estén uno debajo del otro */
     align-items: stretch; /* Los inputs ocuparán el ancho completo */
@@ -50,16 +51,28 @@ body, html {
     border-radius: 8px;
   }
   
-  .input-box .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+
+  .Crear-usuario{
+    height: 550px;
+    background-color: white;
+    border-radius: 10px;
+    width: 350px;
+  }
+  .inputs .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
     border-color: #9e9e9e;
   }
   
-  .input-box .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
-  .input-box .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  .inputs .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+  .inputs .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
     border-color: #397f0e;
   }
   
-  .input-box .MuiInputBase-input {
+  .inputs .MuiInputBase-input {
     color: #000000;
   }
- 
+  
+  /* Agrega el color verde para el label cuando el campo está enfocado */
+  .inputs .MuiFormLabel-root.Mui-focused {
+    color: #397f0e;
+  }
+  

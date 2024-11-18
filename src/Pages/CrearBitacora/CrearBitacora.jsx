@@ -160,17 +160,17 @@ function CrearBitacora() {
   };
 
   return (
-    <div className="container">
-      <Container maxWidth="sm" className="bitacora-container">
-        <Box className="bitacora-header">
-          <IconButton className="back-button" onClick={handleBack}>
+    <div className="container-crear" sx={{Color:'red'}}>
+      <Container maxWidth="sm" className="bitacora-container-crear" >
+        <Box className="bitacora-header-crear">
+          <IconButton  sx={{ marginTop: "16px" }} className="back-button-crear" onClick={handleBack}>
             <ArrowBackIosNewIcon />
           </IconButton>
         </Box>
-        <Typography variant="h4" align="center" className="title-text">
+        <Typography variant="h4" align="center" className="title-text-crear">
           Crear Bitácora
         </Typography>
-        <Box className="bitacora-header">
+        <Box className="bitacora-header-crear">
           <TextField
             color="action"
             variant="outlined"
@@ -178,14 +178,14 @@ function CrearBitacora() {
             fullWidth
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="input-box"
+            className="input-box-crear"
           />
         </Box>
 
-        <Box className="image-upload-container">
-          <Box className="image-gallery">
+        <Box className="image-upload-container-crear">
+          <Box className="image-gallery-crear">
             {images.map((image, index) => (
-              <img key={index} src={image} alt={`Imagen ${index + 1}`} className="bitacora-image" />
+              <img key={index} src={image} alt={`Imagen ${index + 1}`} className="bitacora-image-crear" />
             ))}
           </Box>
           <input
@@ -196,42 +196,42 @@ function CrearBitacora() {
             multiple
             onChange={handleImageChange}
           />
-          <label htmlFor="upload-button" className="upload-label">
-            <Box className="upload-box">
+          <label htmlFor="upload-button" className="upload-label-crear">
+            <Box className="upload-box-crear">
               <IconButton color="primary" component="span">
-                {isMobile ? <PhotoCamera className="upload-icon" /> : <UploadFile className="upload-icon" />}
+                {isMobile ? <PhotoCamera className="upload-icon-crear" /> : <UploadFile className="upload-icon-crear" />}
               </IconButton>
-              <Typography variant="body2" className="upload-text">Agregar imagen</Typography>
+              <Typography variant="body2" className="upload-text-crear">Agregar imagen</Typography>
             </Box>
           </label>
         </Box>
 
         <LocalizationProvider dateAdapter={AdapterDayjs} locale={LocalizationProvider}>
-          <Box className="date-time-container" >
+          <Box className="date-time-container-crear" >
             <DatePicker
               label="Fecha del muestreo"
               value={selectedDate}
               onChange={(newValue) => setSelectedDate(newValue)}
               renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
-              className="input-box"
+              className="input-box-crear"
             />
             <TimePicker
               label="Hora del muestreo"
               value={selectedTime}
               onChange={(newValue) => setSelectedTime(newValue)}
               renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
-              className="input-box"
+              className="input-box-crear"
             />
           </Box>
         </LocalizationProvider>
 
-        <Box className="bitacora-fields" >
+        <Box className="bitacora-fields-crear" >
           <TextField color="action" variant="outlined" label="Latitud" fullWidth value={localizacion.latitud} onChange={(e) => setLocalizacion({ ...localizacion, latitud: e.target.value })} margin="normal" className="input-box" />
           <TextField color="action" variant="outlined" label="Longitud" fullWidth value={localizacion.longitud} onChange={(e) => setLocalizacion({ ...localizacion, longitud: e.target.value })} margin="normal" className="input-box" />
           <TextField color="action" variant="outlined" label="Condiciones Climáticas" fullWidth value={condicionesClimaticas} onChange={(e) => setCondicionesClimaticas(e.target.value)} margin="normal" className="input-box" />
           <TextField color="action" variant="outlined" label="Descripción del Hábitat" fullWidth multiline rows={4} value={descripcionHabitat} onChange={(e) => setDescripcionHabitat(e.target.value)} margin="normal" className="input-box" />
           <TextField color="action" variant="outlined" label="Observaciones Adicionales" fullWidth multiline rows={4} value={observacionesAdicionales} onChange={(e) => setObservacionesAdicionales(e.target.value)} margin="normal" className="input-box" />
-          <Box className="especie-fields">
+          <Box className="especie-fields-crear">
             <Typography variant="h6" color='#397f0e'>Especie Recolectada</Typography>
             <TextField color="action" variant="outlined" label="Nombre Científico" fullWidth value={especie.nombreCientifico} onChange={(e) => setEspecie({ ...especie, nombreCientifico: e.target.value })} margin="normal" className="input-box" />
             <TextField color="action" variant="outlined" label="Nombre Común" fullWidth value={especie.nombreComun} onChange={(e) => setEspecie({ ...especie, nombreComun: e.target.value })} margin="normal" className="input-box" />
@@ -241,13 +241,13 @@ function CrearBitacora() {
           </Box>
         </Box>
 
-        <Box className="save-button-container">
+        <Box className="save-button-container-crear">
           <Button
             variant="contained"
             color="primary"
             startIcon={isLoading ? <CircularProgress size={20} /> : <SaveIcon />}
             onClick={handleSubmit}
-            className="save-button"
+            className="save-button-crear"
             sx={{
               backgroundColor: '#3a7e0d',
               color: '#fff',
@@ -270,6 +270,7 @@ function CrearBitacora() {
         )}
       </Container>
     </div>
+
   );
 }
 

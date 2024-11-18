@@ -104,8 +104,8 @@ const AdminHome = ({ userRole }) => {
 
     return (
         <div className="admin-home-container" >
-            <div className="filter-bar-container"  >
-                <FilterBar  
+            <div className="filter-bar-container-home"  >
+                <FilterBar  className="filtro"
                     onSortChange={setSortOrder} 
                     onSearchChange={setSearchText} 
                     onFilterChange={setFilters} 
@@ -113,7 +113,7 @@ const AdminHome = ({ userRole }) => {
                 />
             </div>
             
-            <div className="bitacora-list">
+            <div className="bitacora-list-home">
                 {filteredBitacoras.length > 0 ? (
                     filteredBitacoras.map((bitacora) => (
                         <BitacoraCard key={bitacora._id} bitacora={bitacora} />

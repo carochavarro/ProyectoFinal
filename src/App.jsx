@@ -5,7 +5,6 @@ import EditarBitacora from './Pages/EditarBitacora/EditarBitacora';
 import CrearBitacora from './Pages/CrearBitacora/CrearBitacora';
 import Login from './Pages/Login/Login';
 import Registro from './Pages/Registro/Registro';
-import BitacoraForm from './Pages/BitacoraForm/BitacoraForm';
 import AdminHome from './Pages/Home/AdminHome/AdminHome';
 import Panel from './Pages/Panel/Panel';
 import CrearUsuario from './Pages/CrearUsuario/CrearUsuario';

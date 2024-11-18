@@ -13,7 +13,7 @@ const BitacoraCard = ({ bitacora }) => {
   return (
     <div className="bitacora-card" onClick={handleClick}>
       <div className="bitacora-content">
-        <h3 className="subtitulo-verde">{bitacora.titulo}</h3>
+        <h3 className="subtitulo-verde" id='titulo'>{bitacora.titulo}</h3>
       </div>
       <div className="bitacora-image">
         <img src={bitacora.imageUrls && bitacora.imageUrls.length > 0 ? bitacora.imageUrls[0] : 'https://via.placeholder.com/100'} alt={bitacora.titulo} />

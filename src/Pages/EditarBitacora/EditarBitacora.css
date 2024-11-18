@@ -1,18 +1,11 @@
-.container{
+.container-edit{
   background-color: white;
   height: 100vh;
 }
 
-body {
-  background-image: url('https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  margin: 0;
-  padding: 0;
-}
 
-.bitacora-container {
+
+.bitacora-container-edit {
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
   border-radius: 10px;
@@ -25,14 +18,13 @@ body {
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.title-text {
+.title-text-edit {
   color: #397f0e;
-  margin-bottom: 20px;
   font-size: 2rem;
-  text-align: center;
+  margin-left: -10px;
 }
 
-.bitacora-header {
+.bitacora-header-edit {
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -40,7 +32,7 @@ body {
   margin-bottom: 20px;
 }
 
-.image-upload-container {
+.image-upload-container-edit {
   width: 100%;
   background-color: transparent; /* Sin fondo para el área de la imagen */
   border-radius: 12px;
@@ -49,7 +41,7 @@ body {
   margin-bottom: 20px;
 }
 
-.image-gallery {
+.image-gallery-edit {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -57,12 +49,12 @@ body {
   padding: 10px 0;
 }
 
-.image-wrapper {
+.image-wrapper-edit {
   position: relative;
   display: inline-block;
 }
 
-.image-wrapper img {
+.image-wrapper-edit img {
   width: 100px;
   height: 100px;
   object-fit: cover;
@@ -70,13 +62,13 @@ body {
   margin: 10px;
 }
 
-.upload-label {
+.upload-label-edit {
   display: inline-block;
   width: 100%;
   cursor: pointer;
 }
 
-.upload-box {
+.upload-box-edit {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,17 +80,17 @@ body {
   margin-top: 10px;
 }
 
-.upload-icon {
+.upload-icon-edit {
   font-size: 24px;
   color: #ffffff;
 }
 
-.upload-text {
+.upload-text-edit {
   font-size: 14px;
   color: #ffffff;
 }
 
-.bitacora-fields {
+.bitacora-fields-edit {
   display: flex;
   flex-direction: column;
   gap: 25px; /* Espaciado mayor entre los campos */
@@ -106,13 +98,13 @@ body {
   margin-bottom: 20px;
 }
 
-.date-time-container {
+.date-time-container-edit {
   display: flex;
   gap: 20px; /* Espacio entre Fecha y Hora */
   margin-bottom: 15px; /* Más espacio debajo de los selectores de fecha y hora */
 }
 
-.save-button-container {
+.save-button-container-edit {
   display: flex;
   justify-content: center;
   margin-top: 20px;
@@ -120,40 +112,52 @@ body {
 
 /* Ajustes para responsividad */
 @media (max-width: 768px) {
-  .title-text {
+  .title-text-edit {
       font-size: 1.8rem;
   }
 }
 
 @media (max-width: 480px) {
-  .bitacora-container {
+  .bitacora-container-edit {
       padding: 10px;
       margin-top: 20px;
   }
 
-  .title-text {
+  .title-text-edit {
       font-size: 1.6rem;
   }
 
-  .bitacora-image {
+  .bitacora-image-edit {
       width: 60px;
       height: 60px;
   }
 
-  .upload-box {
+  .upload-box-edit {
       height: 50px;
   }
 }
 
-.input-box .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-  border-color:  #d9d9d9; 
+/* Estilos para cambiar el color de la etiqueta cuando el input esté enfocado */
+.input-box-edit .MuiInputLabel-root.Mui-focused {
+  color: #2e5d0a; /* Color verde para el label enfocado */
 }
 
-.input-box .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
-.input-box .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: rgb(58, 126, 13) ; 
+/* Estilos para cambiar el color del texto del input */
+.input-box-edit .MuiInputBase-input {
+  color: black; /* Cambia el texto a verde */
 }
-/* Cambiar el color cuando el input esté enfocado */
-.MuiInputLabel-root.Mui-focused {
-  color: #2e5d0a; /* Otro tono de verde */
+
+/* Estilos para el borde del input cuando está enfocado */
+.input-box-edit .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: rgb(58, 126, 13); /* Verde para el borde enfocado */
+}
+
+/* Estilo para el borde del input en estado normal */
+.input-box-edit .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: #d9d9d9; /* Color de borde predeterminado */
+}
+
+/* Cambio de color al pasar el cursor por encima */
+.input-box-edit .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: rgb(58, 126, 13); /* Verde al hacer hover */
 }

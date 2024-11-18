@@ -75,8 +75,8 @@ function Registro() {
   };
 
   return (
-    <Container maxWidth="xs" className="register-container">
-      <Box className="register-header">
+    <Container maxWidth="xs" className="register-container" >
+      <Box className="register-header" >
         <IconButton className="back-button" onClick={handleBack}>
           <ArrowBackIosNewIcon />
         </IconButton>

@@ -37,7 +37,7 @@ const BitacoraDetail = () => {
   if (!bitacora) return <p>No se encontró la bitácora.</p>;
 
   return (
-    <div className="container">
+    <div className="container-details">
       <div className="bitacora-detail-container">
         <FilterBar />
         <div className="detail-content">

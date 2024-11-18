@@ -87,7 +87,7 @@ const Cuentas = () => {
     };
 
     return (
-        <div className="cuentas-container">
+                <div className="cuentas-container">
             <div className="filter-bar-container">
                 <FilterBar
                     onSortChange={setSortOrder}
