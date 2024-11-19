@@ -13,65 +13,72 @@ const AdminHome = ({ userRole }) => {
     const [filters, setFilters] = useState({});
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
+    // Fetch inicial de las bitácoras y actualizaciones periódicas.
     useEffect(() => {
         fetchBitacoras();
         const interval = setInterval(fetchBitacoras, 5000);
         return () => clearInterval(interval);
     }, []);
 
+    // Filtrar y ordenar bitácoras cada vez que cambian los filtros, búsqueda o el orden.
     useEffect(() => {
         const sortedAndFiltered = filterAndSortBitacoras(bitacoras, searchText, sortOrder, filters);
         setFilteredBitacoras(sortedAndFiltered);
     }, [sortOrder, bitacoras, searchText, filters]);
 
+    // Función para obtener las bitácoras del backend.
     const fetchBitacoras = () => {
         axios.get('https://bachendapi.onrender.com/api/bitacoras')
             .then(response => {
-                const newBitacoras = response.data.filter(bitacora => bitacora.estadoActivo);
+                const newBitacoras = response.data.filter(bitacora => bitacora.estadoActivo); // Solo bitácoras activas.
                 const previousBitacoraCount = parseInt(localStorage.getItem('bitacoraCount')) || 0;
 
                 if (newBitacoras.length > previousBitacoraCount) {
-                    setOpenSnackbar(true);
+                    setOpenSnackbar(true); // Mostrar notificación si hay nuevas bitácoras.
                 }
 
                 localStorage.setItem('bitacoraCount', newBitacoras.length);
                 setBitacoras(newBitacoras);
-                setFilteredBitacoras(newBitacoras); // Aseguramos que `filteredBitacoras` tenga datos iniciales.
+                setFilteredBitacoras(newBitacoras); // Inicializamos `filteredBitacoras`.
             })
             .catch(error => console.error('Error al obtener las bitácoras:', error));
     };
 
+    // Función para cerrar el Snackbar.
     const handleCloseSnackbar = () => {
         setOpenSnackbar(false);
     };
 
+    // Función para filtrar y ordenar las bitácoras.
     const filterAndSortBitacoras = (bitacorasToFilter, search, order, filters) => {
-        const searchLower = search.toLowerCase();
+        const searchLower = search.toLowerCase(); // Convertimos el texto de búsqueda a minúsculas.
 
+        // Filtrado por título o autor, y por otros filtros si se especifican.
         let filteredBitacoras = bitacorasToFilter.filter(bitacora => {
-            const fecha = new Date(bitacora.fechaHoraMuestreo);
-            const startDate = filters.startDate ? new Date(filters.startDate) : null;
-            const endDate = filters.endDate ? new Date(filters.endDate) : null;
-
-            const inDateRange = (!startDate || fecha >= startDate) && (!endDate || fecha <= endDate);
             const matchesTitleOrAuthor = bitacora.titulo.toLowerCase().includes(searchLower) ||
                 (bitacora.Autor && bitacora.Autor.toLowerCase().includes(searchLower));
 
-            const matchesHabitat = filters.habitat 
+            const fecha = new Date(bitacora.fechaHoraMuestreo);
+            const startDate = filters.startDate ? new Date(filters.startDate) : null;
+            const endDate = filters.endDate ? new Date(filters.endDate) : null;
+            const inDateRange = (!startDate || fecha >= startDate) && (!endDate || fecha <= endDate);
+
+            const matchesHabitat = filters.habitat
                 ? bitacora.descripcionHabitat.toLowerCase().includes(filters.habitat.toLowerCase())
                 : true;
 
-            const matchesClimate = filters.climate 
+            const matchesClimate = filters.climate
                 ? bitacora.condicionesClimaticas.toLowerCase().includes(filters.climate.toLowerCase())
                 : true;
 
-            const matchesLocation = filters.location 
+            const matchesLocation = filters.location
                 ? (`${bitacora.localizacion.latitud},${bitacora.localizacion.longitud}`).includes(filters.location)
                 : true;
 
-            return inDateRange && matchesTitleOrAuthor && matchesHabitat && matchesClimate && matchesLocation;
+            return matchesTitleOrAuthor && inDateRange && matchesHabitat && matchesClimate && matchesLocation;
         });
 
+        // Ordenar las bitácoras según el orden seleccionado.
         switch (order) {
             case 'recientes':
                 filteredBitacoras.sort((a, b) => new Date(b.fechaHoraMuestreo) - new Date(a.fechaHoraMuestreo));
@@ -90,16 +97,17 @@ const AdminHome = ({ userRole }) => {
     };
 
     return (
-        <div className="admin-home-container" >
-            <div className="filter-bar-container-home"  >
-                <FilterBar  className="filtro"
-                    onSortChange={setSortOrder} 
-                    onSearchChange={setSearchText} 
-                    onFilterChange={setFilters} 
+        <div className="admin-home-container">
+            <div className="filter-bar-container-home">
+                <FilterBar
+                    className="filtro"
+                    onSortChange={setSortOrder}
+                    onSearchChange={(e) => setSearchText(e.target.value)} // Manejo del texto de búsqueda.
+                    onFilterChange={setFilters}
                     userRole={localStorage.getItem('role')}
                 />
             </div>
-            
+
             <div className="bitacora-list-home">
                 {filteredBitacoras.length > 0 ? (
                     filteredBitacoras.map((bitacora) => (
