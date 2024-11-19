@@ -18,7 +18,7 @@ import "./FilterBar.css";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 
-const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
+const FilterBar = ({ onSortChange, onSearchChange, onFilterChange, userRole }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
   const [sortOrder, setSortOrder] = useState("recientes");
@@ -75,7 +75,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
         gap: 8,
         padding: 8,
         borderRadius: 8,
-              }}
+      }}
     >
       {!isDetailView && (
         <>
@@ -171,6 +171,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
           marginLeft: "auto",
         }}
       >
+        {userRole==='Investigador'&&[
         <Button
           variant="contained"
           color="primary"
@@ -184,7 +185,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
         >
           Crear Bitácora
         </Button>
-
+     ]}
         <IconButton
           sx={{
             bgcolor: "#3a7e0d",
@@ -217,7 +218,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
             vertical: "bottom",
             horizontal: "left",
           }}
-        >
+        >{[userRole==='Administrador'&&
           <MenuItem
             onClick={() => {
               navigate("/panel");
@@ -226,6 +227,8 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
           >
             Gestión Usuarios
           </MenuItem>
+          ]}
+          {[userRole==='Investigador'&&
           <MenuItem
             onClick={() => {
               navigate("/cuentas");
@@ -234,6 +237,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
           >
             Cuenta
           </MenuItem>
+          ]}
           <MenuItem
             onClick={() => {
               navigate("/login");
@@ -262,7 +266,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Box sx={{ marginTop: 2 }}>
               <DatePicker
-              className="input-box"
+                className="input-box"
                 label="Fecha inicio"
                 value={startDate}
                 onChange={(newValue) => setStartDate(newValue)}
@@ -273,7 +277,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
             </Box>
             <Box sx={{ marginTop: 2 }}>
               <DatePicker
-              className="input-box"
+                className="input-box"
                 label="Fecha fin"
                 value={endDate}
                 onChange={(newValue) => setEndDate(newValue)}
@@ -286,7 +290,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
 
           <Box sx={{ marginTop: 2 }}>
             <TextField
-            className="input-box"
+              className="input-box"
               placeholder="Escribe hábitat"
               size="small"
               fullWidth
@@ -296,9 +300,9 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
             />
           </Box>
 
-          <Box  sx={{ marginTop: 2  }}>
+          <Box sx={{ marginTop: 2 }}>
             <TextField
-            className="input-box"
+              className="input-box"
               placeholder="Escribe clima"
               size="small"
               fullWidth
@@ -310,7 +314,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
 
           <Box sx={{ marginTop: 2 }}>
             <TextField
-            className="input-box"
+              className="input-box"
               placeholder="Escribe lugar"
               size="small"
               fullWidth

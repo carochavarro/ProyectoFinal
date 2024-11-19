@@ -48,9 +48,10 @@ function Login() {
       );
       console.log("Login exitoso:", response.data);
 
-      const { token, Nombre } = response.data;
+      const { token, Nombre, rol } = response.data;
       localStorage.setItem("token", token);
       localStorage.setItem("usuario", Nombre);
+      localStorage.setItem("role", rol);
 
       setAlert({
         open: true,

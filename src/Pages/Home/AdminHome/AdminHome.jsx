@@ -5,7 +5,7 @@ import BitacoraCard from '../../../Components/BitacoraCard/BitacoraCard';
 import { Snackbar } from '@mui/material';
 import './AdminHome.css';
 
-const AdminHome = ({ userRole }) => {
+const AdminHome = () => {
     const [bitacoras, setBitacoras] = useState([]);
     const [filteredBitacoras, setFilteredBitacoras] = useState([]);
     const [sortOrder, setSortOrder] = useState('recientes');
