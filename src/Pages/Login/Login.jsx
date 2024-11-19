@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Container,
   Box,
@@ -7,13 +7,13 @@ import {
   Button,
   Link,
   Snackbar,
-} from '@mui/material';
-import MuiAlert from '@mui/material/Alert';
-import PersonIcon from '@mui/icons-material/Person';
-import LockIcon from '@mui/icons-material/Lock';
-import { useNavigate } from 'react-router-dom';
-import './Login.css';
-import axios from 'axios';
+} from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
+import PersonIcon from "@mui/icons-material/Person";
+import LockIcon from "@mui/icons-material/Lock";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
+import axios from "axios";
 
 // Componente de alerta personalizado
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -22,14 +22,14 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function Login() {
   const [formData, setFormData] = useState({
-    email: '',
-    contraseña: ''
+    email: "",
+    contraseña: "",
   });
 
   const [alert, setAlert] = useState({
     open: false,
-    message: '',
-    severity: 'success'
+    message: "",
+    severity: "success",
   });
 
   const navigate = useNavigate();
@@ -42,51 +42,65 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://bachendapi.onrender.com/api/usuarios/login', formData);
+      const response = await axios.post(
+        "https://bachendapi.onrender.com/api/usuarios/login",
+        formData
+      );
       console.log("Login exitoso:", response.data);
 
       const { token, Nombre } = response.data;
-      localStorage.setItem('token', token);
-      localStorage.setItem('usuario', Nombre);
+      localStorage.setItem("token", token);
+      localStorage.setItem("usuario", Nombre);
 
       setAlert({
         open: true,
-        message: 'Login exitoso',
-        severity: 'success'
+        message: "Login exitoso",
+        severity: "success",
       });
 
-      navigate('/home');
-
+      navigate("/home");
     } catch (error) {
-      console.error("Error al iniciar sesión:", error.response ? error.response.data : error.message);
+      console.error(
+        "Error al iniciar sesión:",
+        error.response ? error.response.data : error.message
+      );
       setAlert({
         open: true,
-        message: error.response?.data?.message || 'Error al iniciar sesión',
-        severity: 'error'
+        message: error.response?.data?.message || "Error al iniciar sesión",
+        severity: "error",
       });
     }
   };
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') return;
+    if (reason === "clickaway") return;
     setAlert({ ...alert, open: false });
   };
 
   const goToRegister = () => {
-    navigate('/registro');
+    navigate("/registro");
   };
 
   return (
     <Container maxWidth="xs" className="login-container">
       <Box className="login-header"></Box>
-      <img src="https://i.ibb.co/86vzgdT/Proyecto-Creador-de-logotipos-2.png" alt="Logo" className="logo" />
+      <img
+        src="https://i.ibb.co/86vzgdT/Proyecto-Creador-de-logotipos-2.png"
+        alt="Logo"
+        className="logo"
+      />
       <Typography variant="h4" align="center" className="welcome-text">
         NEOGARDEN
       </Typography>
       <Typography variant="body2" align="center" className="subtitle-text">
         Inicie sesión en su cuenta
       </Typography>
-      <Box component="form" noValidate className="form-box" onSubmit={handleSubmit}>
+      <Box
+        component="form"
+        noValidate
+        className="form-box"
+        onSubmit={handleSubmit}
+      >
         <Box className="input-box">
           <PersonIcon color="action" className="input-icon" />
           <TextField
@@ -115,20 +129,32 @@ function Login() {
           />
         </Box>
         <Box className="options-box">
-          <Link href="#" variant="body2" className="forgot-password">
-            ¿Has olvidado tu contraseña?
-          </Link>
-        </Box>
+      <Link
+        href="#"
+        variant="body2"
+        className="forgot-password"
+        sx={{
+          color: 'green', // Color verde
+          textDecoration: 'none', // Elimina el subrayado por defecto
+          '&:hover': {
+            color: 'darkgreen', // Cambia de color al pasar el mouse
+            textDecoration: 'none', // Asegura que no se subraye al pasar el mouse
+          },
+        }}
+      >
+        ¿Has olvidado tu contraseña?
+      </Link>
+    </Box>
         <Button
           type="submit"
           fullWidth
           variant="contained"
           className="login-button"
           sx={{
-            backgroundColor: '#3a7e0d',
-            color: '#fff',
-            '&:hover': {
-              backgroundColor: '#2e5d0a',
+            backgroundColor: "#3a7e0d",
+            color: "#fff",
+            "&:hover": {
+              backgroundColor: "#2e5d0a",
             },
           }}
         >
@@ -136,8 +162,12 @@ function Login() {
         </Button>
         <Box className="signup-box">
           <Typography variant="body2">
-            ¿No tienes una cuenta?{' '}
-            <Link onClick={goToRegister} className="signup-link" style={{ cursor: 'pointer', color: '#3a7e0d' }}>
+            ¿No tienes una cuenta?{" "}
+            <Link
+              onClick={goToRegister}
+              className="signup-link"
+              style={{ cursor: "pointer", color: "#3a7e0d" }}
+            >
               Sign up
             </Link>
           </Typography>
@@ -148,9 +178,13 @@ function Login() {
         open={alert.open}
         autoHideDuration={6000}
         onClose={handleClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
-        <Alert onClose={handleClose} severity={alert.severity} sx={{ width: '100%' }}>
+        <Alert
+          onClose={handleClose}
+          severity={alert.severity}
+          sx={{ width: "100%" }}
+        >
           {alert.message}
         </Alert>
       </Snackbar>

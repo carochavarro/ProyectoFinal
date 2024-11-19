@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
+import './FilterBarUsuario.css'
 
 const FilterBarUsuario = ({ onSearchChange }) => {
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
@@ -20,6 +21,7 @@ const FilterBarUsuario = ({ onSearchChange }) => {
   const handleMenuClose = () => setMenuAnchorEl(null);
 
   return (
+    <div className="filter-users">
     <Box
       sx={{
         display: "flex",
@@ -32,8 +34,8 @@ const FilterBarUsuario = ({ onSearchChange }) => {
       <TextField
         className="input-box-filter"
         variant="outlined"
-        placeholder="Usuario"
-        onChange={(e) => onSearchChange(e.target.value)}
+        placeholder="Usuarios"
+            onChange={(e) => onSearchChange(e.target.value)}
         InputProps={{
           startAdornment: (
             <IconButton sx={{ padding: 0, marginRight: 1 }}>
@@ -43,8 +45,7 @@ const FilterBarUsuario = ({ onSearchChange }) => {
         }}
         sx={{
           flexGrow: 1,
-          bgcolor: "white",
-          "& .MuiOutlinedInput-root": {
+                   "& .MuiOutlinedInput-root": {
             "& fieldset": {
               borderColor: "#9e9e9e", // Borde gris predeterminado
             },
@@ -115,6 +116,7 @@ const FilterBarUsuario = ({ onSearchChange }) => {
         </MenuItem>
       </Menu>
     </Box>
+    </div>
   );
 };
 

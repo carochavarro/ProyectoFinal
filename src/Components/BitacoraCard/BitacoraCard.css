@@ -39,12 +39,20 @@
     font-size: 1.4em;
     font-weight: 700;
     color: #37730D; /* Verde oscuro para destacar el título */
+    
 }
 
 .bitacora-content p {
     margin: 6px 0;
     font-size: 0.9em;
     color: #333; /* Color oscuro para los textos secundarios */
+  
+}
+
+.edit-delate-icons{
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 /* Ajuste para dispositivos móviles */

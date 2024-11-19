@@ -82,9 +82,15 @@ function Registro() {
   };
 
   return (
-    <Container maxWidth="xs" className="register-container" >
-      <Box className="register-header" >
-        <IconButton className="back-button" onClick={handleBack}>
+    <Container maxWidth="xs" className="register-container">
+      <Box className="register-header">
+        <IconButton
+          className="back-button"
+          onClick={handleBack}
+          sx={{
+            marginTop: 2, // Ajusta el valor del margen superior (puedes cambiar 2 por cualquier valor que desees)
+          }}
+        >
           <ArrowBackIosNewIcon />
         </IconButton>
         <img

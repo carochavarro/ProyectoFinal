@@ -18,7 +18,7 @@
 .filter-bar-container-panel {
   width: calc(100% - 40px);
   max-width: 1000px;
-  background-color: #3a7e0d;
+  background-color: #397f0e;
   padding: 8px;
   border-radius: 10px;
   position: absolute;
@@ -30,7 +30,7 @@
 .table-container {
   width: calc(100% - 40px);
   max-width: 1200px;
-  margin-top: 30%; /* Ajusta el espacio para que la tabla se separe del FilterBar */
+  margin-top: 35%; /* Ajusta el espacio para que la tabla se separe del FilterBar */
   background-color: rgba(
     255,
     255,
@@ -95,15 +95,53 @@
 .input-box .MuiFormLabel-root.Mui-focused {
   color: #397f0e;
 }
+.table-users .table-container {
+  overflow-x: auto; /* Habilita el desplazamiento horizontal */
+  max-width: 100%; /* Asegura que no exceda el ancho del contenedor */
+}
 
 @media (max-width: 768px) {
-  .filter-bar-container {
+  .table-users .table-container {
+    display: block; /* Asegura que sea desplazable en pantallas pequeñas */
+  }
+
+  .table-users table {
+    width: 100%; /* Asegura que la tabla se ajuste al contenedor */
+    border-collapse: collapse;
+  }
+
+  .table-users th, .table-users td {
+    display: block;
     width: 100%;
+    box-sizing: border-box;
+  }
+
+  .table-users th, .table-users td {
+    white-space: normal; /* Permite que el contenido se ajuste */
+    padding: 8px; /* Ajusta el padding */
+  }
+
+  .table-users tr {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px; /* Agrega espacio entre filas */
+    border-bottom: 1px solid #ccc; /* Opcional: agrega una línea para separar filas */
+  }
+
+  .table-users th {
+    font-weight: bold;
   }
 }
-@media (max-width: 768px) {
-  .table-container {
-    margin-top: 40%;
+
+@media (max-width: 600px) {
+  .table-users{
+    margin-top: 2600px;
+  }
+  .table-users th, .table-users td {
+    font-size: 14px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
   }
 }
+
+
+
 

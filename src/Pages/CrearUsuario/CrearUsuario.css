@@ -5,27 +5,22 @@ body, html {
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
-  }
+    
+    }
   
   .crear-usuario-container {
-    margin-top: 30px;
+     margin-top: 30px;
     background-color:white; /* Opacidad en blanco para mostrar el fondo */
     border-radius: 15px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px;
- 
-    
   }
   
   .crear-usuario-header {
     display: flex;
     align-items: center;
-  }
+      }
   
-  .back-button {
-    color: white;
-    align-self: flex-start;
-  }
+
   
   .crear-usuario-text {
     color: #397f0e;
@@ -45,18 +40,14 @@ body, html {
   }
   
   .crear-usuario-button {
-    margin-top: 24px;
-    background-color: #397f0e;
-    color: #fff;
-    border-radius: 8px;
+    font-size: 0.9rem;
   }
   
 
   .Crear-usuario{
     height: 550px;
-    background-color: white;
-    border-radius: 10px;
-    width: 350px;
+    background-color: rgb(220, 35, 35);
+     width: 350px;
   }
   .inputs .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
     border-color: #9e9e9e;

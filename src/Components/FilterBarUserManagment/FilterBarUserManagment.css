@@ -28,3 +28,28 @@
     align-items: center;
     gap: 8px;
 }
+
+.input-box .MuiInputLabel-root.Mui-focused {
+  color: #2e5d0a; /* Color verde para el label enfocado */
+}
+
+/* Estilos para cambiar el color del texto del input */
+.input-box .MuiInputBase-input {
+  color: black; /* Cambia el texto a verde */
+}
+
+/* Estilos para el borde del input cuando está enfocado */
+.input-box- .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: rgb(58, 126, 13); /* Verde para el borde enfocado */
+}
+
+/* Estilo para el borde del input en estado normal */
+.input-box .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: #d9d9d9; /* Color de borde predeterminado */
+}
+
+/* Cambio de color al pasar el cursor por encima */
+.input-box .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: rgb(58, 126, 13); /* Verde al hacer hover */
+}
+

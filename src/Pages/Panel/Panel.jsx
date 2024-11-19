@@ -91,6 +91,10 @@ const Panel = () => {
   const filteredUsuarios = usuarios.filter((usuario) =>
     usuario.nombreCompleto.toLowerCase().includes(searchText)
   );
+  const handleCreateUser = () => {
+    alert("Funcionalidad para crear usuario aún no implementada.");
+  };
+  
 
   return (
     <div className="panel-container">
@@ -100,6 +104,7 @@ const Panel = () => {
           onCreateUser={handleCreateUser}
         />
       </div>
+      <div className="table-users">
       <TableContainer
         component={Paper}
         className="table-container"
@@ -161,6 +166,7 @@ const Panel = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      </div>
     </div>
   );
 };

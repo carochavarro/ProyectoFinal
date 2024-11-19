@@ -68,22 +68,22 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
   const isDetailView = locationData.pathname.includes("/bitacora/");
 
   return (
-    <div className="filtro"
+    <div className="filter-bar"
       style={{
         display: "flex",
         alignItems: "center",
         gap: 8,
         padding: 8,
         borderRadius: 8,
-      }}
+              }}
     >
       {!isDetailView && (
         <>
           <IconButton
             onClick={handleFilterClick}
             sx={{
-              bgcolor: "#49a011",
-              "&:hover": { bgcolor: "#49a011" },
+              bgcolor: "#3a7e0d",
+              "&:hover": { bgcolor: "#3a7e0d" },
               borderRadius: 1,
               padding: "8px",
             }}
@@ -95,7 +95,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
             />
           </IconButton>
 
-          <TextField
+          <TextField className="buscar"
             variant="outlined"
             placeholder="Buscar bitácoras por título o autor"
             onChange={onSearchChange}
@@ -187,8 +187,8 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
 
         <IconButton
           sx={{
-            bgcolor: "#49a011",
-            "&:hover": { bgcolor: "#49a011" },
+            bgcolor: "#3a7e0d",
+            "&:hover": { bgcolor: "#3a7e0d" },
             borderRadius: 1,
             padding: "8px",
           }}
@@ -200,8 +200,8 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
         <IconButton
           onClick={handleUserIconClick}
           sx={{
-            bgcolor: "#49a011",
-            "&:hover": { bgcolor: "#49a011" },
+            bgcolor: "#3a7e0d",
+            "&:hover": { bgcolor: "#3a7e0d" },
             borderRadius: 1,
             padding: "8px",
           }}
@@ -262,6 +262,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Box sx={{ marginTop: 2 }}>
               <DatePicker
+              className="input-box"
                 label="Fecha inicio"
                 value={startDate}
                 onChange={(newValue) => setStartDate(newValue)}
@@ -272,6 +273,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
             </Box>
             <Box sx={{ marginTop: 2 }}>
               <DatePicker
+              className="input-box"
                 label="Fecha fin"
                 value={endDate}
                 onChange={(newValue) => setEndDate(newValue)}
@@ -284,6 +286,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
 
           <Box sx={{ marginTop: 2 }}>
             <TextField
+            className="input-box"
               placeholder="Escribe hábitat"
               size="small"
               fullWidth
@@ -293,8 +296,9 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
             />
           </Box>
 
-          <Box sx={{ marginTop: 2 }}>
+          <Box  sx={{ marginTop: 2  }}>
             <TextField
+            className="input-box"
               placeholder="Escribe clima"
               size="small"
               fullWidth
@@ -306,6 +310,7 @@ const FilterBar = ({ onSortChange, onSearchChange, onFilterChange }) => {
 
           <Box sx={{ marginTop: 2 }}>
             <TextField
+            className="input-box"
               placeholder="Escribe lugar"
               size="small"
               fullWidth

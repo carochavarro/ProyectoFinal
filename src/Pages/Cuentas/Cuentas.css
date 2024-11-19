@@ -2,20 +2,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-   background-size: cover;
+  background-size: cover;
   background-attachment: fixed;
   background-position: center;
-  margin-top: 50%;
+  margin-top: 20%;
+  height: 100vh;
 
 }
 
 .filter-bar-container {
   width: calc(100% - 40px);
   max-width: 1000px;
-  background-color: #3a7e0d;
   padding: 1px 10px;
   border-radius: 10px;
-  position: fixed;
+  position: absolute;
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
@@ -31,7 +31,6 @@
   padding: 10px 20px;
   border-radius: 10px;
   text-align: center;
-  margin-top: 7%;
 }
 
 .bitacora-list {
@@ -43,6 +42,9 @@
   gap: 20px; /* Agrega un espacio uniforme entre tarjetas */
   width: 1000px;
   margin-top: 10px;
+  padding: 15px;
+
+  
 }
 
 .bitacora-card-container {
@@ -64,22 +66,35 @@
 
 .edit-delete-icons {
   display: flex;
-  justify-content: space-around;
-  width: 100%;
-  margin-top: 12px;
+  justify-content: center; /* Centra los íconos horizontalmente */
+  align-items: center; /* Centra los íconos verticalmente */
+  gap: 8px; /* Espacio entre los íconos */
+  margin-top: 12px; /* Margen superior opcional */
+}
+
+.edit-delete-icons img {
+  width: 24px; /* Ajusta el tamaño de los íconos según sea necesario */
+  height: 24px; /* Asegúrate de que sea cuadrado */
+  cursor: pointer; /* Cambia el cursor al pasar sobre los íconos */
+  transition: transform 0.2s; /* Agrega una transición para hover */
+}
+
+.edit-delete-icons img:hover {
+  transform: scale(1.1); /* Agranda el ícono al pasar el cursor */
 }
 
 /* Responsividad */
 @media (max-width: 768px) {
-  .filter-bar-container {
-    width: 90%;
+  .cuentas-container{
+    margin-top: 20%;
   }
+  .bitacora-list{
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+     }
+     .user-name-banner{
+margin-top: 50px;
 
-  .user-name-banner {
-    font-size: 1rem;
-  }
-
-  .bitacora-card-container {
-    width: 100%;
-  }
+     }
 }
