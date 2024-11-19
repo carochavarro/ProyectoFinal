@@ -12,7 +12,7 @@
   background-repeat: no-repeat;
   background-position: center;
   min-height: 100vh;
-  padding-top: 140px; /* Espacio superior para el navbar fijo */
+   /* Espacio superior para el navbar fijo */
 }
 
 .filter-bar-container-panel {
@@ -30,7 +30,7 @@
 .table-container {
   width: calc(100% - 40px);
   max-width: 1200px;
-  margin-top: 35%; /* Ajusta el espacio para que la tabla se separe del FilterBar */
+  margin-top: 20vh; /* Ajusta el espacio para que la tabla se separe del FilterBar */
   background-color: rgba(
     255,
     255,
@@ -135,7 +135,7 @@
 
 @media (max-width: 600px) {
   .table-users{
-    margin-top: 2600px;
+    margin-top: 150vh;
   }
   .table-users th, .table-users td {
     font-size: 14px; /* Ajusta el tamaño de fuente para pantallas pequeñas */
